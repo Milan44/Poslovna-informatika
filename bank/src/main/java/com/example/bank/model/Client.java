@@ -184,9 +184,30 @@ public class Client {
 		this.legalEntityAccount = legalEntityAccount;
 	}
 	
-	
-	
-	
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPib() {
+		return pib;
+	}
+
+	public void setPib(String pib) {
+		this.pib = pib;
+	}
 
 	public Client(Long id, String address, String phone, String fax, String email, String addressForStatements,
 			Boolean emailStatements, String name, String jmbg, String typeOfClient, Place residence, String pib,

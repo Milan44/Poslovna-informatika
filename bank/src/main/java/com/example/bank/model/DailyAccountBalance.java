@@ -76,20 +76,26 @@ public class DailyAccountBalance {
 	
 
 	
-	
 	public DailyAccountBalance() {
 		super();
 	}
 	
-	public DailyAccountBalance(Date trafficDate, Float previousState, Float trafficToBenefit, Float trafficToTheBurden,
-			Float newState) {
+	
+	public DailyAccountBalance(Long id, @NotNull Date trafficDate, Float previousState, Float trafficToBenefit,
+			Float trafficToTheBurden, Float newState, BankAccount legalEntityAccount,
+			List<AnalyticsOfStatements> analyticsOfStatements) {
 		super();
+		this.id = id;
 		this.trafficDate = trafficDate;
 		this.previousState = previousState;
 		this.trafficToBenefit = trafficToBenefit;
 		this.trafficToTheBurden = trafficToTheBurden;
 		this.newState = newState;
+		this.legalEntityAccount = legalEntityAccount;
+		this.analyticsOfStatements = analyticsOfStatements;
 	}
+
+
 
 
 
@@ -158,19 +164,7 @@ public class DailyAccountBalance {
 		this.analyticsOfStatements = analyticsOfStatements;
 	}
 
-	public DailyAccountBalance(Long id, @NotNull Date trafficDate, Float previousState, Float trafficToBenefit,
-			Float trafficToTheBurden, Float newState, BankAccount legalEntityAccount,
-			List<AnalyticsOfStatements> analyticsOfStatements) {
-		super();
-		this.id = id;
-		this.trafficDate = trafficDate;
-		this.previousState = previousState;
-		this.trafficToBenefit = trafficToBenefit;
-		this.trafficToTheBurden = trafficToTheBurden;
-		this.newState = newState;
-		this.legalEntityAccount = legalEntityAccount;
-		this.analyticsOfStatements = analyticsOfStatements;
-	}
+
 
 
 	
