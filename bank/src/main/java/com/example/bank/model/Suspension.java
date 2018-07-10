@@ -9,16 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 //import org.hibernate.validator.constraints.NotBlank;
 
-import com.example.bank.model.LegalEntityAccount;
+import com.example.bank.model.BankAccount;
 
 /**
  * ukidanje
  */
 @Entity
+@Table(name = "suspension")
 public class Suspension {
 
 	@Id
@@ -36,7 +38,7 @@ public class Suspension {
 
 	
 	@ManyToOne
-	private LegalEntityAccount legalEntityAccount;
+	private BankAccount legalEntityAccount;
 	
 	public Long getId() {
 		return id;
@@ -62,12 +64,25 @@ public class Suspension {
 		this.transferToAccount = transferToAccount;
 	}
 
-	public LegalEntityAccount getLegalEntityAccount() {
+	public BankAccount getLegalEntityAccount() {
 		return legalEntityAccount;
 	}
 
-	public void setLegalEntityAccount(LegalEntityAccount legalEntityAccount) {
+	public void setLegalEntityAccount(BankAccount legalEntityAccount) {
 		this.legalEntityAccount = legalEntityAccount;
+	}
+
+	public Suspension(Long id, @NotNull Date date, String transferToAccount, BankAccount legalEntityAccount) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.transferToAccount = transferToAccount;
+		this.legalEntityAccount = legalEntityAccount;
+	}
+
+	public Suspension() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

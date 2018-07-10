@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,6 +27,7 @@ import com.example.bank.model.AnalyticsOfStatements;
  */
 
 @Entity
+@Table(name = "paymentType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "paymentType")
 public class PaymentType {
@@ -82,6 +84,15 @@ public class PaymentType {
 	}
 
 	public void setAnalyticsOfStatements(List<AnalyticsOfStatements> analyticsOfStatements) {
+		this.analyticsOfStatements = analyticsOfStatements;
+	}
+
+	public PaymentType(Long id, String code, String nameOfPaymentType,
+			List<AnalyticsOfStatements> analyticsOfStatements) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.nameOfPaymentType = nameOfPaymentType;
 		this.analyticsOfStatements = analyticsOfStatements;
 	}
 

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -23,6 +24,7 @@ import com.example.bank.model.Client;
 import com.example.bank.model.Country;
 
 @Entity
+@Table(name = "place")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "place")
 public class Place {
@@ -102,6 +104,22 @@ public class Place {
 
 	public void setAnalyticsOfStatements(List<AnalyticsOfStatements> analyticsOfStatements) {
 		this.analyticsOfStatements = analyticsOfStatements;
+	}
+
+	public Place(Long id, String pttNumber, String name, Country country, List<Client> clients,
+			List<AnalyticsOfStatements> analyticsOfStatements) {
+		super();
+		this.id = id;
+		this.pttNumber = pttNumber;
+		this.name = name;
+		this.country = country;
+		this.clients = clients;
+		this.analyticsOfStatements = analyticsOfStatements;
+	}
+
+	public Place() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

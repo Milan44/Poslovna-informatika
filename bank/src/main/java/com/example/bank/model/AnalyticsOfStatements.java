@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,6 +33,7 @@ import com.example.bank.model.Place;
  */
 
 @Entity
+@Table(name = "analyticsOfStatements")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "analyticsOfStatements")
 public class AnalyticsOfStatements {
@@ -311,6 +313,36 @@ public class AnalyticsOfStatements {
 
 	public Boolean getEmergency() {
 		return emergency;
+	}
+
+	public AnalyticsOfStatements(Long itemNumber, String debtor_originator, String purposeOfPayment,
+			String creditor_recipient, @NotNull Date dateOfReceipt, @NotNull Date currencyDate, String debtorAccount,
+			@Max(99) Integer modelAssigments, String referenceNumberAssigments, String accountCreditor,
+			@Max(99) Integer modelApproval, String referenceNumberCreditor, @NotNull Boolean emergency, Float sum,
+			@Max(1) Integer typeOfMistake, String status, DailyAccountBalance dailyAccountBalance,
+			PaymentType paymentType, Currency paymentCurrency, List<ItemTransfer> itemTransfer, Place place) {
+		super();
+		this.itemNumber = itemNumber;
+		this.debtor_originator = debtor_originator;
+		this.purposeOfPayment = purposeOfPayment;
+		this.creditor_recipient = creditor_recipient;
+		this.dateOfReceipt = dateOfReceipt;
+		this.currencyDate = currencyDate;
+		this.debtorAccount = debtorAccount;
+		this.modelAssigments = modelAssigments;
+		this.referenceNumberAssigments = referenceNumberAssigments;
+		this.accountCreditor = accountCreditor;
+		this.modelApproval = modelApproval;
+		this.referenceNumberCreditor = referenceNumberCreditor;
+		this.emergency = emergency;
+		this.sum = sum;
+		this.typeOfMistake = typeOfMistake;
+		this.status = status;
+		this.dailyAccountBalance = dailyAccountBalance;
+		this.paymentType = paymentType;
+		this.paymentCurrency = paymentCurrency;
+		this.itemTransfer = itemTransfer;
+		this.place = place;
 	}
 	
 }

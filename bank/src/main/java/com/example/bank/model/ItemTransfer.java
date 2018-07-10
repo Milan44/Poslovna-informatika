@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -20,6 +21,7 @@ import com.example.bank.model.InterbankTransfer;
  */
 
 @Entity
+@Table(name = "itemTransfer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "itemTransfer")
 public class ItemTransfer {
@@ -63,6 +65,13 @@ public class ItemTransfer {
 	}
 
 	public void setInterbankTransfer(InterbankTransfer interbankTransfer) {
+		this.interbankTransfer = interbankTransfer;
+	}
+
+	public ItemTransfer(Long id, AnalyticsOfStatements analyticsOfStatements, InterbankTransfer interbankTransfer) {
+		super();
+		this.id = id;
+		this.analyticsOfStatements = analyticsOfStatements;
 		this.interbankTransfer = interbankTransfer;
 	}
 	

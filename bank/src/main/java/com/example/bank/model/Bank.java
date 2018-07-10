@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,9 +24,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.example.bank.model.ExchangeRateList;
 import com.example.bank.model.InterbankTransfer;
-import com.example.bank.model.LegalEntityAccount;
+import com.example.bank.model.BankAccount;
 
 @Entity
+@Table(name = "bank")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "bank")
 public class Bank {
@@ -87,7 +89,7 @@ public class Bank {
 	@JsonIgnore
 	@OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
 	@XmlTransient
-	private List<LegalEntityAccount> legalEntityAccount;	
+	private List<BankAccount> legalEntityAccount;	
 
 	
 	@JsonIgnore
@@ -175,11 +177,11 @@ public class Bank {
 		this.exchangeRateLists = exchangeRateLists;
 	}
 
-	public List<LegalEntityAccount> getLegalEntityAccount() {
+	public List<BankAccount> getLegalEntityAccount() {
 		return legalEntityAccount;
 	}
 
-	public void setLegalEntityAccount(List<LegalEntityAccount> legalEntityAccount) {
+	public void setLegalEntityAccount(List<BankAccount> legalEntityAccount) {
 		this.legalEntityAccount = legalEntityAccount;
 	}
 
@@ -197,6 +199,30 @@ public class Bank {
 
 	public void setBank(Boolean bank) {
 		this.bank = bank;
+	}
+
+	public Bank(Long id, String bankCode, String pib, String name, String address, String email, String web,
+			String phone, String fax, @NotNull Boolean bank, List<ExchangeRateList> exchangeRateLists,
+			List<BankAccount> legalEntityAccount, List<InterbankTransfer> interbankTransfers) {
+		super();
+		this.id = id;
+		this.bankCode = bankCode;
+		this.pib = pib;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.web = web;
+		this.phone = phone;
+		this.fax = fax;
+		this.bank = bank;
+		this.exchangeRateLists = exchangeRateLists;
+		this.legalEntityAccount = legalEntityAccount;
+		this.interbankTransfers = interbankTransfers;
+	}
+
+	public Bank() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

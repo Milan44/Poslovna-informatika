@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -28,9 +29,10 @@ import com.example.bank.model.DailyAccountBalance;
 import com.example.bank.model.Suspension;
 
 @Entity
+@Table(name = "bankAccount")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "legalEntityAccount")
-public class LegalEntityAccount {
+@XmlRootElement(name = "BankAccount")
+public class BankAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,13 +42,16 @@ public class LegalEntityAccount {
 	@Column(unique = true, columnDefinition = "CHAR(18)")
 //	@NotBlank
 	@XmlElement
-	private String brojRacuna;
+	private String accountNumber;
 
 	@XmlElement
-	private Date datumOtvaranja;
+	private Date dateOfOpening;
 	
 	@XmlElement
-	private Boolean vazeci;
+	private Boolean valid;
+	
+	@XmlElement
+	private double money;
 
 	@ManyToOne
 	@XmlElement
@@ -70,23 +75,32 @@ public class LegalEntityAccount {
 	@XmlTransient
 	private List<DailyAccountBalance> dailyAccountBalances;
 
-	public LegalEntityAccount() {
+	
+	
+	public BankAccount() {
 		super();
 	}
 
 	
-	public LegalEntityAccount(Long id, String brojRacuna, Date datumOtvaranja, boolean vazeci, Client client,
-			Bank bank, Currency currency, List<Suspension> suspensions) {
+
+	public BankAccount(Long id, String accountNumber, Date dateOfOpening, Boolean valid, double money, Client client,
+			Bank bank, Currency currency, List<Suspension> suspensions,
+			List<DailyAccountBalance> dailyAccountBalances) {
 		super();
 		this.id = id;
-		this.brojRacuna = brojRacuna;
-		this.datumOtvaranja = datumOtvaranja;
-		this.vazeci = vazeci;
+		this.accountNumber = accountNumber;
+		this.dateOfOpening = dateOfOpening;
+		this.valid = valid;
+		this.money = money;
 		this.client = client;
 		this.bank = bank;
 		this.currency = currency;
 		this.suspensions = suspensions;
+		this.dailyAccountBalances = dailyAccountBalances;
 	}
+
+
+
 
 	public Long getId() {
 		return id;
@@ -96,31 +110,46 @@ public class LegalEntityAccount {
 		this.id = id;
 	}
 
-	public String getBrojRacuna() {
-		return brojRacuna;
+	
+
+	public String getAccountNumber() {
+		return accountNumber;
 	}
 
-	public void setBrojRacuna(String brojRacuna) {
-		this.brojRacuna = brojRacuna;
-	}
 
-	public Date getDatumOtvaranja() {
-		return datumOtvaranja;
-	}
-
-	public void setDatumOtvraranja(Date datumOtvaranja) {
-		this.datumOtvaranja = datumOtvaranja;
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 
 
-	public Boolean getVazeci() {
-		return vazeci;
+	public Date getDateOfOpening() {
+		return dateOfOpening;
 	}
 
 
-	public void setVazeci(Boolean vazeci) {
-		this.vazeci = vazeci;
+	public void setDateOfOpening(Date dateOfOpening) {
+		this.dateOfOpening = dateOfOpening;
+	}
+
+
+	public Boolean getValid() {
+		return valid;
+	}
+
+
+	public void setValid(Boolean valid) {
+		this.valid = valid;
+	}
+
+
+	public double getMoney() {
+		return money;
+	}
+
+
+	public void setMoney(double money) {
+		this.money = money;
 	}
 
 
@@ -167,9 +196,6 @@ public class LegalEntityAccount {
 	}
 
 
-	public void setDatumOtvaranja(Date datumOtvaranja) {
-		this.datumOtvaranja = datumOtvaranja;
-	}
 	
 	
 

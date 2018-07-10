@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,12 +25,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.model.Country;
 import com.example.bank.model.CurrencyRate;
-import com.example.bank.model.LegalEntityAccount;
+import com.example.bank.model.BankAccount;
 
 /**
  * valuta
  */
 @Entity
+@Table(name = "currency")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "paymentCurrency")
 public class Currency {
@@ -61,7 +63,7 @@ public class Currency {
 	@JsonIgnore
 	@OneToMany(mappedBy = "currency", cascade = CascadeType.ALL)
 	@XmlTransient
-	private List<LegalEntityAccount> legalEntityAccount;
+	private List<BankAccount> legalEntityAccount;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "paymentCurrency", cascade = CascadeType.ALL)
@@ -120,11 +122,11 @@ public class Currency {
 		this.country = country;
 	}
 
-	public List<LegalEntityAccount> getLegalEntityAccount() {
+	public List<BankAccount> getLegalEntityAccount() {
 		return legalEntityAccount;
 	}
 
-	public void setLegalEntityAccount(List<LegalEntityAccount> legalEntityAccount) {
+	public void setLegalEntityAccount(List<BankAccount> legalEntityAccount) {
 		this.legalEntityAccount = legalEntityAccount;
 	}
 
@@ -150,6 +152,26 @@ public class Currency {
 
 	public void setAccordingToCurrencyRate(List<CurrencyRate> accordingToCurrencyRate) {
 		this.accordingToCurrencyRate = accordingToCurrencyRate;
+	}
+
+	public Currency(Long id, String official_code, String name, @NotNull Boolean domicilna, Country country,
+			List<BankAccount> legalEntityAccount, List<AnalyticsOfStatements> analyticsOfStatements,
+			List<CurrencyRate> baseCurrencyRate, List<CurrencyRate> accordingToCurrencyRate) {
+		super();
+		this.id = id;
+		this.official_code = official_code;
+		this.name = name;
+		this.domicilna = domicilna;
+		this.country = country;
+		this.legalEntityAccount = legalEntityAccount;
+		this.analyticsOfStatements = analyticsOfStatements;
+		this.baseCurrencyRate = baseCurrencyRate;
+		this.accordingToCurrencyRate = accordingToCurrencyRate;
+	}
+
+	public Currency() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

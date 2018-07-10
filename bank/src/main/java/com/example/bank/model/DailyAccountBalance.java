@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.example.bank.model.AnalyticsOfStatements;
-import com.example.bank.model.LegalEntityAccount;
+import com.example.bank.model.BankAccount;
 
 /**
  * dnevno stanje racuna
@@ -29,6 +30,7 @@ import com.example.bank.model.LegalEntityAccount;
 
 
 @Entity
+@Table(name = "dailyAccountBalance")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "dailyAccountBalance")
 public class DailyAccountBalance {
@@ -64,7 +66,7 @@ public class DailyAccountBalance {
 	private Float newState;
 	
 	@ManyToOne
-	private LegalEntityAccount legalEntityAccount;
+	private BankAccount legalEntityAccount;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -140,11 +142,11 @@ public class DailyAccountBalance {
 		this.newState = newState;
 	}
 
-	public LegalEntityAccount getLegalEntityAccount() {
+	public BankAccount getLegalEntityAccount() {
 		return legalEntityAccount;
 	}
 
-	public void setLegalEntityAccount(LegalEntityAccount legalEntityAccount) {
+	public void setLegalEntityAccount(BankAccount legalEntityAccount) {
 		this.legalEntityAccount = legalEntityAccount;
 	}
 
@@ -153,6 +155,20 @@ public class DailyAccountBalance {
 	}
 
 	public void setAnalyticsOfStatements(List<AnalyticsOfStatements> analyticsOfStatements) {
+		this.analyticsOfStatements = analyticsOfStatements;
+	}
+
+	public DailyAccountBalance(Long id, @NotNull Date trafficDate, Float previousState, Float trafficToBenefit,
+			Float trafficToTheBurden, Float newState, BankAccount legalEntityAccount,
+			List<AnalyticsOfStatements> analyticsOfStatements) {
+		super();
+		this.id = id;
+		this.trafficDate = trafficDate;
+		this.previousState = previousState;
+		this.trafficToBenefit = trafficToBenefit;
+		this.trafficToTheBurden = trafficToTheBurden;
+		this.newState = newState;
+		this.legalEntityAccount = legalEntityAccount;
 		this.analyticsOfStatements = analyticsOfStatements;
 	}
 

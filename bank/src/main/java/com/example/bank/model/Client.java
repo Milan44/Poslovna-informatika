@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -22,10 +23,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import com.example.bank.model.LegalEntityAccount;
+import com.example.bank.model.BankAccount;
 import com.example.bank.model.Place;
 
 @Entity
+@Table(name = "client")
 @Inheritance(strategy  = InheritanceType.JOINED)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "client")
@@ -46,6 +48,9 @@ public class Client {
 	private String phone;
 	
 	@XmlElement
+	private String fax;
+	
+	@XmlElement
 	private String email;
 	
 	@XmlElement
@@ -56,11 +61,8 @@ public class Client {
 	
 //	@NotBlank
 	@XmlElement
-	private String firstName;
+	private String name;
 	
-//	@NotBlank
-	@XmlElement
-	private String lastName;
 	
 	@Column(unique = true)
 //	@NotBlank
@@ -76,10 +78,17 @@ public class Client {
 	@XmlElement
 	private Place residence;
 	
+	
+
+	@Column(name = "pib", nullable = true)
+	@XmlElement
+	private String pib;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	@XmlTransient
-	private List<LegalEntityAccount> legalEntityAccount;
+	private List<BankAccount> legalEntityAccount;
+	
 	
 	public Client() {
 		super();
@@ -134,21 +143,7 @@ public class Client {
 		this.emailStatements = emailStatements;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public String getJmbg() {
 		return jmbg;
@@ -179,15 +174,41 @@ public class Client {
 
 
 
-	public List<LegalEntityAccount> getLegalEntityAccount() {
+	public List<BankAccount> getLegalEntityAccount() {
 		return legalEntityAccount;
 	}
 
 
 
-	public void setLegalEntityAccount(List<LegalEntityAccount> legalEntityAccount) {
+	public void setLegalEntityAccount(List<BankAccount> legalEntityAccount) {
 		this.legalEntityAccount = legalEntityAccount;
 	}
+	
+	
+	
+	
+
+	public Client(Long id, String address, String phone, String fax, String email, String addressForStatements,
+			Boolean emailStatements, String name, String jmbg, String typeOfClient, Place residence, String pib,
+			List<BankAccount> legalEntityAccount) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.phone = phone;
+		this.fax = fax;
+		this.email = email;
+		this.addressForStatements = addressForStatements;
+		this.emailStatements = emailStatements;
+		this.name = name;
+		this.jmbg = jmbg;
+		this.typeOfClient = typeOfClient;
+		this.residence = residence;
+		this.pib = pib;
+		this.legalEntityAccount = legalEntityAccount;
+	}
+
+
+	
 	
 	
 	

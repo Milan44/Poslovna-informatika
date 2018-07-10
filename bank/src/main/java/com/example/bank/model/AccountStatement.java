@@ -8,12 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.example.bank.model.AnalyticsOfStatements;;
 
 
 
 @Entity
+@Table(name = "accountStatement")
 public class AccountStatement {
 
 
@@ -122,5 +124,27 @@ public class AccountStatement {
 	public void setStateAtTheEndOfPeriod(Float stateAtTheEndOfPeriod) {
 		this.stateAtTheEndOfPeriod = stateAtTheEndOfPeriod;
 	}
+
+
+	public AccountStatement(Long id, Date fromDate, Date toDate, Float startAccountState, Float trafficToBenefit,
+			Float trafficToTheBurden, Float stateAtTheEndOfPeriod, List<AnalyticsOfStatements> statements) {
+		super();
+		this.id = id;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.startAccountState = startAccountState;
+		this.trafficToBenefit = trafficToBenefit;
+		this.trafficToTheBurden = trafficToTheBurden;
+		this.stateAtTheEndOfPeriod = stateAtTheEndOfPeriod;
+		this.statements = statements;
+	}
+
+
+	public AccountStatement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 
 }

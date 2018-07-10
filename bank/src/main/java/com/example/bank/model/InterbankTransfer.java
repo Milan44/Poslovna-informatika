@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -31,6 +32,7 @@ import com.example.bank.model.ItemTransfer;
  */
 
 @Entity
+@Table(name = "interbankTransfer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "interbankTransfer")
 public class InterbankTransfer {
@@ -138,6 +140,19 @@ public class InterbankTransfer {
 
 	public void setProcessed(Boolean processed) {
 		this.processed = processed;
+	}
+
+	public InterbankTransfer(Long idMessage, String typeOfMessage, @NotNull Date date, Float sum, Bank senderBank,
+			Bank bank, Boolean processed, List<ItemTransfer> itemTransfers) {
+		super();
+		this.idMessage = idMessage;
+		this.typeOfMessage = typeOfMessage;
+		this.date = date;
+		this.sum = sum;
+		this.senderBank = senderBank;
+		this.bank = bank;
+		this.processed = processed;
+		this.itemTransfers = itemTransfers;
 	}
 	
 	

@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,6 +26,7 @@ import com.example.bank.model.CurrencyRate;
  * kursna lista
  */
 @Entity
+@Table(name = "exchangeRateList")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class ExchangeRateList {
@@ -103,6 +105,22 @@ public class ExchangeRateList {
 
 	public void setCurrencyRates(List<CurrencyRate> currencyRates) {
 		this.currencyRates = currencyRates;
+	}
+
+	public ExchangeRateList(Long id, @NotNull Date date, int numberOfExchangeRateList, Date appliedBy,
+			List<CurrencyRate> currencyRates, Bank commercialBankRate) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.numberOfExchangeRateList = numberOfExchangeRateList;
+		this.appliedBy = appliedBy;
+		this.currencyRates = currencyRates;
+		this.commercialBankRate = commercialBankRate;
+	}
+
+	public ExchangeRateList() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

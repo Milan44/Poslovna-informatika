@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.example.bank.model.Currency;
 import com.example.bank.model.ExchangeRateList;
@@ -17,6 +18,7 @@ import com.example.bank.model.ExchangeRateList;
  */
 
 @Entity
+@Table(name = "currencyRate")
 public class CurrencyRate {
 
 	@Id
@@ -115,6 +117,18 @@ public class CurrencyRate {
 	}
 
 	public void setAccordingToCurrency(Currency accordingToCurrency) {
+		this.accordingToCurrency = accordingToCurrency;
+	}
+
+	public CurrencyRate(Long id, Float buyingExchangeRate, Float middleExchangeRate, Float sellingExchangeRate,
+			Currency baseCurrency, ExchangeRateList currencyInList, Currency accordingToCurrency) {
+		super();
+		this.id = id;
+		this.buyingExchangeRate = buyingExchangeRate;
+		this.middleExchangeRate = middleExchangeRate;
+		this.sellingExchangeRate = sellingExchangeRate;
+		this.baseCurrency = baseCurrency;
+		this.currencyInList = currencyInList;
 		this.accordingToCurrency = accordingToCurrency;
 	}
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -23,6 +24,7 @@ import com.example.bank.model.Currency;
 import com.example.bank.model.Place;
 
 @Entity
+@Table(name = "country")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "country")
 public class Country {
@@ -93,4 +95,18 @@ public class Country {
 		this.currencies = currencies;
 	}
 
+	public Country(Long id, String country_code, String name, List<Place> places, List<Currency> currencies) {
+		super();
+		this.id = id;
+		this.country_code = country_code;
+		this.name = name;
+		this.places = places;
+		this.currencies = currencies;
+	}
+
+	public Country() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 }
