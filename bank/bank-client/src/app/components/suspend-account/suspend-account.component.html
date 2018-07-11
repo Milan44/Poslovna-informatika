@@ -1,0 +1,19 @@
+<div>
+    <ul>
+      <li>
+          <label>Select acccount to transfer the funds to:</label>
+      </li>
+      <li>
+          <select>
+              <option *ngFor="let acc of accounts">
+                  {{acc.accountNumber}}
+              </option>
+          </select>
+      </li>
+      <li>
+          <button>Cancel</button>
+          <button>Confirm</button>
+      </li>    
+    </ul>      
+  </div>
+  
