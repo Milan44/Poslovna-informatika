@@ -12,23 +12,11 @@ export class SuspendAccountService {
 
     constructor(private httpClient: HttpClient, private http: Http) { }
 
-    public getClientAccounts(id:any){
-
-      //  const headers = new Headers();
-       // headers.append('Content-Type', 'application/json');
+    public getClientAccounts(id:any, account: any){
+        return this.httpClient.get<Account[]>("http://localhost:8080/public/bankAccounts/getClientAccounts/"+id + "/" + account)        
+    }
     
-        return this.httpClient.get<Account[]>("http://localhost:8080/public/bankAccounts/getClientAccounts/"+id)        
-
-    /*const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.get("http://localhost:8080/public/bankAccounts/getClientAccounts/"+ id , {headers:headers}).map(data => data.json())
-
-    .catch((err:HttpErrorResponse) =>
-    {
-        return Observable.throw(err);
-    });*/
-  
-  }
-    
+    public suspendAccount(account:any, accountTransfer: any){
+        return this.httpClient.delete<Account[]>("http://localhost:8080/public/bankAccounts/suspendAccount/" + account + "/" + accountTransfer);
+    }
 }

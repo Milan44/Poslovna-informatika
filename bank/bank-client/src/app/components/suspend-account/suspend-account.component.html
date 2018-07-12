@@ -4,15 +4,14 @@
           <label>Select acccount to transfer the funds to:</label>
       </li>
       <li>
-          <select>
+          <select id="accountSelect">
               <option *ngFor="let acc of accounts">
                   {{acc.accountNumber}}
               </option>
           </select>
       </li>
-      <li>
-          <button>Cancel</button>
-          <button>Confirm</button>
+      <li>     
+          <button (click) = "confirm()">Confirm</button>
       </li>    
     </ul>      
   </div>

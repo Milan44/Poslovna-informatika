@@ -12,15 +12,31 @@ export class SuspendAccountComponent implements OnInit {
 
   client: any;
   accounts: Account[];
+  account: any;
 
   constructor(private suspendAccountService: SuspendAccountService) { }
 
   ngOnInit() {
     this.client = localStorage.getItem("client");
     console.log("Id klenta je: " + this.client);
-    this.suspendAccountService.getClientAccounts(this.client).subscribe(data => {
+
+    this.account = localStorage.getItem("account");
+    console.log("Id accounta za brisanje je: " + this.account);
+    
+    this.suspendAccountService.getClientAccounts(this.client, this.account).subscribe(data => {
       this.accounts = data;
       console.log(this.accounts);
+    });
+  }
+
+  confirm(){
+    let selector = document.getElementById("accountSelect") as HTMLSelectElement;
+    let accountTransfer = selector.options[selector.selectedIndex].text;
+
+    console.log(accountTransfer);
+
+    this.suspendAccountService.suspendAccount(this.account, accountTransfer).subscribe( data => {
+      console.log(data);
     });
   }
 

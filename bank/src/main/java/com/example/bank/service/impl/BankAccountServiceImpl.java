@@ -32,19 +32,34 @@ public class BankAccountServiceImpl implements BankAccountService{
 	}
 
 	@Override
-	public List<BankAccount> findByClientId(Long id) {
+	public List<BankAccount> findByClientId(Long id, Long account) {
 		List<BankAccount> allAccounts = bankAccountRepository.findAll();
 		List<BankAccount> ret = new ArrayList<BankAccount>();
 		
 		for(BankAccount acc: allAccounts){
-			if(acc.getClient().getId().compareTo(id)==0){
+			if(acc.getClient().getId().compareTo(id)==0 && acc.getId().compareTo(account) != 0){
 				ret.add(acc);
-				System.out.println(acc.getClient());
-				System.out.println(acc.getMoney());
+				//System.out.println(acc.getClient());
+				//System.out.println(acc.getMoney());
 			}
 		}
 		
 		return ret;
+	}
+
+	@Override
+	public BankAccount findById(Long id) {
+		return bankAccountRepository.findById(id).get();
+	}
+
+	@Override
+	public BankAccount save(BankAccount a) {
+		return bankAccountRepository.save(a);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		bankAccountRepository.deleteById(id);
 	}
 
 }

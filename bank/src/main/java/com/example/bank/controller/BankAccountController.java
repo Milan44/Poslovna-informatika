@@ -57,11 +57,26 @@ public class BankAccountController {
 	}
 	
 	@RequestMapping(
-			value = "/getClientAccounts/{id}",
+			value = "/getClientAccounts/{id}/{account}",
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<BankAccount> getClientAccounts(@PathVariable("id") Long id) {						
-		return bankAccountService.findByClientId(id);
+	public List<BankAccount> getClientAccounts(@PathVariable("id") Long id, @PathVariable("account") Long accountId) {						
+		return bankAccountService.findByClientId(id, accountId);
+	}
+	
+	@RequestMapping(
+			value = "suspendAccount/{id}/{trasferAccount}",
+			method = RequestMethod.DELETE)			
+	public List<BankAccount> suspendAccount(@PathVariable("id") Long id, @PathVariable("trasferAccount") Long transferAccount){
+		double trasferedMoney = bankAccountService.findById(id).getMoney();
+		BankAccount trasfer = bankAccountService.findById(transferAccount);
+		
+		trasfer.setMoney(trasfer.getMoney() + trasferedMoney);
+		bankAccountService.save(trasfer);
+		
+		bankAccountService.deleteById(id);
+		
+		return bankAccountService.getAll();
 	}
 
 }

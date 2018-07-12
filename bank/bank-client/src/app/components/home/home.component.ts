@@ -50,7 +50,9 @@ export class HomeComponent implements OnInit {
   suspend(account) {
 
     console.log(account);
-    var countryId = localStorage.setItem("client", account.client.id)
+    localStorage.setItem("client", account.client.id);
+    localStorage.setItem("account", account.id);
+
     this.suspendDialogRef = this.suspendDialog.open(SuspendAccountComponent, {
       height: '200px',
       width: '400px',
