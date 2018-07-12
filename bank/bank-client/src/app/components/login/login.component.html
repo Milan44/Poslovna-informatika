@@ -1,10 +1,15 @@
-<form class="form-signin">
+<form class="form-signin" >
   <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" [(ngModel)] = "userEmail" name = "userEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input *ngIf=" !wrongEmail && !wrongPassword" type="email" [(ngModel)] = "userEmail" name = "userEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input *ngIf=wrongEmail style="border:1px solid #ff0000;" type="email" [(ngModel)] = "userEmail" name = "userEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input *ngIf=wrongPassword type="email" [(ngModel)] = "userEmail" name = "userEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" [(ngModel)] = "userPassword" name = "userPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-  
+  <input *ngIf=" !wrongEmail && !wrongPassword" style="margin-top:1px" type="password" [(ngModel)] = "userPassword" name = "userPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+  <input *ngIf=wrongEmail style="margin-top:1px" type="password" [(ngModel)] = "userPassword" name = "userPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+  <input *ngIf=wrongPassword style="margin-top:1px; border:1px solid #ff0000;" type="password" [(ngModel)] = "userPassword" name = "userPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+
   <button (click) = "login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
+

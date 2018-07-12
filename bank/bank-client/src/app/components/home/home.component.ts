@@ -58,4 +58,9 @@ export class HomeComponent implements OnInit {
       width: '400px',
     });
   }
+
+  logout() {
+
+    this.router.navigateByUrl('/login');
+  }
 }

@@ -10,31 +10,77 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  userEmail : string;
-  userPassword : string;
+  userEmail : string = "";
+  userPassword : string = "";
 
-  emailError : boolean = false;
-  passwordError : boolean = false;
+  emailError : boolean;
+  passwordError : boolean;
+
+  wrongEmail : boolean;
+  wrongPassword : boolean;
 
   constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit() {
 
+    this.wrongEmail = false;
+    this.wrongPassword = false;
+
+    this.emailError = false;
+    this.passwordError = false;
   }
 
 
   login() {
 
-    this.userService.loginUser({email : this.userEmail, password : this.userPassword}).subscribe(data => {
-      
-      
-      
-      console.log(data);
+    if (this.userPassword.trim() == "") {
 
-      if (data == 'SUCCESS')
-      this.router.navigateByUrl('/home');
+      this.wrongPassword = true;
+      this.wrongEmail = false;
 
-    });
+    }
+
+    if (this.userEmail.trim() == "") {
+
+      this.wrongEmail = true;
+      this.wrongPassword = false;
+
+    }
+    
+    if (this.userEmail.trim() != "" && this.userPassword.trim() != "") {
+
+      this.userService.loginUser({email : this.userEmail, password : this.userPassword}).subscribe(data => {
+      
+      
+      
+        console.log(data);
+  
+        if (data == 'SUCCESS') {
+  
+          this.router.navigateByUrl('/home');
+          this.wrongEmail = false;
+          this.wrongPassword = false;
+  
+        }  else if (data == 'WRONG_MAIL') {
+  
+          this.wrongEmail = true;
+          this.wrongPassword = false;
+  
+        } else if (data == 'WRONG_PASSWORD') {
+  
+          this.wrongPassword = true;
+          this.wrongEmail = false;
+  
+        }
+  
+         
+  
+      });
+
+
+    }
+
+    
   }
 
 }
