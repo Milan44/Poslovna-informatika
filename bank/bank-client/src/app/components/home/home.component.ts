@@ -9,8 +9,9 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
-import {BankAccountService} from '../../services/bank-account.service'
-import {ClientService} from '../../services/client.service'
+import {BankAccountService} from '../../services/bank-account.service';
+import {ClientService} from '../../services/client.service';
+import {BankService} from '../../services/bank.service';
 
 @Component({
   selector: 'app-home',
@@ -22,15 +23,17 @@ export class HomeComponent implements OnInit {
 
   private bankAccounts : any[] = [];
   private clients : any[] = [];
+  private banks : any[] = [];
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
 
 
-  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog) { }
+  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private bankService : BankService, private suspendDialog: MatDialog) { }
 
   ngOnInit() {
 
     this.getBankAccounts();
     this.getClients();
+    this.getBanks();
 
   }
 
@@ -47,6 +50,14 @@ export class HomeComponent implements OnInit {
       console.log(this.clients);
     });
   }
+
+  getBanks() {
+    this.bankService.getBanks().subscribe(data=> {   
+      this.banks = data;
+      console.log(this.banks);
+    });
+  }
+
   suspend(account) {
 
     console.log(account);
