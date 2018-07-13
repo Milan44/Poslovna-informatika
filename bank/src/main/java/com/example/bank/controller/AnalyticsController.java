@@ -166,6 +166,7 @@ public class AnalyticsController {
 			service.save(analyticsDebt);
 			
 		}
+	}
 
 	private void updateDailyAccountBalance(AnalyticsOfStatements analytic) {
 		dailyAccountBalanceService.update(analytic);
