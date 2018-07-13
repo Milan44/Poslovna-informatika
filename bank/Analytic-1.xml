@@ -4,6 +4,8 @@
     <debtor_originator>Cubric i minimum pet sinova,Inc</debtor_originator>
     <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
     <creditor_recipient>Naovis</creditor_recipient>
+    <dateOfReceipt>2018-07-10</dateOfReceipt>
+    <currencyDate>2018-07-10</currencyDate>
     <debtorAccount>234-1234-234</debtorAccount>
     <modelAssigments>97</modelAssigments>
     <accountCreditor>4</accountCreditor>

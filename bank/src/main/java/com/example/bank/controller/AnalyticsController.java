@@ -40,7 +40,7 @@ public class AnalyticsController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AnalyticsOfStatements>loadAnalytics(@RequestBody String putanjaClient) {		
 		
-		/*List<AnalyticsOfStatements> analitike = service.findAll();
+	/*	List<AnalyticsOfStatements> analitike = service.findAll();
 				
 		for(AnalyticsOfStatements analitika: analitike){
 			
@@ -91,7 +91,7 @@ public class AnalyticsController {
 				}
 			}
 		 
-		}*/
+		} */
 		
 		System.out.println("PUTANJA JE: " + putanjaClient);
 		
@@ -108,8 +108,8 @@ public class AnalyticsController {
 					Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			    	AnalyticsOfStatements analyticParsed = (AnalyticsOfStatements) jaxbUnmarshaller.unmarshal(file);
 			    	
-			    	analyticParsed.setDateOfReceipt(current);
-			    	analyticParsed.setCurrencyDate(current);
+			    	//analyticParsed.setDateOfReceipt(current);
+			    //	analyticParsed.setCurrencyDate(current);
 			    	
 			    	service.save(analyticParsed);
 				} catch (JAXBException e) {					 
