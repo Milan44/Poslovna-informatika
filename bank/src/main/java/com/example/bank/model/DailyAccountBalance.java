@@ -66,13 +66,20 @@ public class DailyAccountBalance {
 	@XmlElement
 	private Float newState;
 	
+	
 	@ManyToOne
 	private BankAccount legalEntityAccount;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	 @OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 @OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@XmlTransient
-	private List<AnalyticsOfStatements>analyticsOfStatements;
+	 private List<AnalyticsOfStatements>analyticsOfStatements;
+//	
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@XmlElement
+//	private List<AnalyticsOfStatements>analyticsOfStatements;
 
 	
 
