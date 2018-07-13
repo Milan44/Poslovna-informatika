@@ -7,6 +7,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,6 +79,29 @@ public class BankAccountController {
 		}
 		
 		
+	}
+	
+	@RequestMapping(
+			value = "/getClientAccounts/{id}/{account}",
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<BankAccount> getClientAccounts(@PathVariable("id") Long id, @PathVariable("account") Long accountId) {						
+		return bankAccountService.findByClientId(id, accountId);
+	}
+	
+	@RequestMapping(
+			value = "suspendAccount/{id}/{trasferAccount}",
+			method = RequestMethod.DELETE)			
+	public List<BankAccount> suspendAccount(@PathVariable("id") Long id, @PathVariable("trasferAccount") Long transferAccount){
+		double trasferedMoney = bankAccountService.findById(id).getMoney();
+		BankAccount trasfer = bankAccountService.findById(transferAccount);
+		
+		trasfer.setMoney(trasfer.getMoney() + trasferedMoney);
+		bankAccountService.save(trasfer);
+		
+		bankAccountService.deleteById(id);
+		
+		return bankAccountService.getAll();
 	}
 
 }

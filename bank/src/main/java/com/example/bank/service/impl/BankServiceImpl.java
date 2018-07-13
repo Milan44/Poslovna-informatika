@@ -1,3 +1,4 @@
+
 package com.example.bank.service.impl;
 
 import java.util.List;
@@ -28,4 +29,12 @@ public class BankServiceImpl implements BankService{
 		return bankRepository.findOneById(id);
 	}
 
+	@Override
+	public boolean registerBank(Bank bank) {
+		// TODO Auto-generated method stub
+		bankRepository.save(bank);
+		return true;
+	}
 }
+
+

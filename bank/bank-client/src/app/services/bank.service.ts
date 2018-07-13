@@ -20,8 +20,7 @@ export class BankService {
 
   constructor(private http: Http) { }
 
-  getBanks(){
-
+  getBanks() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 

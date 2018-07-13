@@ -1,6 +1,8 @@
+INSERT INTO `bank`.`user` (`id`, `email`, `password`) VALUES ('1', 'baka@baka', '9403076d15b643fa4abbd4cab9a89cca09c97a2361d91d7f4c00a655dfc98bdada39b9e1b007349bfb4430395b1eef37d5afe10036edb1a96383480694431bd6');
+
 INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('1', '100', 'Serbia');
-INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('2', '200', 'Spanish');
-INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('3', '300', 'German');
+INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('2', '200', 'Spain');
+INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('3', '300', 'Germany');
 INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('4', '400', 'Italy');
 INSERT INTO `bank`.`country` (`country_id`, `country_code`, `name`) VALUES ('5', '500', 'France');
 
@@ -30,3 +32,15 @@ INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('3', '3', '2010-10-10', '3000', b'1', '1', '3', '3');
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('4', '4', '2012-12-12', '4000', b'1', '2', '1', '2');
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('5', '5', '2013-04-13', '5000', b'1', '1', '2', '2');
+
+INSERT INTO `bank`.`analyticsofstatements`(`itemNumber`, `accountCreditor`, `creditor_recipient`, `currencyDate`, `dateOfReceipt`, `debtorAccount`, `debtor_originator`, `emergency`, `modelApproval`, `modelAssigments`, `purposeOfPayment`,
+`referenceNumberAssigments`, `referenceNumberCreditor`, `status`, `sum`, `typeOfMistake`, `dailyAccountBalance_id`, `paymentCurrency_currency_id`, `paymentType_id`, `place_id` )
+VALUES ('1', '4', 'Naovis', '2018-07-10', '2018-07-10', '234-1234-234','Cubric i minimum pet sinova,Inc', b'0', NULL, '97', 'Isplata oko aplikacije preduzeca', 
+NULL, NULL, NULL, '8000', NULL, NULL, '2', NULL, '1')
+
+
+
+
+
+
+

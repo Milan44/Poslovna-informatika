@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,10 +8,14 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 
+
 import {BankAccountService} from '../../services/bank-account.service'
 import {ClientService} from '../../services/client.service'
 import {BankService} from '../../services/bank.service'
 import {CurrencyService} from '../../services/currency.service'
+
+import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
+
 
 @Component({
   selector: 'app-home',
@@ -23,6 +28,7 @@ export class HomeComponent implements OnInit {
   private bankAccounts : any[] = [];
   private clients : any[] = [];
   private banks : any[] = [];
+
   private currencies : any[] = [];
 
   private accountNumber : any;
@@ -32,15 +38,22 @@ export class HomeComponent implements OnInit {
   private selectedBank : any;
   private selectedCurrency : any;
 
+  private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
+
+
+
 
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
-              private bankService : BankService, private currencyService: CurrencyService) { }
+              private bankService : BankService, private currencyService: CurrencyService, private suspendDialog: MatDialog) { }
+
+
 
   ngOnInit() {
 
     this.getBankAccounts();
     this.getClients();
     this.getBanks();
+
     this.getCurrencies();
 
     const today = new Date();
@@ -48,6 +61,8 @@ export class HomeComponent implements OnInit {
     const mm = today.getMonth() + 1; // January is 0!
     const yyyy = today.getFullYear();
     this.dateOfOpening = {year: yyyy, month: mm, day: dd};
+
+
 
   }
 
@@ -71,6 +86,7 @@ export class HomeComponent implements OnInit {
       console.log(this.banks);
     });
   }
+
 
   getCurrencies() {
     this.currencyService.getCurrencies().subscribe(data=> {   
@@ -121,5 +137,23 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
+
+  suspend(account) {
+
+    console.log(account);
+    localStorage.setItem("client", account.client.id);
+    localStorage.setItem("account", account.id);
+
+    this.suspendDialogRef = this.suspendDialog.open(SuspendAccountComponent, {
+      height: '200px',
+      width: '400px',
+    });
+  }
+
+  logout() {
+
+    this.router.navigateByUrl('/login');
+  }
 
 }
