@@ -25,6 +25,8 @@ public interface BankAccountService {
 	BankAccount save(BankAccount a);
 	
 	void deleteById(Long id);
+	
+	BankAccount findByAccNumber(String number);
 
 
 }

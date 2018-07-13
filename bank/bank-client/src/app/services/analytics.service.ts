@@ -15,10 +15,17 @@ export class AnalyticsService {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        console.log("PUANJA JE:::" + putanja);
+        console.log("PUANJA JE:::" + putanja);  
 
         console.log("Salje zahtev na server")
         return this.http.post("http://localhost:8080/public/analytics/load/", putanja , {headers:headers}).map(data => data.json());
+    }
+
+    deleteAll(){
+        console.log("AAAAAAAAAA");
+        return this.httpClient.delete("http://localhost:8080/public/analytics").subscribe( data=> {
+            console.log(data);
+        });
     }
   
 }

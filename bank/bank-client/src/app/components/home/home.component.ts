@@ -13,6 +13,7 @@ import {BankAccountService} from '../../services/bank-account.service'
 import {ClientService} from '../../services/client.service'
 import {BankService} from '../../services/bank.service'
 import {CurrencyService} from '../../services/currency.service'
+import {AnalyticsService} from '../../services/analytics.service';
 
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
 
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
-              private bankService : BankService, private currencyService: CurrencyService, private suspendDialog: MatDialog) { }
+              private bankService : BankService, private currencyService: CurrencyService, private suspendDialog: MatDialog, private analyticService: AnalyticsService) { }
 
 
 
@@ -163,5 +164,13 @@ export class HomeComponent implements OnInit {
     });
   }
   // NOVO
+
+  getAnalytics(){
+    let putanja = document.getElementById("putanjaInput") as HTMLInputElement;
+    console.log(putanja.value);
+    this.analyticService.loadAnalytics(putanja.value).subscribe( data => {
+      console.log(data);
+    });
+  }
 
 }

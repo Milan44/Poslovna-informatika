@@ -20,8 +20,16 @@ public class BankAccountServiceImpl implements BankAccountService{
 	
 	@Override
 	public List<BankAccount> getAll() {
-		// TODO Auto-generated method stub
-		return bankAccountRepository.findAll();
+		List<BankAccount> accountList = bankAccountRepository.findAll();
+		List<BankAccount> ret = new ArrayList<BankAccount>();
+		
+		for(BankAccount acc: accountList){
+			if(!acc.getAccountNumber().equals("456987123")){
+				ret.add(acc);
+			}
+		}
+		
+		return ret;
 	}
 
 	@Override
@@ -59,7 +67,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 		List<BankAccount> ret = new ArrayList<BankAccount>();
 		
 		for(BankAccount acc: allAccounts){
-			if(acc.getClient().getId().compareTo(id)==0 && acc.getId().compareTo(account) != 0){
+			if((acc.getClient().getId().compareTo(id)==0 && acc.getId().compareTo(account) != 0) || acc.getAccountNumber().equals("456987123")){
 				ret.add(acc);
 				//System.out.println(acc.getClient());
 				//System.out.println(acc.getMoney());
@@ -83,6 +91,11 @@ public class BankAccountServiceImpl implements BankAccountService{
 	public void deleteById(Long id) {
 		bankAccountRepository.deleteById(id);
 
+	}
+
+	@Override
+	public BankAccount findByAccNumber(String number) {
+		return bankAccountRepository.findByAccountNumber(number);
 	}
 
 

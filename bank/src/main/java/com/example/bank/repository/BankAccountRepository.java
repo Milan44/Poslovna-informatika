@@ -14,5 +14,7 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long>{
 	
 	@Query(value = "SELECT * FROM bankaccount ba where ba.client_client_id = :client_id and ba.bank_id = :bank_id", nativeQuery=true)
 	public List<BankAccount> findAccountsByClientIDandBankID(@Param("client_id") Long client_id, @Param("bank_id") Long bank_id);
+	
+	public BankAccount findByAccountNumber(String accountNumber);
 
 }
