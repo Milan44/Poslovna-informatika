@@ -124,6 +124,65 @@
             <button id="addClient"  (click) = "openAddClientModal(addClientModal)" type="button" class="btn btn-primary  center" >Register client</button>
         </ng-template>
       </ngb-tab>
+
+      <ngb-tab title="Items for clearing">
+        <ng-template ngbTabContent>
+          
+            <table class="table">
+                <thead>
+                    <tr>
+    
+                        <th style="width: 20%; text-align:center;vertical-align:middle" >#</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Id</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Purpose</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Date of receipt</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Currency date</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor account</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Model assigments</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number assigments</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Model approval</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number creditor</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Sum</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Payment currency</th>
+                        
+                        <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active" *ngFor="let clearingItem of clearingItems; let i = index">
+
+                            <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td>
+                            <td style = "text-align:center;vertical-align:middle" >{{clearingItem.itemNumber}}</td> 
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.debtor_originator}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.purposeOfPayment}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.creditor_recipient}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.dateOfReceipt}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.currencyDate}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.debtorAccount}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.modelAssigments}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.referenceNumberAssigments}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.modelApproval}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.referenceNumberCreditor}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.sum}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.paymentCurrency.official_code}}</td>
+                            <td style = "text-align:center;vertical-align:middle">
+                            <td style = "text-align:center;vertical-align:middle">
+                                <input type="checkbox" >
+                            </td>
+
+                                             
+                    </tr>
+                   
+
+                </tbody>
+            </table>
+            <button id="exportClearing"  type="button" class="btn btn-primary  center" >Export</button>
+        </ng-template>
+      </ngb-tab>
      
       
     </ngb-tabset>

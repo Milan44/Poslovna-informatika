@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
 import {BankAccountService} from '../../services/bank-account.service'
 import {ClientService} from '../../services/client.service'
+import {AnalyticsOfStatementsService} from '../../services/analytics-of-statements.service'
 
 @Component({
   selector: 'app-home',
@@ -23,15 +24,15 @@ export class HomeComponent implements OnInit {
   private bankAccounts : any[] = [];
   private clients : any[] = [];
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
+  private clearingItems : any[] = [];
 
-
-  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog) { }
+  constructor(private router : Router, private analyticsOfStatementsService : AnalyticsOfStatementsService, private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog) { }
 
   ngOnInit() {
 
     this.getBankAccounts();
     this.getClients();
-
+    this.getClearingItems();
   }
 
   getBankAccounts() {
@@ -62,5 +63,13 @@ export class HomeComponent implements OnInit {
   logout() {
 
     this.router.navigateByUrl('/login');
+  }
+
+  getClearingItems() {
+
+    this.analyticsOfStatementsService.getAnalyticsForClearing().subscribe(data=> {   
+      this.clearingItems = data;
+      console.log(this.clearingItems);
+    });
   }
 }
