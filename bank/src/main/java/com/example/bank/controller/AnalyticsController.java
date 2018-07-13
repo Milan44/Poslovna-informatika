@@ -138,4 +138,24 @@ public class AnalyticsController {
 		}
 	}
 	
+	public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
+		
+		String currentBank = "555";
+		
+		if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) {
+			
+			
+			AnalyticsOfStatements analyticsCredit = analytics;
+			analyticsCredit.setDebtorAccount(null);
+			
+			AnalyticsOfStatements analyticsDebt = analytics;
+			analyticsCredit.setAccountCreditor(null);
+			
+			service.save(analyticsCredit);
+			service.save(analyticsDebt);
+			
+		}
+		
+	}
+	
 }
