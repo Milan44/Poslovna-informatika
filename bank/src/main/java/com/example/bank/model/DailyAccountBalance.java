@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -65,13 +66,20 @@ public class DailyAccountBalance {
 	@XmlElement
 	private Float newState;
 	
+	
 	@ManyToOne
 	private BankAccount legalEntityAccount;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@XmlElement
-	private List<AnalyticsOfStatements>analyticsOfStatements;
+//	 @OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	 @OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@XmlTransient
+	 private List<AnalyticsOfStatements>analyticsOfStatements;
+//	
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "dailyAccountBalance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@XmlElement
+//	private List<AnalyticsOfStatements>analyticsOfStatements;
 
 	
 

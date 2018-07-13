@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.service.AnalyticsOfStatementsService;
+import com.example.bank.service.DailyAccountBalanceService;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -34,6 +35,9 @@ public class AnalyticsController {
 	@Autowired
 	private AnalyticsOfStatementsService service;
 	
+	@Autowired
+	private DailyAccountBalanceService dailyAccountBalanceService;
+
 	@RequestMapping(
 			value = "/load", 	
 			method = RequestMethod.POST, 
@@ -108,10 +112,16 @@ public class AnalyticsController {
 					Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			    	AnalyticsOfStatements analyticParsed = (AnalyticsOfStatements) jaxbUnmarshaller.unmarshal(file);
 			    	
-			    	//analyticParsed.setDateOfReceipt(current);
+//			    	analyticParsed.setDateOfReceipt(current);
 			    //	analyticParsed.setCurrencyDate(current);
 			    	
+			    	updateDailyAccountBalance(analyticParsed);
+			    	String bankKreditor=analyticParsed.getAccountCreditor().substring(0, 3);
+			    	String bankDebitor=analyticParsed.getDebtorAccount().substring(0, 3);
+			    	
+			    	
 			    	service.save(analyticParsed);
+//			    	updateDailyAccountBalance(analyticParsed);
 				} catch (JAXBException e) {					 
 					e.printStackTrace();
 				}
@@ -119,6 +129,14 @@ public class AnalyticsController {
 		}
 		List<AnalyticsOfStatements> analitike = service.findAll();
 		return service.findAll();
+		
+	}
+	
+	private void updateDailyAccountBalance(AnalyticsOfStatements analytic) {
+		dailyAccountBalanceService.update(analytic);
+	}
+	
+	public void exportAccountStatement() {
 		
 	}
 	
