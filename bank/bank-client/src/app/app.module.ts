@@ -18,18 +18,24 @@ import { FormsModule } from '@angular/forms';
 
 import {BankAccountService} from '../app/services/bank-account.service'
 import {ClientService} from '../app/services/client.service';
+import { BankService } from '../app/services/bank.service';
 import { SuspendAccountService } from './services/suspend-account.service';
 import { LoginComponent } from './components/login/login.component'
+import { AnalyticsComponent } from './components/analytics/analytics.component'
 
 import { UserService } from './services/user.service';
+
 import {AnalyticsOfStatementsService} from './services/analytics-of-statements.service';
+import { AnalyticsService } from './services/analytics.service'
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SuspendAccountComponent,
-    LoginComponent
+    LoginComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -42,7 +48,9 @@ import {AnalyticsOfStatementsService} from './services/analytics-of-statements.s
     HttpClientModule
   ],
   entryComponents: [SuspendAccountComponent],
-  providers: [BankAccountService, ClientService, SuspendAccountService, UserService, AnalyticsOfStatementsService],
+
+  providers: [BankAccountService, ClientService, BankService, SuspendAccountService, UserService, AnalyticsOfStatementsService, AnalyticsService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

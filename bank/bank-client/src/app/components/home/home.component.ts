@@ -12,6 +12,7 @@ import { SuspendAccountComponent } from '../../components/suspend-account/suspen
 import {BankAccountService} from '../../services/bank-account.service'
 import {ClientService} from '../../services/client.service'
 import {AnalyticsOfStatementsService} from '../../services/analytics-of-statements.service'
+import {BankService} from '../../services/bank.service';
 
 @Component({
   selector: 'app-home',
@@ -23,16 +24,21 @@ export class HomeComponent implements OnInit {
 
   private bankAccounts : any[] = [];
   private clients : any[] = [];
+  private banks : any[] = [];
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
   private clearingItems : any[] = [];
 
-  constructor(private router : Router, private analyticsOfStatementsService : AnalyticsOfStatementsService, private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog) { }
+
+  constructor(private router : Router, private analyticsOfStatementsService : AnalyticsOfStatementsService, private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog, private bankService : BankService) { }
+
 
   ngOnInit() {
 
     this.getBankAccounts();
     this.getClients();
     this.getClearingItems();
+    this.getBanks();
+    
   }
 
   getBankAccounts() {
@@ -48,6 +54,14 @@ export class HomeComponent implements OnInit {
       console.log(this.clients);
     });
   }
+
+  getBanks() {
+    this.bankService.getBanks().subscribe(data=> {   
+      this.banks = data;
+      console.log(this.banks);
+    });
+  }
+
   suspend(account) {
 
     console.log(account);
