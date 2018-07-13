@@ -25,6 +25,27 @@ public class AnalyticsOfStatementsServiceImpl implements AnalyticsOfStatementsSe
 	@Override
 	public AnalyticsOfStatements save(AnalyticsOfStatements analytic) {
 		return repository.save(analytic);
+		
 	}
 
+
+	@Override
+	public void deleteAll() {
+		
+		repository.deleteAll();
+		
+	}
+
+
+	@Override
+	public void delete(Long id) {
+		System.out.println("Brise id: " + id);
+		repository.deleteById(id);		
+	}
+
+
+	
+
+
+	
 }

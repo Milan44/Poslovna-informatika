@@ -17,6 +17,7 @@ import javax.xml.bind.Unmarshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,7 @@ public class AnalyticsController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AnalyticsOfStatements>loadAnalytics(@RequestBody String putanjaClient) {		
 		
-	/*	List<AnalyticsOfStatements> analitike = service.findAll();
+		/*List<AnalyticsOfStatements> analitike = service.findAll();
 				
 		for(AnalyticsOfStatements analitika: analitike){
 			
@@ -98,12 +99,14 @@ public class AnalyticsController {
 		} */
 		
 		System.out.println("PUTANJA JE: " + putanjaClient);
+			
 		
 		File[] files = new File(putanjaClient).listFiles();
 		//If this pathname does not denote a directory, then listFiles() returns null. 
 		long time = System.currentTimeMillis();
 		Date current = new Date(time);
 
+		service.deleteAll();
 		for (File file : files) {
 		    
 		    	JAXBContext jaxbContext;
@@ -127,9 +130,22 @@ public class AnalyticsController {
 				}
 		    	
 		}
-		List<AnalyticsOfStatements> analitike = service.findAll();
+		List<AnalyticsOfStatements> analitike = service.findAll(); 
 		return service.findAll();
+		//return null;
 		
+	}
+	
+	@DeleteMapping
+	public void deleteAnalytics() {
+		
+		System.out.println("POGODIO BRISANJE");
+		
+		List<AnalyticsOfStatements> analytics = service.findAll();
+		
+		for(AnalyticsOfStatements a: analytics){
+			service.delete(a.getItemNumber());
+		}
 	}
 	
 	private void updateDailyAccountBalance(AnalyticsOfStatements analytic) {

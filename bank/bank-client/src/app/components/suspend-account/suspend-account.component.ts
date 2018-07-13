@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SuspendAccountService } from '../../services/suspend-account.service'
 import { Account } from '../../models/Account';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class SuspendAccountComponent implements OnInit {
   accounts: Account[];
   account: any;
 
-  constructor(private suspendAccountService: SuspendAccountService) { }
+  constructor(private suspendAccountService: SuspendAccountService, private router:Router) { }
 
   ngOnInit() {
     this.client = localStorage.getItem("client");
@@ -37,6 +38,7 @@ export class SuspendAccountComponent implements OnInit {
 
     this.suspendAccountService.suspendAccount(this.account, accountTransfer).subscribe( data => {
       console.log(data);
+      this.router.navigateByUrl('/home');
     });
   }
 
