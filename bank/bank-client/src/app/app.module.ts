@@ -18,15 +18,18 @@ import { FormsModule } from '@angular/forms';
 
 import {BankAccountService} from '../app/services/bank-account.service'
 import {ClientService} from '../app/services/client.service';
-import { SuspendAccountService } from './services/suspend-account.service'
+import { BankService } from '../app/services/bank.service';
+import { SuspendAccountService } from './services/suspend-account.service';
+import { LoginComponent } from './components/login/login.component'
 
-
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SuspendAccountComponent
+    SuspendAccountComponent,
+    LoginComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -39,7 +42,7 @@ import { SuspendAccountService } from './services/suspend-account.service'
     HttpClientModule
   ],
   entryComponents: [SuspendAccountComponent],
-  providers: [BankAccountService, ClientService, SuspendAccountService],
+  providers: [BankService, BankAccountService, ClientService, SuspendAccountService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
