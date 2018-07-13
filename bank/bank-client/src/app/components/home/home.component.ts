@@ -8,10 +8,14 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 
+
+import {BankAccountService} from '../../services/bank-account.service'
+import {ClientService} from '../../services/client.service'
+import {BankService} from '../../services/bank.service'
+import {CurrencyService} from '../../services/currency.service'
+
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
-import {BankAccountService} from '../../services/bank-account.service';
-import {ClientService} from '../../services/client.service';
-import {BankService} from '../../services/bank.service';
+
 
 @Component({
   selector: 'app-home',
@@ -24,16 +28,41 @@ export class HomeComponent implements OnInit {
   private bankAccounts : any[] = [];
   private clients : any[] = [];
   private banks : any[] = [];
+
+  private currencies : any[] = [];
+
+  private accountNumber : any;
+  private money : any;
+  private dateOfOpening : any;
+  private selectedClient : any;
+  private selectedBank : any;
+  private selectedCurrency : any;
+
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
 
 
-  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private bankService : BankService, private suspendDialog: MatDialog) { }
+
+
+  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
+              private bankService : BankService, private currencyService: CurrencyService, private suspendDialog: MatDialog) { }
+
+
 
   ngOnInit() {
 
     this.getBankAccounts();
     this.getClients();
     this.getBanks();
+
+    this.getCurrencies();
+
+    const today = new Date();
+    const dd = today.getDate();
+    const mm = today.getMonth() + 1; // January is 0!
+    const yyyy = today.getFullYear();
+    this.dateOfOpening = {year: yyyy, month: mm, day: dd};
+
+
 
   }
 
@@ -57,6 +86,58 @@ export class HomeComponent implements OnInit {
       console.log(this.banks);
     });
   }
+
+
+  getCurrencies() {
+    this.currencyService.getCurrencies().subscribe(data=> {   
+      this.currencies = data;
+      console.log(this.currencies);
+    });
+  }
+
+
+  openAddBankAccountModal(addBankAccountModal) {
+
+    this.modalService.open(addBankAccountModal).result.then((result) => {
+      
+    }, (reason) => {
+      
+    });
+    
+  }
+
+  addBankAccount() {
+
+    let date = ""+this.dateOfOpening.year + "-";
+    if(this.dateOfOpening.month<10)
+      date += "0"+this.dateOfOpening.month + "-";
+    else
+      date += this.dateOfOpening.month + "-";
+
+    if(this.dateOfOpening.day<10)
+      date += "0"+this.dateOfOpening.day;
+    else
+      date += this.dateOfOpening.day;
+
+    console.log(date);
+
+    // let bankAccountDTO = {accountNumber:this.accountNumber+"", money: this.money, valid:true, dateOfOpening:date, client:this.selectedClient, bank:this.selectedBank, currency:this.selectedCurrency}
+    this.bankAccountService.registerBankAccount({accountNumber:this.accountNumber+"", money: this.money, valid:true, dateOfOpening:date, clientID:this.selectedClient, bankID:this.selectedBank, currencyID:this.selectedCurrency}).subscribe(data => {
+      
+      if(data){
+        alert("You have successfully registered an account!");
+        this.getBankAccounts();
+      } 
+      else {
+        alert("An error has occurred.");
+      }
+
+     
+      
+    });
+  }
+
+
 
   suspend(account) {
 
@@ -82,4 +163,5 @@ export class HomeComponent implements OnInit {
     });
   }
   // NOVO
+
 }

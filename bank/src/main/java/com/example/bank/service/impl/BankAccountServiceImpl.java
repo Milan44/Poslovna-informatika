@@ -25,7 +25,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 	}
 
 	@Override
-	public boolean registerCinema(BankAccount account) {
+	public boolean registerBankAccount(BankAccount account) {
 		// TODO Auto-generated method stub
 		bankAccountRepository.save(account);
 		return true;
@@ -45,6 +45,12 @@ public class BankAccountServiceImpl implements BankAccountService{
 		}
 		
 		return ret;
+	}
+
+	@Override
+	public List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID) {
+		// TODO Auto-generated method stub
+		return bankAccountRepository.findAccountsByClientIDandBankID(clientID, clientID);
 	}
 
 	@Override
@@ -76,6 +82,9 @@ public class BankAccountServiceImpl implements BankAccountService{
 	@Override
 	public void deleteById(Long id) {
 		bankAccountRepository.deleteById(id);
+
 	}
+
+
 
 }

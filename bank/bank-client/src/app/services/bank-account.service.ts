@@ -41,5 +41,14 @@ export class BankAccountService {
 
     return this.http.get("http://localhost:8080/public/bankAccounts/pdf/" + bank.id, {headers:headers}).map(data => data.json())
   }
+  
+  registerBankAccount(bankAccountDTO : any) {
+    console.log(bankAccountDTO);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/public/bankAccounts/registerBankAccount', 
+      JSON.stringify(bankAccountDTO), { headers : headers }).map((data : Response) => data.json());
+
+  }
 
 }

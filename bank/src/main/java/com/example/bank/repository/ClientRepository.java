@@ -7,5 +7,7 @@ import com.example.bank.model.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long>{
+	
+	Client findOneById(Long id);
 
 }

@@ -113,8 +113,8 @@
                               <button id="updateClient"  (click) = "updateClient(client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
                             <!-- </td>
                             <td style = "text-align:center;vertical-align:middle">  -->
-                              <button id="deleteClient"  (click) = "deleteClient(client)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
-                            </td>
+                              <!-- <button id="deleteClient"  (click) = "deleteClient(client)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
+                            </td> -->
                                              
                     </tr>
                    
@@ -165,3 +165,76 @@
       
     </ngb-tabset>
 </div>
+
+
+<ng-template #addBankAccountModal let-c="close" let-d="dismiss">
+    
+  <div class="modal-header">
+      <h4 class="modal-title">Add bank account</h4>
+      <!-- <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
+      
+        <div class="form-group">
+            <label for="broj_racuna">Account number: </label>
+            <input id="broj_racuna" name="broj_racuna" [(ngModel)]="accountNumber" class="form-control" type="number" data-validation="required" #broj_Racuna >
+            <span id="error_naziv_drzave" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="broj_racuna">Money: </label>
+          <input id="broj_racuna" name="broj_racuna" [(ngModel)]="money" class="form-control" type="number" data-validation="required" #broj_Racuna >
+          <span id="error_naziv_drzave" class="text-danger"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="broj_racuna">Date of opening: </label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" disabled
+                  name="datePicker" [(ngModel)]="dateOfOpening" ngbDatepicker #dt="ngbDatepicker" required>
+          <!-- <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
+              <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          </div> -->
+        </div>
+      </div>
+
+  
+        <div class="form-group">
+            <label for="drzava">Client: </label>
+            <div class="input-group-append" >
+              <select [(ngModel)]="selectedClient" name="izabran_klijent" class="form-control">
+                  <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+              </select> 
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="drzava">Bank: </label>
+          <div class="input-group-append" >
+            <select [(ngModel)]="selectedBank" name="izabran_banka" class="form-control">
+                <option *ngFor="let bank of banks" [value]="bank.id">{{bank.name}}</option>
+            </select> 
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="drzava">Currency: </label>
+        <div class="input-group-append" >
+          <select [(ngModel)]="selectedCurrency" name="izabran_valuta" class="form-control">
+              <option *ngFor="let currency of currencies" [value]="currency.id">{{currency.official_code}}</option>
+          </select> 
+        </div>
+    </div>
+
+        <div class="form-group">
+
+            <button id="submitBankAccount" (click) = "addBankAccount()" type="button" class="btn btn-primary  center" > Submit </button>
+
+        </div>
+    </div>
+
+</ng-template>

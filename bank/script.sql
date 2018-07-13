@@ -32,3 +32,15 @@ INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('3', '3', '2010-10-10', '3000', b'1', '1', '3', '3');
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('4', '4', '2012-12-12', '4000', b'1', '2', '1', '2');
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('5', '5', '2013-04-13', '5000', b'1', '1', '2', '2');
+
+INSERT INTO `bank`.`analyticsofstatements`(`itemNumber`, `accountCreditor`, `creditor_recipient`, `currencyDate`, `dateOfReceipt`, `debtorAccount`, `debtor_originator`, `emergency`, `modelApproval`, `modelAssigments`, `purposeOfPayment`,
+`referenceNumberAssigments`, `referenceNumberCreditor`, `status`, `sum`, `typeOfMistake`, `dailyAccountBalance_id`, `paymentCurrency_currency_id`, `paymentType_id`, `place_id` )
+VALUES ('1', '4', 'Naovis', '2018-07-10', '2018-07-10', '234-1234-234','Cubric i minimum pet sinova,Inc', b'0', NULL, '97', 'Isplata oko aplikacije preduzeca', 
+NULL, NULL, NULL, '8000', NULL, NULL, '2', NULL, '1')
+
+
+
+
+
+
+

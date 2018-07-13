@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.example.bank.model.AnalyticsOfStatements;;
 
@@ -16,6 +20,8 @@ import com.example.bank.model.AnalyticsOfStatements;;
 
 @Entity
 @Table(name = "accountStatement")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "accountStatement")
 public class AccountStatement {
 
 
@@ -23,29 +29,41 @@ public class AccountStatement {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@XmlElement
 	private Date fromDate;
 	
+	@XmlElement
 	private Date toDate;
 	
-	
+	@XmlElement
 	private Float startAccountState;
 	
-	
+	@XmlElement
 	private Float trafficToBenefit;
 	
-	
+	@XmlElement
 	private Float trafficToTheBurden; //promet na teret
 	
-	
+	@XmlElement
 	private Float stateAtTheEndOfPeriod;
 	
 	@OneToMany
+	@XmlElement
 	private List<AnalyticsOfStatements>statements;
+	
+	@XmlElement
+	private String accountNumber;
 
-
-
-
-
+	@XmlElement
+	private int countOfTrafficToBenefit;
+	
+	@XmlElement
+	private int countOfTrafficToBurden;
+	
+	@XmlElement
+	private int numberOfSection;
+	
+	
 	public Long getId() {
 		return id;
 	}

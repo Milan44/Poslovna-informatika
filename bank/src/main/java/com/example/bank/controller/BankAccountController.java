@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.text.SimpleDateFormat;  
+import java.util.Date; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,13 +21,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.example.bank.model.AccountForBank;
 import com.example.bank.model.Bank;
+import com.example.bank.DTO.BankAccountDTO;
 import com.example.bank.model.BankAccount;
 import com.example.bank.model.DailyAccountBalance;
 import com.example.bank.service.BankAccountService;
 import com.example.bank.service.BankService;
 import com.example.bank.service.DailyAccountBalanceService;
+import com.example.bank.service.ClientService;
+import com.example.bank.service.CurrencyService;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -45,14 +51,20 @@ public class BankAccountController {
 	private BankService bankService;
 	
 	@Autowired
+
 	private DailyAccountBalanceService dailyAccountBalanceService;
+
+	private ClientService clientService;
+	
+	@Autowired
+	private CurrencyService currencyService;
 	
 	
 	@RequestMapping(
 			value = "/getAll", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<BankAccount>  getCinemas() {
+	public List<BankAccount>  getBankAccounts() {
 		
 		
 		return bankAccountService.getAll();
@@ -65,11 +77,21 @@ public class BankAccountController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public boolean registerBankAccount(@RequestBody BankAccount account) {
+	public boolean registerBankAccount(@RequestBody BankAccountDTO accountDTO) {
 		
 		try {
 			
-			bankAccountService.registerCinema(account);
+			BankAccount account = new BankAccount();
+			account.setAccountNumber(accountDTO.getAccountNumber());
+			account.setDateOfOpening(new SimpleDateFormat("yyyy-MM-dd").parse(accountDTO.getDateOfOpening()));
+			account.setMoney(accountDTO.getMoney());
+			account.setValid(accountDTO.getValid());
+			
+			account.setClient(clientService.getClientById(accountDTO.getClientID()));
+			account.setBank(bankService.getBankById(accountDTO.getBankID()));
+			account.setCurrency(currencyService.getCurrencyById(accountDTO.getCurrencyID()));
+			
+			bankAccountService.registerBankAccount(account);
 			return true;
 			
 		} catch (Exception e) {
