@@ -14,7 +14,7 @@
 
 <div class="container">
 
-  <ngb-tabset>
+    <ngb-tabset>
       <ngb-tab title="Bank Accounts">
         <ng-template ngbTabContent>
           
@@ -125,7 +125,12 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab title="Items for clearing">
+      <ngb-tab  >
+
+        <ng-template ngbTabTitle>
+                <div (click)="loadClearingItems()">Items for clearing</div>
+        </ng-template>
+
         <ng-template ngbTabContent>
           
             <table class="table">
@@ -182,11 +187,12 @@
             </table>
             <button id="exportClearing"  type="button" class="btn btn-primary  center" >Export</button>
         </ng-template>
+      </ngb-tab>
 
       <ngb-tab title="Banks">
         <ng-template ngbTabContent>
           
-          <table class="table">
+            <table class="table">
               <thead>
                   <tr>
   
@@ -212,11 +218,11 @@
                         <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                       </td>
                                                              
-              </tr>
+                  </tr>
 
               </tbody>
-          </table>
-      </ng-template>
+            </table>
+        </ng-template>
       </ngb-tab>
      
       

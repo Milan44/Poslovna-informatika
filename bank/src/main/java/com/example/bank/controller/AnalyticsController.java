@@ -100,6 +100,7 @@ public class AnalyticsController {
 		long time = System.currentTimeMillis();
 		Date current = new Date(time);
 
+		service.deleteAll();
 		for (File file : files) {
 		    
 		    	JAXBContext jaxbContext;

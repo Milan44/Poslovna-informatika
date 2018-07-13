@@ -29,16 +29,19 @@ export class HomeComponent implements OnInit {
   private clearingItems : any[] = [];
 
 
-  constructor(private router : Router, private analyticsOfStatementsService : AnalyticsOfStatementsService, private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog, private bankService : BankService) { }
+  constructor(private router : Router, private analyticsOfStatementsService : AnalyticsOfStatementsService, private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService, private suspendDialog: MatDialog, private bankService : BankService) {
+
+    
+   }
 
 
   ngOnInit() {
-
+    
     this.getBankAccounts();
     this.getClients();
-    this.getClearingItems();
-    this.getBanks();
     
+    this.getBanks();
+
   }
 
   getBankAccounts() {
@@ -83,7 +86,13 @@ export class HomeComponent implements OnInit {
 
     this.analyticsOfStatementsService.getAnalyticsForClearing().subscribe(data=> {   
       this.clearingItems = data;
-      console.log(this.clearingItems);
+      console.log(data);
     });
+  }
+
+  loadClearingItems() {
+
+    this.clearingItems = [];
+    this.getClearingItems();
   }
 }

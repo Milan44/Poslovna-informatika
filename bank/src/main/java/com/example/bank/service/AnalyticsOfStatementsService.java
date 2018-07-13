@@ -10,4 +10,6 @@ public interface AnalyticsOfStatementsService {
 	
 	AnalyticsOfStatements save(AnalyticsOfStatements analytic);
 	
+	void deleteAll();
+	
 }
