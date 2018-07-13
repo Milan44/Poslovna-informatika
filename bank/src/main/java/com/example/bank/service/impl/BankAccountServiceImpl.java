@@ -20,15 +20,45 @@ public class BankAccountServiceImpl implements BankAccountService{
 	
 	@Override
 	public List<BankAccount> getAll() {
-		// TODO Auto-generated method stub
-		return bankAccountRepository.findAll();
+		List<BankAccount> accountList = bankAccountRepository.findAll();
+		List<BankAccount> ret = new ArrayList<BankAccount>();
+		
+		for(BankAccount acc: accountList){
+			if(!acc.getAccountNumber().equals("456987123")){
+				ret.add(acc);
+			}
+		}
+		
+		return ret;
 	}
 
 	@Override
-	public boolean registerCinema(BankAccount account) {
+	public boolean registerBankAccount(BankAccount account) {
 		// TODO Auto-generated method stub
 		bankAccountRepository.save(account);
 		return true;
+	}
+	
+	@Override
+	public ArrayList<BankAccount> findByBank(Long id) {
+		List<BankAccount> allAccounts = bankAccountRepository.findAll();
+		ArrayList<BankAccount> ret = new ArrayList<BankAccount>();
+		
+		for(BankAccount acc: allAccounts){
+			if(acc.getBank().getId().compareTo(id)==0){
+				ret.add(acc);
+				//System.out.println(acc.getClient());
+				//System.out.println(acc.getMoney());
+			}
+		}
+		
+		return ret;
+	}
+
+	@Override
+	public List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID) {
+		// TODO Auto-generated method stub
+		return bankAccountRepository.findAccountsByClientIDandBankID(clientID, clientID);
 	}
 
 	@Override
@@ -37,7 +67,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 		List<BankAccount> ret = new ArrayList<BankAccount>();
 		
 		for(BankAccount acc: allAccounts){
-			if(acc.getClient().getId().compareTo(id)==0 && acc.getId().compareTo(account) != 0){
+			if((acc.getClient().getId().compareTo(id)==0 && acc.getId().compareTo(account) != 0) || acc.getAccountNumber().equals("456987123")){
 				ret.add(acc);
 				//System.out.println(acc.getClient());
 				//System.out.println(acc.getMoney());
@@ -60,6 +90,14 @@ public class BankAccountServiceImpl implements BankAccountService{
 	@Override
 	public void deleteById(Long id) {
 		bankAccountRepository.deleteById(id);
+
 	}
+
+	@Override
+	public BankAccount findByAccNumber(String number) {
+		return bankAccountRepository.findByAccountNumber(number);
+	}
+
+
 
 }

@@ -12,9 +12,9 @@ import com.example.bank.service.BankService;
 @Service
 public class BankServiceImpl implements BankService{
 
+	
 	@Autowired
 	private BankRepository bankRepository;
-	
 	
 	@Override
 	public List<Bank> getAll() {
@@ -23,9 +23,21 @@ public class BankServiceImpl implements BankService{
 	}
 
 	@Override
+	public Bank getBankById(Long id) {
+		// TODO Auto-generated method stub
+		return bankRepository.findOneById(id);
+	}
+
+	@Override
 	public boolean registerBank(Bank bank) {
 		// TODO Auto-generated method stub
 		bankRepository.save(bank);
 		return true;
 	}
+	
+	@Override
+	public Bank findOne(Long id) {
+		return (Bank)bankRepository.findById(id).get();
+	}
 }
+

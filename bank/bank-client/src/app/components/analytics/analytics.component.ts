@@ -19,6 +19,8 @@ export class AnalyticsComponent implements OnInit {
 
     let putanja = document.getElementById("putanjaInput") as HTMLInputElement;
     console.log(putanja.value);
+    this.analyticsService.deleteAll();
+
     this.analyticsService.loadAnalytics(putanja.value).subscribe( data => {
       console.log(data);
     });

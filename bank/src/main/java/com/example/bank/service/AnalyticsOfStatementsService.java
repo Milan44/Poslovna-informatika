@@ -9,6 +9,8 @@ public interface AnalyticsOfStatementsService {
 	List<AnalyticsOfStatements> findAll();
 	
 	AnalyticsOfStatements save(AnalyticsOfStatements analytic);
+
+	void delete (Long id);
 	
 	void deleteAll();
 	

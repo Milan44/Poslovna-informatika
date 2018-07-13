@@ -115,7 +115,7 @@ public class AnalyticsOfStatements {
 	private String status;
 	
 	@ManyToOne
-	@XmlTransient
+	@XmlElement
 	private DailyAccountBalance dailyAccountBalance;
 	
 	// Analitika izvoda banke
@@ -316,14 +316,13 @@ public class AnalyticsOfStatements {
 		return emergency;
 	}
 
-	public AnalyticsOfStatements(Long itemNumber, String debtor_originator, String purposeOfPayment,
+	public AnalyticsOfStatements(String debtor_originator, String purposeOfPayment,
 			String creditor_recipient, @NotNull Date dateOfReceipt, @NotNull Date currencyDate, String debtorAccount,
 			@Max(99) Integer modelAssigments, String referenceNumberAssigments, String accountCreditor,
 			@Max(99) Integer modelApproval, String referenceNumberCreditor, @NotNull Boolean emergency, Float sum,
 			@Max(1) Integer typeOfMistake, String status, DailyAccountBalance dailyAccountBalance,
 			PaymentType paymentType, Currency paymentCurrency, List<ItemTransfer> itemTransfer, Place place) {
 		super();
-		this.itemNumber = itemNumber;
 		this.debtor_originator = debtor_originator;
 		this.purposeOfPayment = purposeOfPayment;
 		this.creditor_recipient = creditor_recipient;
