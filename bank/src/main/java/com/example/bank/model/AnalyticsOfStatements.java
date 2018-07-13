@@ -27,6 +27,7 @@ import com.example.bank.model.DailyAccountBalance;
 import com.example.bank.model.ItemTransfer;
 import com.example.bank.model.PaymentType;
 import com.example.bank.model.Place;
+import com.example.bank.controller.AddaptDate;
 
 /**
  * analitika izvoda
@@ -58,13 +59,13 @@ public class AnalyticsOfStatements {
 	
 	@Column
 	@NotNull
-//	@XmlJavaTypeAdapter(AddaptDate.class)
+	@XmlJavaTypeAdapter(AddaptDate.class)
 	@XmlElement
 	private Date dateOfReceipt; //datum prijema
 	
 	@Column
 	@NotNull
-//	@XmlJavaTypeAdapter(AddaptDate.class)
+	@XmlJavaTypeAdapter(AddaptDate.class)
 	@XmlElement
 	private Date currencyDate; //datum valute
 	
