@@ -30,6 +30,22 @@ public class BankAccountServiceImpl implements BankAccountService{
 		bankAccountRepository.save(account);
 		return true;
 	}
+	
+	@Override
+	public ArrayList<BankAccount> findByBank(Long id) {
+		List<BankAccount> allAccounts = bankAccountRepository.findAll();
+		ArrayList<BankAccount> ret = new ArrayList<BankAccount>();
+		
+		for(BankAccount acc: allAccounts){
+			if(acc.getBank().getId().compareTo(id)==0){
+				ret.add(acc);
+				//System.out.println(acc.getClient());
+				//System.out.println(acc.getMoney());
+			}
+		}
+		
+		return ret;
+	}
 
 	@Override
 	public List<BankAccount> findByClientId(Long id, Long account) {

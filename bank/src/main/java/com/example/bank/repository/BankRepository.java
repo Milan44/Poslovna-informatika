@@ -8,4 +8,5 @@ import com.example.bank.model.Bank;
 @Repository
 public interface BankRepository extends JpaRepository<Bank, Long>{
 
+	
 }

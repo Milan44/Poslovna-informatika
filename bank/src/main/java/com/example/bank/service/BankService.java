@@ -8,5 +8,9 @@ public interface BankService {
 
 	List<Bank> getAll();
 	
-	boolean registerBank(Bank bank);
+	//List<Bank> findAll();
+	
+	//boolean registerBank(Bank bank);
+	
+	public Bank findOne(Long id);
 }

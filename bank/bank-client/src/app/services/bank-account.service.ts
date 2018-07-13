@@ -35,4 +35,11 @@ export class BankAccountService {
   
   }
 
+  exportAccount(bank){
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get("http://localhost:8080/public/bankAccounts/pdf/" + bank.id, {headers:headers}).map(data => data.json())
+  }
+
 }

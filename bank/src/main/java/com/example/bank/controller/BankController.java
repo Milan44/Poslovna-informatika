@@ -28,8 +28,8 @@ public class BankController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Bank>  getCinemas() {
 		
-		
 		return bankService.getAll();
+		//return bankService.findAll();
 		
 	}
 	

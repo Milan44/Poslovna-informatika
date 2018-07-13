@@ -74,4 +74,12 @@ export class HomeComponent implements OnInit {
 
     this.router.navigateByUrl('/login');
   }
+
+  // NOVO
+  exportAccount(bank){
+    this.bankAccountService.exportAccount(bank).subscribe( data => {
+    console.log(data);
+    });
+  }
+  // NOVO
 }
