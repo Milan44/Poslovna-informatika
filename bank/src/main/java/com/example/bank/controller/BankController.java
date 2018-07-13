@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.model.Bank;
+import com.example.bank.service.AnalyticsOfStatementsService;
 import com.example.bank.service.BankService;
 
 @RestController
@@ -20,6 +22,8 @@ public class BankController {
 	@Autowired
 	private BankService bankService;
 	
+	@Autowired
+	private AnalyticsOfStatementsService service;
 	
 	
 	@RequestMapping(
@@ -30,6 +34,15 @@ public class BankController {
 		
 		
 		return bankService.getAll();
+		
+	}
+	
+	@RequestMapping(
+			value = "/load", 	
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AnalyticsOfStatements>loadAnalytics() {			
+		return service.findAll();
 		
 	}
 	

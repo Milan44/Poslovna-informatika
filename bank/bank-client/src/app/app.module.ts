@@ -21,15 +21,18 @@ import {ClientService} from '../app/services/client.service';
 import { BankService } from '../app/services/bank.service';
 import { SuspendAccountService } from './services/suspend-account.service';
 import { LoginComponent } from './components/login/login.component'
+import { AnalyticsComponent } from './components/analytics/analytics.component'
 
 import { UserService } from './services/user.service';
+import { AnalyticsService } from './services/analytics.service'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SuspendAccountComponent,
-    LoginComponent
+    LoginComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -42,7 +45,7 @@ import { UserService } from './services/user.service';
     HttpClientModule
   ],
   entryComponents: [SuspendAccountComponent],
-  providers: [BankService, BankAccountService, ClientService, SuspendAccountService, UserService],
+  providers: [BankService, BankAccountService, ClientService, SuspendAccountService, UserService, AnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
