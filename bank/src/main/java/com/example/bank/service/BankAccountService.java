@@ -8,6 +8,8 @@ public interface BankAccountService {
 	
 	List<BankAccount> getAll();
 	
-	boolean registerCinema(BankAccount account);
+	boolean registerBankAccount(BankAccount account);
+	
+	List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID);
 
 }

@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 
 import {BankAccountService} from '../app/services/bank-account.service'
 import {ClientService} from '../app/services/client.service'
+import {BankService} from '../app/services/bank.service'
+import {CurrencyService} from '../app/services/currency.service'
 
 
 @NgModule({
@@ -28,7 +30,7 @@ import {ClientService} from '../app/services/client.service'
     HttpModule,
     FormsModule
   ],
-  providers: [BankAccountService, ClientService],
+  providers: [BankAccountService, ClientService, BankService, CurrencyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

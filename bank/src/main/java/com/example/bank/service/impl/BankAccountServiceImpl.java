@@ -23,10 +23,16 @@ public class BankAccountServiceImpl implements BankAccountService{
 	}
 
 	@Override
-	public boolean registerCinema(BankAccount account) {
+	public boolean registerBankAccount(BankAccount account) {
 		// TODO Auto-generated method stub
 		bankAccountRepository.save(account);
 		return true;
+	}
+
+	@Override
+	public List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID) {
+		// TODO Auto-generated method stub
+		return bankAccountRepository.findAccountsByClientIDandBankID(clientID, clientID);
 	}
 
 }

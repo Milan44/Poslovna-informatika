@@ -16,31 +16,22 @@ import 'rxjs/add/operator/toPromise';
 import { HttpHeaders, HttpClient, HttpErrorResponse, HttpParams  } from '@angular/common/http';
 
 @Injectable()
-export class BankAccountService {
+export class BankService {
 
   constructor(private http: Http) { }
 
-
-  getBankAccounts(){
+  getBanks(){
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.get("http://localhost:8080/public/bankAccounts/getAll", {headers:headers}).map(data => data.json())
+    return this.http.get("http://localhost:8080/public/banks/getAll", {headers:headers}).map(data => data.json())
 
     .catch((err:HttpErrorResponse) =>
     {
         return Observable.throw(err);
     });
   
-  }
-
-  registerBankAccount(bankAccountDTO : any) {
-    console.log(bankAccountDTO);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/public/bankAccounts/registerBankAccount', 
-      JSON.stringify(bankAccountDTO), { headers : headers }).map((data : Response) => data.json());
   }
 
 }
