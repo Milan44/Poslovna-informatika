@@ -160,13 +160,13 @@ public class BankAccountController {
 		else {
 			
 			
-		//	AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), null, 
+			//	AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), null, 
 			//		"987-446-587", trasfer.getAccountNumber(), null, "4654-6216", emergencyBool, trasfer.getMoney(), null, null, dailyAccountBalance,null, null, null, null);
 		
-			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
-					"987-446-587", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, (float)trasfer.getMoney(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
-			analyticService.save(nova);
-			bankAccountService.deleteById(id);
+//			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
+//					"987-446-587", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, (float)trasfer.getMoney(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+//			analyticService.save(nova);
+//			bankAccountService.deleteById(id);
 		}
 		
 		//97 15 1 0 2 1

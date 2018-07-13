@@ -17,5 +17,5 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long>{
 	
 	public BankAccount findByAccountNumber(String accountNumber);
 
-	BankAccount findByAccountNumber(String accountNumber);
+	
 }
