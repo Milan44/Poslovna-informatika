@@ -14,7 +14,5 @@ public interface BankService {
 	
 	boolean registerBank(Bank bank);
 
+	public Bank findOne(Long id);
 }
-
-
-

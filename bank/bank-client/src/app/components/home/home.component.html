@@ -14,7 +14,7 @@
 
 <div class="container">
 
-  <ngb-tabset>
+    <ngb-tabset>
       <ngb-tab title="Bank Accounts">
         <ng-template ngbTabContent>
           
@@ -23,6 +23,7 @@
                     <tr>
     
                         <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
+                        <th style="width: 30%; text-align:center;vertical-align:middle; visibility: hidden;" >ID</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >Account number</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >Date of opening</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >Valid</th>
@@ -39,6 +40,7 @@
                     <tr class="active" *ngFor="let account of bankAccounts; let i = index">
 
                             <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle" >{{account.id}}</td>
                             <td style = "text-align:center;vertical-align:middle" >{{account.accountNumber}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{account.dateOfOpening}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{account.valid}}</td>
@@ -125,10 +127,83 @@
         </ng-template>
       </ngb-tab>
 
+<<<<<<< HEAD
+=======
+      <ngb-tab  >
 
+        <ng-template ngbTabTitle>
+                <div (click)="loadClearingItems()">Items for clearing</div>
+        </ng-template>
+>>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
+
+<<<<<<< HEAD
       <ngb-tab title="Banks">
         <ng-template ngbTabContent>    
           <table class="table">
+=======
+        <ng-template ngbTabContent>
+          
+            <table class="table">
+                <thead>
+                    <tr>
+    
+                        <th style="width: 20%; text-align:center;vertical-align:middle" >#</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Id</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Purpose</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Date of receipt</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Currency date</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor account</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Model assigments</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number assigments</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Model approval</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number creditor</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Sum</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Payment currency</th>
+                        
+                        <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active" *ngFor="let clearingItem of clearingItems; let i = index">
+
+                            <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td>
+                            <td style = "text-align:center;vertical-align:middle" >{{clearingItem.itemNumber}}</td> 
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.debtor_originator}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.purposeOfPayment}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.creditor_recipient}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.dateOfReceipt}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.currencyDate}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.debtorAccount}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.modelAssigments}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.referenceNumberAssigments}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.modelApproval}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.referenceNumberCreditor}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.sum}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{clearingItem.paymentCurrency.official_code}}</td>
+                            <td style = "text-align:center;vertical-align:middle">
+                            <td style = "text-align:center;vertical-align:middle">
+                                <input type="checkbox" >
+                            </td>
+
+                                             
+                    </tr>
+                   
+
+                </tbody>
+            </table>
+            <button id="exportClearing"  type="button" class="btn btn-primary  center" >Export</button>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab title="Banks">
+        <ng-template ngbTabContent>
+          
+            <table class="table">
+>>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
               <thead>
                   <tr>
                       <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
@@ -148,12 +223,32 @@
                       <td style = "text-align:center;vertical-align:middle">{{bank.pib}}</td>
                     
                       <td style = "text-align:center;vertical-align:middle"> 
+<<<<<<< HEAD
                         <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                       </td>                                                           
               </tr>
+=======
+                        <button id="exportPDF" (click) = "exportAccount(bank)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
+                      </td>
+                                                             
+                  </tr>
+
+>>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
               </tbody>
-          </table>
-      </ng-template>
+            </table>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab title= "Analytics">
+        <ng-template ngbTabContent>
+                <form class="form-signin" >
+                        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                        <h1 class="h3 mb-3 font-weight-normal">Enter Path</h1>  
+                        <input id="putanjaInput" type="text" class="form-control" placeholder="Path">
+                        <br/>
+                        <button (click) = "getAnalytics()" class="btn btn-lg btn-primary btn-block">Load</button>
+                </form>
+        </ng-template>
       </ngb-tab>
      
       <ngb-tab title="Currencies">

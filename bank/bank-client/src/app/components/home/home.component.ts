@@ -17,7 +17,12 @@ import {CurrencyService} from '../../services/currency.service'
 import {PlaceService} from '../../services/place.service'
 import{CountryService} from '../../services/country.service'
 
+import {AnalyticsService} from '../../services/analytics.service';
+
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
+import {AnalyticsOfStatementsService} from '../../services/analytics-of-statements.service'
+
+
 
 
 @Component({
@@ -44,6 +49,7 @@ export class HomeComponent implements OnInit {
   private selectedCurrency : any;
 
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
+  private clearingItems : any[] = [];
 
   private clientTypes = ["fizicko", "pravno"];
 
@@ -68,16 +74,19 @@ export class HomeComponent implements OnInit {
 
   private isFizicko = false;
 
+ 
 
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
-              private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService) { }
+              private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService,
+              private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService) { }
 
-
+    
 
   ngOnInit() {
-
+    
     this.getBankAccounts();
     this.getClients();
+    
     this.getBanks();
     this.getCurrencies();
     this.getPlaces();
@@ -193,6 +202,7 @@ export class HomeComponent implements OnInit {
 
     this.router.navigateByUrl('/login');
   }
+
 
 
   deleteClient(clientID : any){
@@ -388,6 +398,37 @@ export class HomeComponent implements OnInit {
       else {
         alert("An error has occurred.");
       }
+    });
+  }
+
+
+  getClearingItems() {
+
+    this.analyticsOfStatementsService.getAnalyticsForClearing().subscribe(data=> {   
+      this.clearingItems = data;
+      console.log(data);
+    });
+  }
+
+  loadClearingItems() {
+
+    this.clearingItems = [];
+    this.getClearingItems();
+  }
+
+  // NOVO
+  exportAccount(bank){
+    this.bankAccountService.exportAccount(bank).subscribe( data => {
+    console.log(data);
+    });
+  }
+  // NOVO
+
+  getAnalytics(){
+    let putanja = document.getElementById("putanjaInput") as HTMLInputElement;
+    console.log(putanja.value);
+    this.analyticService.loadAnalytics(putanja.value).subscribe( data => {
+      console.log(data);
 
     });
   }

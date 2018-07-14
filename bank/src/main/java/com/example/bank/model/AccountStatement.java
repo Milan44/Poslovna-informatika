@@ -1,39 +1,27 @@
 package com.example.bank.model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.example.bank.model.AnalyticsOfStatements;;
+import com.example.bank.model.AnalyticsOfStatements;
 
-
-
-@Entity
-@Table(name = "accountStatement")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "accountStatement")
 public class AccountStatement {
 
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
 	@XmlElement
 	private Date fromDate;
 	
 	@XmlElement
 	private Date toDate;
+	
+	@XmlElement
+	private String accountNumber;
 	
 	@XmlElement
 	private Float startAccountState;
@@ -42,44 +30,29 @@ public class AccountStatement {
 	private Float trafficToBenefit;
 	
 	@XmlElement
-	private Float trafficToTheBurden; //promet na teret
-	
-	@XmlElement
-	private Float stateAtTheEndOfPeriod;
-	
-	@OneToMany
-	@XmlElement
-	private List<AnalyticsOfStatements>statements;
-	
-	@XmlElement
-	private String accountNumber;
-
-	@XmlElement
 	private int countOfTrafficToBenefit;
+	
+	@XmlElement
+	private Float trafficToTheBurden; //promet na teret
 	
 	@XmlElement
 	private int countOfTrafficToBurden;
 	
 	@XmlElement
-	private int numberOfSection;
+	private Float stateAtTheEndOfPeriod;
 	
-	
-	public Long getId() {
-		return id;
-	}
+	@XmlElement
+	private ArrayList<AnalyticsOfStatements>statements;
 
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 
-	public List<AnalyticsOfStatements> getStatements() {
+	public ArrayList<AnalyticsOfStatements> getStatements() {
 		return statements;
 	}
 
 
-	public void setStatements(List<AnalyticsOfStatements> statements) {
+	public void setStatements(ArrayList<AnalyticsOfStatements> statements) {
 		this.statements = statements;
 	}
 
@@ -144,25 +117,18 @@ public class AccountStatement {
 	}
 
 
-	public AccountStatement(Long id, Date fromDate, Date toDate, Float startAccountState, Float trafficToBenefit,
-			Float trafficToTheBurden, Float stateAtTheEndOfPeriod, List<AnalyticsOfStatements> statements) {
-		super();
-		this.id = id;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-		this.startAccountState = startAccountState;
-		this.trafficToBenefit = trafficToBenefit;
-		this.trafficToTheBurden = trafficToTheBurden;
-		this.stateAtTheEndOfPeriod = stateAtTheEndOfPeriod;
-		this.statements = statements;
+	public String getAccountNumber() {
+		return accountNumber;
 	}
 
 
-	public AccountStatement() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
-	
-	
 
+
+
+	
+	
+	
 }

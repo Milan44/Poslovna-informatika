@@ -28,9 +28,12 @@ import { AnalyticsComponent } from './components/analytics/analytics.component'
 
 
 import { UserService } from './services/user.service';
+
+import {AnalyticsOfStatementsService} from './services/analytics-of-statements.service';
 import { AnalyticsService } from './services/analytics.service'
 import { PlaceService } from './services/place.service'
 import { CountryService } from './services/country.service'
+
 
 @NgModule({
   declarations: [
@@ -51,11 +54,11 @@ import { CountryService } from './services/country.service'
     HttpClientModule
   ],
 
-  providers: [BankAccountService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, PlaceService,CountryService],
+
+  providers: [BankAccountService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService, PlaceService,CountryService],
+
 
   entryComponents: [SuspendAccountComponent],
-
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }

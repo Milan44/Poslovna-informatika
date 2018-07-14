@@ -30,6 +30,17 @@ public class PlaceServiceImpl implements PlaceService {
 		return placeRepository.findOneById(id);
 	}
 	
+	@Override
+	public List<Place> findAll() {
+		return placeRepository.findAll();
+	}
+
+	@Override
+	public Place findById(Long id) {
+		return placeRepository.findById(id).get();
+	}
 	
 
 }
+
+

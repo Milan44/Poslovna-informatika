@@ -1,4 +1,3 @@
-
 package com.example.bank.service.impl;
 
 import java.util.List;
@@ -35,6 +34,10 @@ public class BankServiceImpl implements BankService{
 		bankRepository.save(bank);
 		return true;
 	}
+	
+	@Override
+	public Bank findOne(Long id) {
+		return (Bank)bankRepository.findById(id).get();
+	}
 }
-
 
