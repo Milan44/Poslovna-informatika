@@ -12,6 +12,9 @@ public interface BankAccountService {
 
 	boolean registerBankAccount(BankAccount account);
 	
+
+	List<BankAccount> getAccountsByClientID(Long clientID);
+
 	ArrayList<BankAccount> findByBank(Long id);
 	
 	List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID);

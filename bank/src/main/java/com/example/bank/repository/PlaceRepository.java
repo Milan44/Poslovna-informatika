@@ -8,4 +8,5 @@ import com.example.bank.model.Place;
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long>{
 
+	Place findOneById(Long id);
 }

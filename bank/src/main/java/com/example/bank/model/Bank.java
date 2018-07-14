@@ -80,6 +80,16 @@ public class Bank {
 	@XmlElement
 	private Boolean bank;
 	
+	@Column(length = 8)
+//	@NotBlank
+	@XmlElement
+	private String swift;
+	
+	@Column(length = 18)
+//	@NotBlank
+	@XmlElement
+	private String racun;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "commercialBankRate", cascade = CascadeType.ALL)
 	@XmlTransient
@@ -99,6 +109,27 @@ public class Bank {
 	public Long getId() {
 		return id;
 	}
+
+	
+	public String getSwift() {
+		return swift;
+	}
+
+
+	public String getRacun() {
+		return racun;
+	}
+
+
+	public void setRacun(String racun) {
+		this.racun = racun;
+	}
+
+
+	public void setSwift(String swift) {
+		this.swift = swift;
+	}
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -201,9 +232,14 @@ public class Bank {
 		this.bank = bank;
 	}
 
+	
+
+	
+
 	public Bank(Long id, String bankCode, String pib, String name, String address, String email, String web,
-			String phone, String fax, @NotNull Boolean bank, List<ExchangeRateList> exchangeRateLists,
-			List<BankAccount> legalEntityAccount, List<InterbankTransfer> interbankTransfers) {
+			String phone, String fax, @NotNull Boolean bank, String swift, String racun,
+			List<ExchangeRateList> exchangeRateLists, List<BankAccount> legalEntityAccount,
+			List<InterbankTransfer> interbankTransfers) {
 		super();
 		this.id = id;
 		this.bankCode = bankCode;
@@ -215,10 +251,13 @@ public class Bank {
 		this.phone = phone;
 		this.fax = fax;
 		this.bank = bank;
+		this.swift = swift;
+		this.racun = racun;
 		this.exchangeRateLists = exchangeRateLists;
 		this.legalEntityAccount = legalEntityAccount;
 		this.interbankTransfers = interbankTransfers;
 	}
+
 
 	public Bank() {
 		super();

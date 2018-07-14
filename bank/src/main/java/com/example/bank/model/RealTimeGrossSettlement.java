@@ -53,6 +53,10 @@ public class RealTimeGrossSettlement {
 	
 	@Column(length = 255)
 	@XmlElement
+	private String svrhaPlacanja;
+	
+	@Column(length = 255)
+	@XmlElement
 	private String poverilac;
 	
 	@Column
@@ -95,13 +99,7 @@ public class RealTimeGrossSettlement {
 	@XmlElement
 	private String sifraValute;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 	public String getPorukaID() {
 		return porukaID;
@@ -109,6 +107,15 @@ public class RealTimeGrossSettlement {
 
 	public void setPorukaID(String porukaID) {
 		this.porukaID = porukaID;
+	}
+
+	
+	public String getSvrhaPlacanja() {
+		return svrhaPlacanja;
+	}
+
+	public void setSvrhaPlacanja(String svrhaPlacanja) {
+		this.svrhaPlacanja = svrhaPlacanja;
 	}
 
 	public String getDuznikSWIFT() {
@@ -239,10 +246,13 @@ public class RealTimeGrossSettlement {
 		this.sifraValute = sifraValute;
 	}
 
+	
+
 	public RealTimeGrossSettlement(Long id, String porukaID, String duznikSWIFT, String duznikObracunskiRacun,
-			String poverilacSWIFT, String poveriocObracunskiRacun, String duznik, String poverilac, Date datumNaloga,
-			Date datumValute, String duznikRacun, Long modelZaduzenja, String pozivNaBrojZaduzenja,
-			String poverlacRacun, Long modelOdobrenja, String pozivNaBrojOdobrenja, double iznos, String sifraValute) {
+			String poverilacSWIFT, String poveriocObracunskiRacun, String duznik, String svrhaPlacanja,
+			String poverilac, Date datumNaloga, Date datumValute, String duznikRacun, Long modelZaduzenja,
+			String pozivNaBrojZaduzenja, String poverlacRacun, Long modelOdobrenja, String pozivNaBrojOdobrenja,
+			double iznos, String sifraValute) {
 		super();
 		this.id = id;
 		this.porukaID = porukaID;
@@ -251,6 +261,7 @@ public class RealTimeGrossSettlement {
 		this.poverilacSWIFT = poverilacSWIFT;
 		this.poveriocObracunskiRacun = poveriocObracunskiRacun;
 		this.duznik = duznik;
+		this.svrhaPlacanja = svrhaPlacanja;
 		this.poverilac = poverilac;
 		this.datumNaloga = datumNaloga;
 		this.datumValute = datumValute;

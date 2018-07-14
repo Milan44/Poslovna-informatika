@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.bank.DTO.ClientDTO;
 import com.example.bank.model.BankAccount;
 import com.example.bank.model.Client;
+import com.example.bank.model.Place;
 import com.example.bank.service.BankAccountService;
 import com.example.bank.service.ClientService;
+import com.example.bank.service.PlaceService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,13 +30,16 @@ public class ClientController {
 	@Autowired
 	private BankAccountService bankAccountService;
 	
+	@Autowired
+	private PlaceService placeService;
+	
 	
 	
 	@RequestMapping(
 			value = "/getAll", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Client>  getCinemas() {
+	public List<Client>  getClients() {
 		
 		
 		return clientService.getAll();
@@ -46,9 +52,23 @@ public class ClientController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public boolean registerClient(@RequestBody Client client) {
+	public boolean registerClient(@RequestBody ClientDTO clientDTO) {
 		
 		try {
+			Place residence = placeService.getPlaceById(clientDTO.getResidenceID());
+			
+			Client client = new Client();
+			client.setAddress(clientDTO.getAddress());
+			client.setAddressForStatements(clientDTO.getAddressForStatements());
+			client.setEmail(clientDTO.getEmail());
+			client.setEmailStatements(clientDTO.getEmailStatements());
+			client.setFax(clientDTO.getFax());
+			client.setJmbg(clientDTO.getJmbg());
+			client.setName(clientDTO.getName());
+			client.setPhone(clientDTO.getPhone());
+			client.setPib(clientDTO.getPib());
+			client.setResidence(residence);
+			client.setTypeOfClient(clientDTO.getTypeOfClient());
 			
 			clientService.registerClient(client);
 			return true;
@@ -67,13 +87,28 @@ public class ClientController {
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public boolean updateClient(@RequestBody Client c){
+	public boolean updateClient(@RequestBody ClientDTO clientDTO){
 	 
 		
 		System.out.println("POGODJEN CONTROLLER /update");
 		try {
+			Place residence = placeService.getPlaceById(clientDTO.getResidenceID());
 			
-			clientService.updateClient(c);
+			Client client = clientService.getClientById(clientDTO.getId());
+			client.setId(clientDTO.getId());
+			client.setAddress(clientDTO.getAddress());
+			client.setAddressForStatements(clientDTO.getAddressForStatements());
+			client.setEmail(clientDTO.getEmail());
+			client.setEmailStatements(clientDTO.getEmailStatements());
+			client.setFax(clientDTO.getFax());
+			client.setJmbg(clientDTO.getJmbg());
+			client.setName(clientDTO.getName());
+			client.setPhone(clientDTO.getPhone());
+			client.setPib(clientDTO.getPib());
+			client.setResidence(residence);
+			client.setTypeOfClient(clientDTO.getTypeOfClient());
+			
+			clientService.updateClient(client);
 			return true;
 			
 		} catch (Exception e) {
@@ -86,16 +121,16 @@ public class ClientController {
 	
 	
 	@RequestMapping(
-			value = "/deleteClient/{clientID}/{bankID}",
+			value = "/deleteClient/{clientID}",
 			method = RequestMethod.DELETE,
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public  boolean deleteClient(@PathVariable("clientID") Long clientID, @PathVariable("bankID") Long bankID){
+	public  boolean deleteClient(@PathVariable("clientID") Long clientID){
 		
 		System.out.println("Controller: " + clientID);
 		
 			
-		List<BankAccount> accounts = bankAccountService.getAccountsByClientIDandBankID(clientID, bankID);
+		List<BankAccount> accounts = bankAccountService.getAccountsByClientID(clientID);
 		
 		if(accounts.isEmpty()) {						// ako nema ni jedan racun u toj banci onda tek moze da ga obrise
 			clientService.deleteClient(clientID);
