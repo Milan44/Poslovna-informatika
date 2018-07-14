@@ -29,8 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.model.RealTimeGrossSettlement;
 import com.example.bank.model.Bank;
+import com.example.bank.model.Clearing;
+import com.example.bank.model.ClearingItem;
 import com.example.bank.service.AnalyticsOfStatementsService;
 import com.example.bank.service.DailyAccountBalanceService;
+import com.example.bank.service.IClearingItemService;
+import com.example.bank.service.IClearingService;
 import com.example.bank.service.IRealTimeGrossSettlementService;
 import com.example.bank.service.impl.BankServiceImpl;
 
@@ -51,6 +55,12 @@ public class AnalyticsController {
 	@Autowired
 	private IRealTimeGrossSettlementService realTimeGrossSettlementService;
 
+	@Autowired
+	private IClearingService clearingService;
+	
+	@Autowired
+	private IClearingItemService clearingItemService;
+	
 	@RequestMapping(
 			value = "/load", 	
 			method = RequestMethod.POST, 
@@ -210,6 +220,86 @@ public class AnalyticsController {
 		String obracunskiRacunBankeDuznika = "555989898989812345";
 		
 		if (analytics.getSum() < 250000 && !analytics.getEmergency()) {	//generisanje clearing-a
+			
+			List<Clearing> clearings = clearingService.getAll();
+			
+			ClearingItem ci = new ClearingItem();
+			ci.setItemNumber(analytics.getItemNumber());
+			ci.setDebtor_originator(analytics.getDebtor_originator());
+			ci.setPurposeOfPayment(analytics.getPurposeOfPayment());
+			ci.setCreditor_recipient(analytics.getCreditor_recipient());
+			ci.setDateOfReceipt(analytics.getDateOfReceipt());
+			ci.setCurrencyDate(analytics.getCurrencyDate());
+			ci.setDebtorAccount(analytics.getDebtorAccount());
+			ci.setModelAssigments(analytics.getModelAssigments());
+			ci.setReferenceNumberAssigments(analytics.getReferenceNumberAssigments());
+			ci.setReferenceNumberCreditor(analytics.getReferenceNumberCreditor());
+			ci.setAccountCreditor(analytics.getAccountCreditor());
+			ci.setModelApproval(analytics.getModelApproval());
+			ci.setIznos(analytics.getSum());
+			ci.setSifraValute(analytics.getPaymentCurrency().getOfficial_code());
+			
+			clearingItemService.save(ci);
+			
+			boolean pronadjen = false;
+			for (Clearing clearing : clearings) {
+				
+				if (clearing.getPoveriocObracunskiRacun().substring(0,  3).equals(analytics.getAccountCreditor())) {
+					
+					List<ClearingItem> items = clearing.getNalozi();
+					items.add(ci);
+					clearing.setNalozi(items);
+					clearing.setUkupanIznos(clearing.getUkupanIznos() + ci.getIznos());
+					
+					clearingService.save(clearing);
+					
+					pronadjen = true;
+					
+					break;
+					
+				}
+			}
+			
+			if (!pronadjen) {
+				
+				
+				Random rand = new Random();
+				int porukaID = rand.nextInt(1000) + 1;
+				
+				List<Bank> banks = bankService.getAll();
+				
+				Clearing cl = new Clearing();
+				
+				cl.setPorukaID(porukaID + "");
+				cl.setDuznikSWIFT(currentBankSwift);
+				cl.setDuznikObracunskiRacun(obracunskiRacunBankeDuznika);
+				
+				for (Bank bank : banks) {
+					
+					if (bank.getRacun().substring(0, 3).equals(analytics.getAccountCreditor().substring(0, 3))) {
+						
+						cl.setPoverilacSWIFT(bank.getSwift());
+						cl.setPoveriocObracunskiRacun(bank.getRacun());
+						break;
+					}
+				}
+				
+				double ukupanIznos = 0;
+				for (ClearingItem clearingItem : cl.getNalozi()) {
+					
+					ukupanIznos += clearingItem.getIznos();
+				}
+				cl.setUkupanIznos(ukupanIznos);
+				cl.setSifraValute(analytics.getPaymentCurrency().getOfficial_code());
+				cl.setDatumValute(analytics.getCurrencyDate());
+				cl.setDatum(analytics.getDateOfReceipt());
+				
+				List<ClearingItem> items = cl.getNalozi();
+				items.add(ci);
+				cl.setNalozi(items);
+				
+				clearingService.save(cl);
+			}
 			
 			
 		} else if (analytics.getSum() >= 250000 || analytics.getEmergency()) { //generisanje rtgs-a
