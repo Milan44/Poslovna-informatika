@@ -8,4 +8,5 @@ import com.example.bank.model.Country;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long>{
 
+	Country findOneById(Long id);
 }
