@@ -36,6 +36,13 @@ import com.example.bank.service.BankService;
 import com.example.bank.service.DailyAccountBalanceService;
 import com.example.bank.service.PaymentTypeService;
 import com.example.bank.service.PlaceService;
+
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 import com.example.bank.service.ClientService;
 import com.example.bank.service.CurrencyService;
 
@@ -256,7 +263,7 @@ public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 			list.add(afb);
 		}
 
-	/*	JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(list);
+		JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(list);
 
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -267,7 +274,7 @@ public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 		JasperPrint jasperPrint = JasperFillManager.fillReport("excerptBank.jasper", parameters, new JREmptyDataSource());
 	    File file = new File("../bank/accounts.pdf");
 	    OutputStream outputStream = new FileOutputStream(file);
-	    JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); */
+	    JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); 
 	
 	}
 
