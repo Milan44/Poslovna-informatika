@@ -224,6 +224,9 @@ public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 			
 			List<Clearing> clearings = clearingService.getAll();
 			
+			System.out.println("Broj clearinga:");
+			System.out.println(clearings.size());
+			
 			ClearingItem ci = new ClearingItem();
 			ci.setItemNumber(analytics.getItemNumber());
 			ci.setDebtor_originator(analytics.getDebtor_originator());
@@ -245,7 +248,7 @@ public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 			boolean pronadjen = false;
 			for (Clearing clearing : clearings) {
 				
-				if (clearing.getPoveriocObracunskiRacun().substring(0,  3).equals(analytics.getAccountCreditor())) {
+				if (clearing.getPoveriocObracunskiRacun().substring(0,  3).equals(analytics.getAccountCreditor().substring(0,  3))) {
 					
 					List<ClearingItem> items = clearing.getNalozi();
 					items.add(ci);
