@@ -172,22 +172,22 @@ public class AnalyticsController {
 	}
 	
 
-	public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
+public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 		
 		String currentBank = "555";
 		
 		
 		if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount() == null) { //uplata na racun
 			
-			//updateDailyAccountBalance(analytics);
+			dailyAccountBalanceService.updateCreditor(analytics);
 			
-			service.save(analytics);
+//			service.save(analytics);
 			
 		} else if (analytics.getAccountCreditor() == null && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //isplata
 			
-			//updateDailyAccountBalance(analytics);
+			dailyAccountBalanceService.updateDebtor(analytics);
 			
-			service.save(analytics);
+//			service.save(analytics);
 			
 		} else if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //unutarbankarski transfer
 			
@@ -198,18 +198,18 @@ public class AnalyticsController {
 			AnalyticsOfStatements analyticsDebt = analytics;
 			analyticsDebt.setAccountCreditor(null);
 			
-			//updateDailyAccountBalance(analyticsCredit);
-			//updateDailyAccountBalance(analyticsDebt);
+			dailyAccountBalanceService.updateCreditor(analyticsCredit);
+			dailyAccountBalanceService.updateDebtor(analyticsDebt);
 			
-			service.save(analyticsCredit);
-			service.save(analyticsDebt);
+//			service.save(analyticsCredit);
+//			service.save(analyticsDebt);
 			
 		} else if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank) && !analytics.getAccountCreditor().substring(0,  3).equals(currentBank)) { //medjubankarski transfer
 			
 
-			//updateDailyAccountBalance(analytics);
+			dailyAccountBalanceService.updateDebtor(analytics);
 			
-			service.save(analytics);
+//			service.save(analytics);
 			
 			generateInterbankTransfer(analytics);
 		}
