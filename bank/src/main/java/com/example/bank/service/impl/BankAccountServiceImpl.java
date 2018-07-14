@@ -56,9 +56,9 @@ public class BankAccountServiceImpl implements BankAccountService{
 	}
 
 	@Override
-	public List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID) {
+	public List<BankAccount> getAccountsByClientID(Long clientID) {
 		// TODO Auto-generated method stub
-		return bankAccountRepository.findAccountsByClientIDandBankID(clientID, clientID);
+		return bankAccountRepository.findAccountsByClientID(clientID);
 	}
 
 	@Override
@@ -97,6 +97,14 @@ public class BankAccountServiceImpl implements BankAccountService{
 	public BankAccount findByAccNumber(String number) {
 		return bankAccountRepository.findByAccountNumber(number);
 	}
+
+	@Override
+	public List<BankAccount> getAccountsByClientIDandBankID(Long clientID, Long bankID) {
+		// TODO Auto-generated method stub
+		return bankAccountRepository.findAccountsByClientIDandBankID(clientID, bankID);
+	}
+
+
 
 
 

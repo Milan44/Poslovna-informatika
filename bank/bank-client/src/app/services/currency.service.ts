@@ -34,4 +34,38 @@ export class CurrencyService {
   
   }
 
+  registerCurrency(currencyDTO : any) {
+
+    console.log(currencyDTO.id);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/public/currencies/registerCurrency', 
+      JSON.stringify(currencyDTO), { headers : headers }).map((data : Response) => data.json());
+  }
+
+  updateCurrency(currencyDTO : any) {
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:8080/public/currencies/updateCurrency', 
+      JSON.stringify(currencyDTO), { headers : headers }).map((data : Response) => data.json());
+
+  }
+
+  deleteCurrency(currencyID : any) {  
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.delete("http://localhost:8080/public/currencies/deleteCurrency/"+
+    currencyID,
+    {headers:headers})
+    .map((data) => data.json())
+    .catch((err:HttpErrorResponse) =>
+    {
+        alert(err.status + " " + err.error.error + " \n" + err.error.message);
+        return Observable.throw(err);
+    });
+
+  }
+
 }

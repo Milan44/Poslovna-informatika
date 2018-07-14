@@ -10,9 +10,25 @@ import com.example.bank.repository.PlaceRepository;
 import com.example.bank.service.PlaceService;
 
 @Service
-public class PlaceServiceImpl implements PlaceService{
+public class PlaceServiceImpl implements PlaceService {
+
 	
-	@Autowired PlaceRepository placeRepository;
+	@Autowired
+	private PlaceRepository placeRepository;
+	
+	
+	@Override
+	public List<Place> getAll() {
+		// TODO Auto-generated method stub
+		return placeRepository.findAll();
+	}
+
+
+	@Override
+	public Place getPlaceById(Long id) {
+		// TODO Auto-generated method stub
+		return placeRepository.findOneById(id);
+	}
 	
 	@Override
 	public List<Place> findAll() {
@@ -24,4 +40,7 @@ public class PlaceServiceImpl implements PlaceService{
 		return placeRepository.findById(id).get();
 	}
 	
+
 }
+
+

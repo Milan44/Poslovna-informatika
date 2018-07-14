@@ -79,8 +79,8 @@
                         <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
                         <th style="width: 30%; text-align:center;vertical-align:middle" >ID</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >Adress</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >Adress for statements</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Address</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Address for statements</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >email</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >email statements</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >phone</th>
@@ -101,7 +101,7 @@
                             <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
                             <td style = "text-align:center;vertical-align:middle" >{{client.id}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.name}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.adress}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.address}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.addressForStatements}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.email}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.emailStatements}}</td>
@@ -112,11 +112,11 @@
                             <td style = "text-align:center;vertical-align:middle">{{client.pib}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.residence.name}}</td>
                             <td style = "text-align:center;vertical-align:middle"> 
-                              <button id="updateClient"  (click) = "updateClient(client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
+                              <button id="updateClient"  (click) = "openUpdateClientModal(updateClientModal,client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
                             <!-- </td>
                             <td style = "text-align:center;vertical-align:middle">  -->
-                              <!-- <button id="deleteClient"  (click) = "deleteClient(client)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
-                            </td> -->
+                               <button id="deleteClient"  (click) = "deleteClient(client.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
+                            </td> 
                                              
                     </tr>
                    
@@ -127,12 +127,20 @@
         </ng-template>
       </ngb-tab>
 
+<<<<<<< HEAD
+=======
       <ngb-tab  >
 
         <ng-template ngbTabTitle>
                 <div (click)="loadClearingItems()">Items for clearing</div>
         </ng-template>
+>>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
 
+<<<<<<< HEAD
+      <ngb-tab title="Banks">
+        <ng-template ngbTabContent>    
+          <table class="table">
+=======
         <ng-template ngbTabContent>
           
             <table class="table">
@@ -195,16 +203,14 @@
         <ng-template ngbTabContent>
           
             <table class="table">
+>>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
               <thead>
                   <tr>
-  
                       <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
                       <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
                       <th style="width: 30%; text-align:center;vertical-align:middle" >Bank Code</th>
                       <th style="width: 30%; text-align:center;vertical-align:middle" >PIB</th>
                       <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
-                      
-
                   </tr>
               </thead>
               <tbody>
@@ -217,11 +223,17 @@
                       <td style = "text-align:center;vertical-align:middle">{{bank.pib}}</td>
                     
                       <td style = "text-align:center;vertical-align:middle"> 
+<<<<<<< HEAD
+                        <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
+                      </td>                                                           
+              </tr>
+=======
                         <button id="exportPDF" (click) = "exportAccount(bank)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                       </td>
                                                              
                   </tr>
 
+>>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
               </tbody>
             </table>
         </ng-template>
@@ -239,6 +251,49 @@
         </ng-template>
       </ngb-tab>
      
+      <ngb-tab title="Currencies">
+
+            <ng-template ngbTabContent>
+              
+              <table class="table">
+                  <thead>
+                      <tr>
+      
+                          <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
+                          <th style="width: 30%; text-align:center;vertical-align:middle" >Official_code</th>
+                          <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
+                          <th style="width: 30%; text-align:center;vertical-align:middle" >Domicilna</th>
+                          <th style="width: 30%; text-align:center;vertical-align:middle" >Country</th>
+                          <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+                      <tr class="active" *ngFor="let currency of currencies; let i = index">
+    
+                          <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                          <td style = "text-align:center;vertical-align:middle" >{{currency.official_code}}</td>
+                          <td style = "text-align:center;vertical-align:middle">{{currency.name}}</td>
+                          <td style = "text-align:center;vertical-align:middle">{{currency.domicilna}}</td>
+                          <td style = "text-align:center;vertical-align:middle">{{currency.country.name}}</td>
+                        
+                          <td style = "text-align:center;vertical-align:middle"> 
+                                <button id="updateCurrency"  (click) = "openUpdateCurrencyModal(updateCurrencyModal,currency)" type="button" class="btn btn-warning btn-sm center" >Update</button>
+                              </td>
+                              <td style = "text-align:center;vertical-align:middle"> 
+                                 <button id="deleteCurrency"  (click) = "deleteCurrency(currency.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
+                            </td> 
+                                                                 
+                  </tr>
+    
+                  </tbody>
+              </table>
+        <button id="addCurrency"  (click) = "openAddCurrencyModal(addCurrencyModal)" type="button" class="btn btn-primary  center" >Register client</button>
+          </ng-template>
+        </ngb-tab>
+         
+
       
     </ngb-tabset>
 </div>
@@ -248,9 +303,6 @@
     
   <div class="modal-header">
       <h4 class="modal-title">Add bank account</h4>
-      <!-- <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button> -->
     </div>
     <div class="modal-body">
       
@@ -315,3 +367,262 @@
     </div>
 
 </ng-template>
+
+
+<ng-template #addClientModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Add client</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="ime">Name: </label>
+            <input id="ime" name="ime_Klijenta" [(ngModel)]="client_name" class="form-control" type="text" data-validation="required" #naziv_Klijenta>
+            <span id="error_naziv_drzave" class="text-danger"></span>
+        </div>
+
+          <div class="form-group">
+              <label for="adresa">Address: </label>
+              <input id="adresa" name="naziv_Drzave" [(ngModel)]="client_address" class="form-control" type="text" data-validation="required" #naziv_Ader >
+              <span id="error_naziv_drzave" class="text-danger"></span>
+          </div>
+  
+          <div class="form-group">
+              <label for="oznaka_drzave">Phone: </label>
+              <input id="oznaka_drzave" name="oznaka_Drzave" [(ngModel)]="client_phone" class="form-control" type="text" data-validation="required" #oznaka_Dsssrzave >
+              <span id="error_oznaka_drzave" class="text-danger"></span>
+          </div>
+  
+          <div class="form-group">
+              <label for="fax">Fax: </label>
+              <input id="fax" name="fax" [(ngModel)]="client_fax" class="form-control" type="text" data-validation="required" #ptt_Br22oj >
+              <span id="error_ptt_broj" class="text-danger"></span>
+          </div>
+
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input id="email" name="email" [(ngModel)]="client_email" class="form-control" type="email" data-validation="required" #ptt_Br33oj >
+            <span id="error_ptt_broj" class="text-danger"></span>
+        </div>
+    
+        <div class="form-group">
+            <label for="fax">Address for statements: </label>
+            <input id="addressForStatements" name="addressForStatements" [(ngModel)]="client_addressForStatements" class="form-control" type="text" data-validation="required" #ptt_Br4433oj >
+            <span id="error_ptt_broj" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="client_emailStatements" name="emailStatements"> Email statements
+                    </label>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fax">JMBG: </label>
+            <input id="JMBG" name="JMBG" [(ngModel)]="client_jmbg" class="form-control" type="number" data-validation="required" #ptt_Br41433oj >
+            <span id="error_ptt_broj" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="drzava">Type of client: </label>
+            <div class="input-group-append" >
+              <select [(ngModel)]="client_typeOfClient"  (change) = "selectTypeOfClient()" name="client_type" class="form-control">
+                    <option *ngFor="let type of clientTypes" [value]="type">{{type}}</option>
+              </select> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="drzava">Residence: </label>
+            <div class="input-group-append" >
+              <select [(ngModel)]="client_residence"  name="izabran_valuta" class="form-control">
+                  <option *ngFor="let place of places" [value]="place.id">{{place.name}}</option>
+              </select> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fax">PIB: </label>
+            <input id="pib" name="pib" [(ngModel)]="client_pib" [disabled]="isFizicko" class="form-control" type="number" data-validation="required" #ptt_Br41433oj >
+            <span id="error_ptt_broj" class="text-danger"></span>
+        </div>
+          <div class="form-group">
+  
+              <button id="submitAddClient" (click) = "addClient()" type="button" class="btn btn-primary  center" > Submit </button>
+  
+          </div>
+      </div>
+  
+  </ng-template>
+
+
+
+  <ng-template #updateClientModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Change client</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="ime">Name: </label>
+                <input id="ime" name="ime_Klijenta" [(ngModel)]="client_name" class="form-control" type="text" data-validation="required" #naziv_Klijenta>
+                <span id="error_naziv_drzave" class="text-danger"></span>
+            </div>
+    
+              <div class="form-group">
+                  <label for="adresa">Address: </label>
+                  <input id="adresa" name="naziv_Drzave" [(ngModel)]="client_address" class="form-control" type="text" data-validation="required" #naziv_Ader >
+                  <span id="error_naziv_drzave" class="text-danger"></span>
+              </div>
+      
+              <div class="form-group">
+                  <label for="oznaka_drzave">Phone: </label>
+                  <input id="oznaka_drzave" name="oznaka_Drzave" [(ngModel)]="client_phone" class="form-control" type="text" data-validation="required" #oznaka_Dsssrzave >
+                  <span id="error_oznaka_drzave" class="text-danger"></span>
+              </div>
+      
+              <div class="form-group">
+                  <label for="fax">Fax: </label>
+                  <input id="fax" name="fax" [(ngModel)]="client_fax" class="form-control" type="text" data-validation="required" #ptt_Br22oj >
+                  <span id="error_ptt_broj" class="text-danger"></span>
+              </div>
+    
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input id="email" name="email" [(ngModel)]="client_email" class="form-control" type="email" data-validation="required" #ptt_Br33oj >
+                <span id="error_ptt_broj" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label for="fax">Address for statements: </label>
+                <input id="addressForStatements" name="addressForStatements" [(ngModel)]="client_addressForStatements" class="form-control" type="text" data-validation="required" #ptt_Br4433oj >
+                <span id="error_ptt_broj" class="text-danger"></span>
+            </div>
+    
+            <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="client_emailStatements" name="emailStatements"> Email statements
+                        </label>
+                    </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="fax">JMBG: </label>
+                <input id="JMBG" name="JMBG" [(ngModel)]="client_jmbg" class="form-control" type="number" data-validation="required" #ptt_Br41433oj >
+                <span id="error_ptt_broj" class="text-danger"></span>
+            </div>
+    
+            <div class="form-group">
+                <label for="drzava">Type of client: </label>
+                <div class="input-group-append" >
+                  <select [(ngModel)]="client_typeOfClient"  (change) = "selectTypeOfClient()" name="client_type" class="form-control">
+                        <option *ngFor="let type of clientTypes" [value]="type">{{type}}</option>
+                  </select> 
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="drzava">Residence: </label>
+                <div class="input-group-append" >
+                  <select [(ngModel)]="client_residence"  name="izabran_valuta" class="form-control">
+                      <option *ngFor="let place of places" [value]="place.id">{{place.name}}</option>
+                  </select> 
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="fax">PIB: </label>
+                <input id="pib" name="pib" [(ngModel)]="client_pib" [disabled]="isFizicko" class="form-control" type="number" data-validation="required" #ptt_Br41433oj >
+                <span id="error_ptt_broj" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+      
+                  <button id="submitUpdateClient" (click) = "updateClient()" type="button" class="btn btn-primary  center" > Change </button>
+      
+              </div>
+          </div>
+      
+      </ng-template>
+
+
+    <ng-template #addCurrencyModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Add currency</h4>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+                <label for="official_code">Official_code: </label>
+                <input id="official_code" name="official_code" [(ngModel)]="currency_official_code" class="form-control" type="text" data-validation="required" #ptt_Br33oj >
+                <span id="error_ptt_broj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <input id="c_name" name="c_name" [(ngModel)]="currency_name" class="form-control" type="text" data-validation="required" #ptt_Br33oj >
+                <span id="error_ptt_broj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="currency_domicilna" name="emailStatements"> Domicilna
+                        </label>
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="place">Country: </label>
+                    <div class="input-group-append" >
+                      <select [(ngModel)]="currency_countryID"  name="izabran_valuta" class="form-control">
+                          <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                      </select> 
+                    </div>
+            </div>
+            <div class="form-group">
+      
+                <button id="submitAddClient" (click) = "addCurrency()" type="button" class="btn btn-primary  center" > Submit </button>
+        
+            </div>
+
+        </div>
+
+    </ng-template>
+
+
+    <ng-template #updateCurrencyModal let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title">Change currency</h4>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                    <label for="official_code">Official_code: </label>
+                    <input id="official_code" name="official_code" [(ngModel)]="currency_official_code" class="form-control" type="text" data-validation="required" #ptt_Br33oj >
+                    <span id="error_ptt_broj" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name: </label>
+                    <input id="c_name" name="c_name" [(ngModel)]="currency_name" class="form-control" type="text" data-validation="required" #ptt_Br33oj >
+                    <span id="error_ptt_broj" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="currency_domicilna" name="emailStatements"> Domicilna
+                            </label>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <label for="place">Country: </label>
+                        <div class="input-group-append" >
+                          <select [(ngModel)]="currency_countryID"  name="izabran_valuta" class="form-control">
+                              <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                          </select> 
+                        </div>
+                </div>
+                <div class="form-group">
+          
+                    <button id="submitAddClient" (click) = "updateCurrency()" type="button" class="btn btn-primary  center" > Change </button>
+            
+                </div>
+    
+            </div>
+    
+        </ng-template>

@@ -30,4 +30,33 @@ public class CurrencyServiceImpl implements CurrencyService{
 		return currencyRepository.findOneById(id);
 	}
 
+
+	@Override
+	public boolean registerCurrency(Currency c) {
+		// TODO Auto-generated method stub
+		currencyRepository.save(c);
+		return true;
+	}
+
+
+	@Override
+	public boolean updateCurrency(Currency c) {
+		// TODO Auto-generated method stub
+		Currency currency = currencyRepository.findOneById(c.getId());
+		currency.setCountry(c.getCountry());
+		currency.setDomicilna(c.getDomicilna());
+		currency.setName(c.getName());
+		currency.setOfficial_code(c.getOfficial_code());
+		
+		return true;
+	}
+
+
+	@Override
+	public void deleteCurrency(Long id) {
+		// TODO Auto-generated method stub
+		currencyRepository.deleteById(id);
+		
+	}
+
 }
