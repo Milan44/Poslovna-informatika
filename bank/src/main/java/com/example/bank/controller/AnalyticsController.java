@@ -123,6 +123,7 @@ public class AnalyticsController {
 		    
 		    	JAXBContext jaxbContext;
 				try {
+					
 					jaxbContext = JAXBContext.newInstance(AnalyticsOfStatements.class);
 					Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			    	AnalyticsOfStatements analyticParsed = (AnalyticsOfStatements) jaxbUnmarshaller.unmarshal(file);
@@ -208,7 +209,7 @@ public class AnalyticsController {
 		String currentBankSwift = "55555555";
 		String obracunskiRacunBankeDuznika = "555989898989812345";
 		
-		if (analytics.getSum() < 250000 && !analytics.getEmergency()) {
+		if (analytics.getSum() < 250000 && !analytics.getEmergency()) {	//generisanje clearing-a
 			
 			
 		} else if (analytics.getSum() >= 250000 || analytics.getEmergency()) { //generisanje rtgs-a
@@ -250,6 +251,7 @@ public class AnalyticsController {
 			rtgs.setSifraValute(analytics.getPaymentCurrency().getOfficial_code());
 			
 			realTimeGrossSettlementService.registerRTGS(rtgs);
+			exportRTGS(rtgs);
 		}
 	}
 
@@ -260,6 +262,55 @@ public class AnalyticsController {
 	public void exportAccountStatement() {
 
 		
+	}
+	
+	public void exportRTGS(RealTimeGrossSettlement rtgs) {
+		
+		String xmlString = "";
+	    try {
+	        JAXBContext context = JAXBContext.newInstance(RealTimeGrossSettlement.class);
+	        Marshaller m = context.createMarshaller();
+
+	        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // To format XML
+
+	        StringWriter sw = new StringWriter();
+	        m.marshal(rtgs, sw);
+	        xmlString = sw.toString();
+
+	    } catch (JAXBException e) {
+	        e.printStackTrace();
+	    }
+	    System.out.println(xmlString);		
+	    
+	    BufferedWriter bw = null;
+		FileWriter fw = null;
+	    
+	    String filename = "rtgs-" + rtgs.getPorukaID() +".xml";
+	    try{
+	    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\exportovaniRTGSovi\\" + filename);		    	
+	    	bw = new BufferedWriter(fw);
+	    	bw.write(xmlString);
+	    	
+	    } catch (IOException ex) {
+
+			ex.printStackTrace();
+
+		} finally {
+			try {
+
+				if (bw != null)
+					bw.close();
+
+				if (fw != null)
+					fw.close();					
+					
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
 	}
 	
 }
