@@ -50,7 +50,7 @@
                             <td style = "text-align:center;vertical-align:middle">{{account.currency.official_code}}</td>
                            
                             <td style = "text-align:center;vertical-align:middle"> 
-                              <button id="exportXML"  (click) = "exportXML(account)" type="button" class="btn btn-success btn-sm center" >Export .xml</button>
+                              <button id="exportXML"  (click) = "openExportXmlModal(exportXmlModal, account)" type="button" class="btn btn-success btn-sm center" >Export .xml</button>
                             </td>
                             <td style = "text-align:center;vertical-align:middle"> 
                               <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
@@ -618,3 +618,50 @@
             </div>
     
         </ng-template>
+
+
+        <ng-template #exportXmlModal let-c="close" let-d="dismiss">
+    
+                <div class="modal-header">
+                    <h4 class="modal-title">Export bank account</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                            <label for="broj_racuna">Start date: </label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" 
+                                        name="datePicker" [(ngModel)]="startDate" ngbDatepicker #df="ngbDatepicker" required>
+                                <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="df.toggle()" type="button">
+                                    <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                </button>
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="form-group">
+                            <label for="toDate">End date:</label>
+                            <div class="input-group">
+                              <input class="form-control" placeholder="yyyy-mm-dd"
+                                      name="datePicker" [(ngModel)]="endDate"  ngbDatepicker #dt="ngbDatepicker" required>
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
+                                  <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                </button>
+                              </div>
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+          
+                        <button id="exportAddClient" (click) = "exportXML()" type="button" class="btn btn-primary  center" > Export XML </button>
+                    
+                    </div>
+
+
+            </div>
+
+        </ng-template>
+
+            

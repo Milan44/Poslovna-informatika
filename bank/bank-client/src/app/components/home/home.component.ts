@@ -74,6 +74,10 @@ export class HomeComponent implements OnInit {
 
   private isFizicko = false;
 
+  private startDate : any;
+  private endDate : any;
+  private selectedBankAccount : any;
+
  
 
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
@@ -431,6 +435,66 @@ export class HomeComponent implements OnInit {
       console.log(data);
 
     });
+  }
+
+  openExportXmlModal(exportXmlModal, account) {
+
+    this.selectedBankAccount = account;
+    this.modalService.open(exportXmlModal).result.then((result) => {
+      
+    }, (reason) => {
+      
+    });
+    
+  }
+
+  exportXML(){
+    let startDateModified = ""+this.startDate.year + "-";
+    if(this.startDate.month<10)
+    startDateModified += "0"+this.startDate.month + "-";
+    else
+    startDateModified += this.startDate.month + "-";
+
+    if(this.startDate.day<10)
+    startDateModified += "0"+this.startDate.day;
+    else
+    startDateModified += this.startDate.day;
+
+
+    let endDateModified = ""+this.endDate.year + "-";
+    if(this.endDate.month<10)
+    endDateModified += "0"+this.endDate.month + "-";
+    else
+    endDateModified += this.endDate.month + "-";
+
+    if(this.endDate.day<10)
+    endDateModified += "0"+this.endDate.day;
+    else
+    endDateModified += this.endDate.day;
+
+    this.bankAccountService.exportBankAccountXml(
+      startDateModified,endDateModified, this.selectedBankAccount).subscribe(data => {
+      
+      if(data){
+        alert("You have successfully added a currecny!");
+        this.getCurrencies();
+
+        this.currency_id = null;
+        this.currency_official_code = null;
+        this.currency_name = null;
+        this.currency_domicilna = false;
+        this.currency_countryID = null;
+
+      } 
+      else {
+        alert("An error has occurred.");
+      }
+
+    });
+
+
+
+
   }
 
 }
