@@ -61,6 +61,9 @@ public class BankAccountController {
 	private BankAccountService bankAccountService;
 	
 	@Autowired
+	private AnalyticsOfStatementsService service;
+	
+	@Autowired
 	private BankService bankService;
 	
 	@Autowired
@@ -154,32 +157,84 @@ public class BankAccountController {
 		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(origin, currentDate);
 		PaymentType pt = paymentTypeService.findById(2l);
 		
-		
-		if(trasfer.getBank().getName().equals(origin.getBank().getName())) {
-			
-			trasfer.setMoney(trasfer.getMoney() + trasferedMoney);
-			bankAccountService.save(trasfer);
-			
-			bankAccountService.deleteById(id);
-			
-			
-		}
-		else {
+//		
+//		if(trasfer.getBank().getName().equals(origin.getBank().getName())) {
+//			
+//			trasfer.setMoney(trasfer.getMoney() + trasferedMoney);
+//			bankAccountService.save(trasfer);
+//			
+//			bankAccountService.deleteById(id);
+//			
+//			
+//		}
+//		else {
 			
 			
 			//	AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), null, 
 			//		"987-446-587", trasfer.getAccountNumber(), null, "4654-6216", emergencyBool, trasfer.getMoney(), null, null, dailyAccountBalance,null, null, null, null);
 		
 //			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
-//					"987-446-587", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, (float)trasfer.getMoney(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+//					"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, dailyAccountBalance.getNewState(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+		
+		AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
+				"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, dailyAccountBalance.getNewState(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+
+			klasifikujAnalitiku(nova);
+			
+			//dodaj pozivanje metode i setovanje money-a
 //			analyticService.save(nova);
 //			bankAccountService.deleteById(id);
-		}
+//		}
 		
 		//97 15 1 0 2 1
 		return bankAccountService.getAll();
 	}
 	
+public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
+		
+		String currentBank = "555";
+		
+		
+		if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount() == null) { //uplata na racun
+			
+			dailyAccountBalanceService.updateCreditor(analytics);
+			
+//			service.save(analytics);
+			
+		} else if (analytics.getAccountCreditor() == null && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //isplata
+			
+			dailyAccountBalanceService.updateDebtor(analytics);
+			
+//			service.save(analytics);
+			
+		} else if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //unutarbankarski transfer
+			
+			
+			AnalyticsOfStatements analyticsCredit = analytics;
+			analyticsCredit.setDebtorAccount(null);
+			
+			AnalyticsOfStatements analyticsDebt = analytics;
+			analyticsDebt.setAccountCreditor(null);
+			
+			dailyAccountBalanceService.updateCreditor(analyticsCredit);
+			dailyAccountBalanceService.updateDebtor(analyticsDebt);
+			
+//			service.save(analyticsCredit);
+//			service.save(analyticsDebt);
+			
+		} else if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank) && !analytics.getAccountCreditor().substring(0,  3).equals(currentBank)) { //medjubankarski transfer
+			
+
+			dailyAccountBalanceService.updateDebtor(analytics);
+			
+//			service.save(analytics);
+			
+			//generateInterbankTransfer(analytics);
+		}
+	}
+
+
+
 	// NOVO
 	
 	@GetMapping("/pdf/{id}")

@@ -98,21 +98,42 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 
 
 	@Override
-	public void update(AnalyticsOfStatements analytic) {
+	public void updateDebtor(AnalyticsOfStatements analytic) {
 		//uvek je nalog za placanje pa se uzima debitorov nalog
 		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getDebtorAccount());
 		DailyAccountBalance result = findByAccountNumberAndDate(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
-		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
+//		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
 		result.getAnalyticsOfStatements().add(analytic);
 		result.setTrafficToTheBurden(result.getTrafficToTheBurden()+analytic.getSum());
+		result.setNewState(result.getNewState()-analytic.getSum());
+		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
 		System.out.println("result:"+result);
 		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
 		System.out.println("result2:"+result2);
-		analytic.setDailyAccountBalance(result2);
+//		analytic.setDailyAccountBalance(result2);
+	}
+	@Override
+	public void updateCreditor(AnalyticsOfStatements analytic) {
+		//uvek je nalog za placanje pa se uzima debitorov nalog
+		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getAccountCreditor());
+		DailyAccountBalance result = findByAccountNumberAndDate(bankAccount, analytic.getDateOfReceipt());
+
+		//prva tri broja oznacavaju banku 
+//		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
+		result.getAnalyticsOfStatements().add(analytic);
+		result.setTrafficToBenefit(result.getTrafficToBenefit()+analytic.getSum());
+		result.setNewState(result.getNewState()+analytic.getSum());
+		analytic.setDailyAccountBalance(result);
+		result=repository.save(result);
+		
+		System.out.println("result:"+result);
+		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
+		System.out.println("result2:"+result2);
+//		analytic.setDailyAccountBalance(result2);
 	}
 	
 	@Override

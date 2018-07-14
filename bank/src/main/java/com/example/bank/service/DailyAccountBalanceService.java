@@ -24,5 +24,7 @@ public interface DailyAccountBalanceService {
 
 	DailyAccountBalance findAccountStateAt(BankAccount creditorAccount, Date date);
 
-	void  update(AnalyticsOfStatements analytic);
+	void  updateDebtor(AnalyticsOfStatements analytic);
+	void  updateCreditor(AnalyticsOfStatements analytic);
+
 }
