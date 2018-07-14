@@ -285,12 +285,12 @@ public class AnalyticsController {
 					}
 				}
 				
-				double ukupanIznos = 0;
-				for (ClearingItem clearingItem : cl.getNalozi()) {
-					
-					ukupanIznos += clearingItem.getIznos();
-				}
-				cl.setUkupanIznos(ukupanIznos);
+//				double ukupanIznos = 0;
+//				for (ClearingItem clearingItem : cl.getNalozi()) {
+//					
+//					ukupanIznos += clearingItem.getIznos();
+//				}
+				cl.setUkupanIznos(ci.getIznos());
 				cl.setSifraValute(analytics.getPaymentCurrency().getOfficial_code());
 				cl.setDatumValute(analytics.getCurrencyDate());
 				cl.setDatum(analytics.getDateOfReceipt());
