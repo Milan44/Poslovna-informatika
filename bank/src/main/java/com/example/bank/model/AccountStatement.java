@@ -42,6 +42,9 @@ public class AccountStatement {
 	private Float stateAtTheEndOfPeriod;
 	
 	@XmlElement
+	private ArrayList<DailyAccountBalance> dailyBalances;
+	
+	@XmlElement
 	private ArrayList<AnalyticsOfStatements>statements;
 
 
@@ -49,6 +52,53 @@ public class AccountStatement {
 
 	public ArrayList<AnalyticsOfStatements> getStatements() {
 		return statements;
+	}
+
+
+	public AccountStatement() {
+		super();
+		// TODO Auto-generated constructor stub
+		
+	}
+
+
+	public AccountStatement(Date fromDate, Date toDate, String accountNumber) {
+		super();
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.accountNumber = accountNumber;
+		this.statements= new ArrayList<AnalyticsOfStatements>();
+		this.dailyBalances= new ArrayList<DailyAccountBalance>();
+	}
+
+
+	public int getCountOfTrafficToBenefit() {
+		return countOfTrafficToBenefit;
+	}
+
+
+	public void setCountOfTrafficToBenefit(int countOfTrafficToBenefit) {
+		this.countOfTrafficToBenefit = countOfTrafficToBenefit;
+	}
+
+
+	public int getCountOfTrafficToBurden() {
+		return countOfTrafficToBurden;
+	}
+
+
+	public void setCountOfTrafficToBurden(int countOfTrafficToBurden) {
+		this.countOfTrafficToBurden = countOfTrafficToBurden;
+	}
+
+
+	public ArrayList<DailyAccountBalance> getDailyBalances() {
+		return dailyBalances;
+	}
+
+
+	public void setDailyBalances(ArrayList<DailyAccountBalance> dailyBalances) {
+		this.dailyBalances = dailyBalances;
 	}
 
 

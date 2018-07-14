@@ -30,11 +30,11 @@ INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `em
 ('4', 'Bulevar Kralaj Petra 18', 'adressStatement3', 'uniCredit@gmai.com', b'1', '25923', '1004458730255', 'UniCredit', '069778145', '33', 'pravno lice', '1');
 
 
-INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('1', '1', '2006-07-12', '1000', b'1', '1', '1', '1');
-INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('2', '2', '2008-07-12', '2000', b'1', '1', '1', '2');
-INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('3', '3', '2010-10-10', '3000', b'1', '1', '3', '3');
-INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('4', '4', '2012-12-12', '4000', b'1', '2', '1', '2');
-INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('5', '5', '2013-04-13', '5000', b'1', '1', '2', '2');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('1', '554123456789555555', '2006-07-12', '1000', b'1', '1', '1', '1');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('2', '553123456789555552', '2008-07-12', '2000', b'1', '1', '1', '2');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('3', '555123456789555553', '2010-10-10', '3000', b'1', '1', '3', '3');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('4', '555123456789555554', '2012-12-12', '4000', b'1', '2', '1', '2');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('5', '555123456789555555', '2013-04-13', '5000', b'1', '1', '2', '2');
 
 
 INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `trafficDate`, `trafficToBenefit`, `trafficToTheBurden`, `legalEntityAccount_id`) VALUES ('1', '3500.5', '2700.3', '2006-07-12', '2200.5', '1115.5', '1');
@@ -43,7 +43,7 @@ INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `tr
 INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `trafficDate`, `trafficToBenefit`, `trafficToTheBurden`, `legalEntityAccount_id`) VALUES ('4', '13456.0', '67656.9', '2009-07-12', '12345.8', '45678.9', '4');
 INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `trafficDate`, `trafficToBenefit`, `trafficToTheBurden`, `legalEntityAccount_id`) VALUES ('5', '145.8', '987.9', '2010-07-12', '678.9', '456.9', '5');
 
-INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('6', '456987123', '2008-04-13', '150000', b'1', '1', '4', '1');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('6', '552123456789555555', '2008-04-13', '150000', b'1', '1', '4', '1');
 
 INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `trafficDate`, `trafficToBenefit`, `trafficToTheBurden`, `legalEntityAccount_id`) VALUES ('1', '3500.5', '2700.3', '2006-07-12', '2200.5', '1115.5', '1');
 INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `trafficDate`, `trafficToBenefit`, `trafficToTheBurden`, `legalEntityAccount_id`) VALUES ('2', '2222.2', '1212.4', '2007-07-12', '558.3', '968.5', '2');

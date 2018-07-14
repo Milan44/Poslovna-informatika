@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -24,7 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.bank.model.AccountStatement;
 import com.example.bank.model.AnalyticsOfStatements;
+import com.example.bank.model.BankAccount;
+import com.example.bank.model.DailyAccountBalance;
 import com.example.bank.service.AnalyticsOfStatementsService;
 import com.example.bank.service.DailyAccountBalanceService;
 
@@ -38,7 +43,11 @@ public class AnalyticsController {
 	
 	@Autowired
 	private DailyAccountBalanceService dailyAccountBalanceService;
+	
+	@Autowired
+	private AnalyticsOfStatementsService analyticsOfStatementsService;
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(
 			value = "/load", 	
 			method = RequestMethod.POST, 
@@ -117,14 +126,19 @@ public class AnalyticsController {
 			    	
 //			    	analyticParsed.setDateOfReceipt(current);
 			    //	analyticParsed.setCurrencyDate(current);
+
+			    	updateDailyAccountBalance(analyticParsed);			    	
+//			    	service.save(analyticParsed);
 			    	
-			    	updateDailyAccountBalance(analyticParsed);
+
+			    	BankAccount ba=new BankAccount();
+			    	ba.setAccountNumber(analyticParsed.getDebtorAccount());
+			    	exportXml(new Date(117, 1, 1), new Date(118, 12, 1),ba);
+			    	
+			    	String currentBank="555";
 			    	String bankKreditor=analyticParsed.getAccountCreditor().substring(0, 3);
 			    	String bankDebitor=analyticParsed.getDebtorAccount().substring(0, 3);
 			    	
-			    	
-			    	service.save(analyticParsed);
-//			    	updateDailyAccountBalance(analyticParsed);
 				} catch (JAXBException e) {					 
 					e.printStackTrace();
 				}
@@ -149,11 +163,47 @@ public class AnalyticsController {
 	}
 	
 	private void updateDailyAccountBalance(AnalyticsOfStatements analytic) {
-		dailyAccountBalanceService.update(analytic);
+		dailyAccountBalanceService.updateDebtor(analytic);
 	}
 	
-	public void exportAccountStatement() {
+	private void  exportXml(Date startDate,Date endDate, BankAccount legalEntityAccount)  throws JAXBException{
 		
+		ArrayList<DailyAccountBalance> dailyAccountBalances = (ArrayList<DailyAccountBalance>) dailyAccountBalanceService.findBalances(legalEntityAccount, startDate, endDate);
+		AccountStatement accountStatement = new AccountStatement(startDate,endDate,legalEntityAccount.getAccountNumber());
+		//		Balances balances = new Balances();
+		if(dailyAccountBalances.size()>0) {
+				DailyAccountBalance firstBalance=dailyAccountBalances.get(0);
+				DailyAccountBalance lastBalance=dailyAccountBalances.get(0);
+
+			
+			for(DailyAccountBalance d : dailyAccountBalances){
+				ArrayList<AnalyticsOfStatements> analyticsOfStatements = analyticsOfStatementsService.findByDateAndAccount(legalEntityAccount,d.getTrafficDate());
+//				for(AnalyticsOfStatements a : analyticsOfStatements)
+//					d.getAnalyticsOfStatements().add(a);
+//				
+				if(d.getTrafficDate().before(firstBalance.getTrafficDate())) {
+					firstBalance=d;
+				}
+				
+				if(d.getTrafficDate().after(lastBalance.getTrafficDate())) {
+					lastBalance=d;
+				}
+				accountStatement.getDailyBalances().add(d);
+				accountStatement.getStatements().addAll(0, d.getAnalyticsOfStatements());
+				
+			}
+			
+			accountStatement.setStartAccountState(firstBalance.getPreviousState());
+			accountStatement.setStateAtTheEndOfPeriod(lastBalance.getNewState());
+
+		}
+		
+		File file = new File("C:\\Users\\JOVICA\\Desktop\\files\\statements.xml");
+		JAXBContext jaxbContext = JAXBContext.newInstance(AccountStatement.class);
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		jaxbMarshaller.marshal(accountStatement, file);
+		jaxbMarshaller.marshal(accountStatement, System.out);
 	}
-	
 }
