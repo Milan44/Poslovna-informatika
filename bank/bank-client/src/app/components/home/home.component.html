@@ -127,22 +127,11 @@
         </ng-template>
       </ngb-tab>
 
-<<<<<<< HEAD
-=======
-      <ngb-tab  >
 
-        <ng-template ngbTabTitle>
-                <div (click)="loadClearingItems()">Items for clearing</div>
-        </ng-template>
->>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
 
-<<<<<<< HEAD
-      <ngb-tab title="Banks">
+<!-- 
+      <ngb-tab title="InterBankTransfers">
         <ng-template ngbTabContent>    
-          <table class="table">
-=======
-        <ng-template ngbTabContent>
-          
             <table class="table">
                 <thead>
                     <tr>
@@ -197,13 +186,14 @@
             </table>
             <button id="exportClearing"  type="button" class="btn btn-primary  center" >Export</button>
         </ng-template>
-      </ngb-tab>
+      </ngb-tab> -->
+
+
 
       <ngb-tab title="Banks">
         <ng-template ngbTabContent>
           
             <table class="table">
->>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
               <thead>
                   <tr>
                       <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
@@ -223,21 +213,23 @@
                       <td style = "text-align:center;vertical-align:middle">{{bank.pib}}</td>
                     
                       <td style = "text-align:center;vertical-align:middle"> 
-<<<<<<< HEAD
-                        <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
+
+                        <!-- <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                       </td>                                                           
-              </tr>
-=======
+              </tr> -->
+
                         <button id="exportPDF" (click) = "exportAccount(bank)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                       </td>
                                                              
                   </tr>
 
->>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
+
               </tbody>
             </table>
         </ng-template>
       </ngb-tab>
+
+
 
       <ngb-tab title= "Analytics">
         <ng-template ngbTabContent>
