@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -346,7 +347,7 @@ public class AnalyticsController {
 	}
 
 	private void updateDailyAccountBalance(AnalyticsOfStatements analytic) {
-		dailyAccountBalanceService.update(analytic);
+		dailyAccountBalanceService.updateDebtor(analytic);
 	}
 	
 	public void exportAccountStatement() {

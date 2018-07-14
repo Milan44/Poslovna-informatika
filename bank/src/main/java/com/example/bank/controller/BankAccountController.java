@@ -147,27 +147,29 @@ public class BankAccountController {
 		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(origin, currentDate);
 		PaymentType pt = paymentTypeService.findById(2l);
 		
-		
-		if(trasfer.getBank().getName().equals(origin.getBank().getName())) {
-			
-			trasfer.setMoney(trasfer.getMoney() + trasferedMoney);
-			bankAccountService.save(trasfer);
-			
-			bankAccountService.deleteById(id);
-			
-			
-		}
-		else {
+//		
+//		if(trasfer.getBank().getName().equals(origin.getBank().getName())) {
+//			
+//			trasfer.setMoney(trasfer.getMoney() + trasferedMoney);
+//			bankAccountService.save(trasfer);
+//			
+//			bankAccountService.deleteById(id);
+//			
+//			
+//		}
+//		else {
 			
 			
 			//	AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), null, 
 			//		"987-446-587", trasfer.getAccountNumber(), null, "4654-6216", emergencyBool, trasfer.getMoney(), null, null, dailyAccountBalance,null, null, null, null);
 		
-//			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
-//					"987-446-587", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, (float)trasfer.getMoney(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
+					"987-446-587", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, (float)trasfer.getMoney(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+
+			//dodaj pozivanje metode i setovanje money-a
 //			analyticService.save(nova);
 //			bankAccountService.deleteById(id);
-		}
+//		}
 		
 		//97 15 1 0 2 1
 		return bankAccountService.getAll();
