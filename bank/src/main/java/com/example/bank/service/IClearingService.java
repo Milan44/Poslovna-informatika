@@ -7,5 +7,6 @@ import com.example.bank.model.Clearing;
 public interface IClearingService {
 
 	List<Clearing> getAll();
+	boolean save(Clearing c);
 	
 }

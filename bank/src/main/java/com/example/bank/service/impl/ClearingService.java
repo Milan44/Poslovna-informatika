@@ -21,4 +21,11 @@ public class ClearingService implements IClearingService {
 		return clearingRepository.findAll();
 	}
 
+	@Override
+	public boolean save(Clearing c) {
+		
+		clearingRepository.save(c);
+		return true;
+	}
+
 }

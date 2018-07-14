@@ -1,22 +1,28 @@
 package com.example.bank.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "clearing")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -27,7 +33,7 @@ public class Clearing {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	@XmlElement
-	private Long id;
+	private Long clearingId;
 	
 	@Column(length = 50)
 	@XmlElement
@@ -65,11 +71,12 @@ public class Clearing {
 	@XmlElement
 	private Date datum;
 	
-	@JsonIgnore
-	@OneToMany
-	@XmlElement
-	private List<AnalyticsOfStatements> nalozi;
 
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "clearing_items", joinColumns = @JoinColumn(name = "clearingId"), inverseJoinColumns = @JoinColumn(name = "clearingItemId"))
+    private List<ClearingItem> nalozi;
+	
 	public String getPorukaID() {
 		return porukaID;
 	}
@@ -81,6 +88,8 @@ public class Clearing {
 	public String getDuznikSWIFT() {
 		return duznikSWIFT;
 	}
+
+	
 
 	public void setDuznikSWIFT(String duznikSWIFT) {
 		this.duznikSWIFT = duznikSWIFT;
@@ -142,18 +151,20 @@ public class Clearing {
 		this.datum = datum;
 	}
 
-	public List<AnalyticsOfStatements> getNalozi() {
+	public List<ClearingItem> getNalozi() {
 		return nalozi;
 	}
 
-	public void setNalozi(List<AnalyticsOfStatements> nalozi) {
+	public void setNalozi(List<ClearingItem> nalozi) {
 		this.nalozi = nalozi;
 	}
 
-	public Clearing(String porukaID, String duznikSWIFT, String duznikObracunskiRacun, String poverilacSWIFT,
-			String poveriocObracunskiRacun, double ukupanIznos, String sifraValute, Date datumValute, Date datum,
-			List<AnalyticsOfStatements> nalozi) {
+	
+	public Clearing(Long clearingId, String porukaID, String duznikSWIFT, String duznikObracunskiRacun,
+			String poverilacSWIFT, String poveriocObracunskiRacun, double ukupanIznos, String sifraValute,
+			Date datumValute, Date datum, List<ClearingItem> nalozi) {
 		super();
+		this.clearingId = clearingId;
 		this.porukaID = porukaID;
 		this.duznikSWIFT = duznikSWIFT;
 		this.duznikObracunskiRacun = duznikObracunskiRacun;
@@ -168,7 +179,11 @@ public class Clearing {
 
 	public Clearing() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.nalozi = new ArrayList<>();
+	}
+
+	public Long getClearingId() {
+		return clearingId;
 	}
 	
 	
