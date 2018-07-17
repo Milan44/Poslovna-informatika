@@ -210,25 +210,11 @@
                         <tr class="active" *ngFor="let bank of banks; let i = index">
       
                             <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
-<<<<<<< HEAD
-                            <td style = "text-align:center;vertical-align:middle" >{{account.id}}</td>
-                            <td style = "text-align:center;vertical-align:middle" >{{account.accountNumber}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{account.dateOfOpening}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{account.valid}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{account.money}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{account.client.name}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{account.bank.name}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{account.currency.official_code}}</td>
-                           
-                            <td style = "text-align:center;vertical-align:middle"> 
-                              <button id="exportXML"  (click) = "openExportXmlModal(exportXmlModal, account)" type="button" class="btn btn-success btn-sm center" >Export .xml</button>
-                            </td>
-=======
+
                             <td style = "text-align:center;vertical-align:middle" >{{bank.name}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{bank.bankCode}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{bank.pib}}</td>
-                          
->>>>>>> branch 'master' of https://github.com/Milan44/Poslovna-informatika.git
+
                             <td style = "text-align:center;vertical-align:middle"> 
                               <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                             </td>                                                           
@@ -413,13 +399,9 @@
 
       <ngb-tab title= "Analytics">
         <ng-template ngbTabContent>
-                <form class="form-signin" >
-                        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-                        <h1 class="h3 mb-3 font-weight-normal">Enter Path</h1>  
-                        <input id="putanjaInput" type="text" class="form-control" placeholder="Path">
-                        <br/>
-                        <button (click) = "getAnalytics()" class="btn btn-lg btn-primary btn-block">Load</button>
-                </form>
+                <app-form-upload></app-form-upload>
+                <br/><br/>
+               <app-upload></app-upload>
         </ng-template>
       </ngb-tab>
      
@@ -461,7 +443,7 @@
       
             
           </ngb-tabset>
-      </div>
+     
       
       
       <ng-template #addBankAccountModal let-c="close" let-d="dismiss">
@@ -708,7 +690,7 @@
                     </div>
                 </div>
     
-            </div>
+            
     
         </ng-template>
 
@@ -757,12 +739,7 @@
 
         </ng-template>
 
-            
 
-            
-            </ng-template>
-      
-      
           <ng-template #addCurrencyModal let-c="close" let-d="dismiss">
               <div class="modal-header">
                   <h4 class="modal-title">Add currency</h4>
