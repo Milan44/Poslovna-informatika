@@ -2,25 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 
 
-import {BankAccountService} from '../../services/bank-account.service'
-import {ClientService} from '../../services/client.service'
-import {BankService} from '../../services/bank.service'
-import {CurrencyService} from '../../services/currency.service'
+import { BankAccountService } from '../../services/bank-account.service'
+import { ClientService } from '../../services/client.service'
+import { BankService } from '../../services/bank.service'
+import { CurrencyService } from '../../services/currency.service'
 
-import {PlaceService} from '../../services/place.service'
-import{CountryService} from '../../services/country.service'
+import { PlaceService } from '../../services/place.service'
+import { CountryService } from '../../services/country.service'
 
-import {AnalyticsService} from '../../services/analytics.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
-import {AnalyticsOfStatementsService} from '../../services/analytics-of-statements.service'
+import { AnalyticsOfStatementsService } from '../../services/analytics-of-statements.service'
 
 
 
@@ -33,64 +33,64 @@ import {AnalyticsOfStatementsService} from '../../services/analytics-of-statemen
 export class HomeComponent implements OnInit {
 
 
-  private bankAccounts : any[] = [];
-  private clients : any[] = [];
-  private banks : any[] = [];
-  private places : any[] = [];
+  private bankAccounts: any[] = [];
+  private clients: any[] = [];
+  private banks: any[] = [];
+  private places: any[] = [];
 
-  private currencies : any[] = [];
-  private countries : any[] = [];
+  private currencies: any[] = [];
+  private countries: any[] = [];
 
-  private accountNumber : any;
-  private money : any;
-  private dateOfOpening : any;
-  private selectedClient : any;
-  private selectedBank : any;
-  private selectedCurrency : any;
+  private accountNumber: any;
+  private money: any;
+  private dateOfOpening: any;
+  private selectedClient: any;
+  private selectedBank: any;
+  private selectedCurrency: any;
 
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
-  private clearingItems : any[] = [];
+  private clearingItems: any[] = [];
 
   private clientTypes = ["fizicko", "pravno"];
 
-  private client_id : any;
-  private client_name : any;
-  private client_address : any;
-  private client_phone : any;
-  private client_fax : any;
-  private client_email : any;
-  private client_addressForStatements : any;
+  private client_id: any;
+  private client_name: any;
+  private client_address: any;
+  private client_phone: any;
+  private client_fax: any;
+  private client_email: any;
+  private client_addressForStatements: any;
   private client_emailStatements = false;
-  private client_jmbg : any;
-  private client_typeOfClient : any;
-  private client_residence : any;     // misli se na ID residence
-  private client_pib : any;
+  private client_jmbg: any;
+  private client_typeOfClient: any;
+  private client_residence: any;     // misli se na ID residence
+  private client_pib: any;
 
-  private currency_id : any;
-  private currency_official_code : any;
-  private currency_name : any;
-  private currency_domicilna : any;
-  private currency_countryID : any;
+  private currency_id: any;
+  private currency_official_code: any;
+  private currency_name: any;
+  private currency_domicilna: any;
+  private currency_countryID: any;
 
   private isFizicko = false;
 
-  private startDate : any;
-  private endDate : any;
-  private selectedBankAccount : any;
+  private startDate: any;
+  private endDate: any;
+  private selectedBankAccount: any;
 
- 
 
-  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
-              private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService,
-              private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService) { }
 
-    
+  constructor(private router: Router, private modalService: NgbModal, private bankAccountService: BankAccountService, private clientService: ClientService,
+    private bankService: BankService, private currencyService: CurrencyService, private countryService: CountryService, private suspendDialog: MatDialog, private placeService: PlaceService,
+    private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService) { }
+
+
 
   ngOnInit() {
-    
+
     this.getBankAccounts();
     this.getClients();
-    
+
     this.getBanks();
     this.getCurrencies();
     this.getPlaces();
@@ -100,26 +100,27 @@ export class HomeComponent implements OnInit {
     const dd = today.getDate();
     const mm = today.getMonth() + 1; // January is 0!
     const yyyy = today.getFullYear();
-    this.dateOfOpening = {year: yyyy, month: mm, day: dd};
-
+    this.dateOfOpening = { year: yyyy, month: mm, day: dd };
+    this.startDate = this.dateOfOpening;
+    this.endDate = this.dateOfOpening;
   }
 
   getBankAccounts() {
-    this.bankAccountService.getBankAccounts().subscribe(data=> {   
+    this.bankAccountService.getBankAccounts().subscribe(data => {
       this.bankAccounts = data;
       console.log(this.bankAccounts);
     });
   }
 
   getClients() {
-    this.clientService.getClients().subscribe(data=> {   
+    this.clientService.getClients().subscribe(data => {
       this.clients = data;
       console.log(this.clients);
     });
   }
 
   getBanks() {
-    this.bankService.getBanks().subscribe(data=> {   
+    this.bankService.getBanks().subscribe(data => {
       this.banks = data;
       console.log(this.banks);
     });
@@ -127,14 +128,14 @@ export class HomeComponent implements OnInit {
 
 
   getCurrencies() {
-    this.currencyService.getCurrencies().subscribe(data=> {   
+    this.currencyService.getCurrencies().subscribe(data => {
       this.currencies = data;
       console.log(this.currencies);
     });
   }
 
-  getCountries(){
-    this.countryService.getCountries().subscribe(data=> {   
+  getCountries() {
+    this.countryService.getCountries().subscribe(data => {
       this.countries = data;
       console.log(this.currencies);
     });
@@ -142,7 +143,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPlaces() {
-    this.placeService.getPlaces().subscribe(data=> {   
+    this.placeService.getPlaces().subscribe(data => {
       this.places = data;
       console.log(this.places);
     });
@@ -152,39 +153,39 @@ export class HomeComponent implements OnInit {
   openAddBankAccountModal(addBankAccountModal) {
 
     this.modalService.open(addBankAccountModal).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
-    
+
   }
 
   addBankAccount() {
 
-    let date = ""+this.dateOfOpening.year + "-";
-    if(this.dateOfOpening.month<10)
-      date += "0"+this.dateOfOpening.month + "-";
+    let date = "" + this.dateOfOpening.year + "-";
+    if (this.dateOfOpening.month < 10)
+      date += "0" + this.dateOfOpening.month + "-";
     else
       date += this.dateOfOpening.month + "-";
 
-    if(this.dateOfOpening.day<10)
-      date += "0"+this.dateOfOpening.day;
+    if (this.dateOfOpening.day < 10)
+      date += "0" + this.dateOfOpening.day;
     else
       date += this.dateOfOpening.day;
 
     console.log(date);
 
     // let bankAccountDTO = {accountNumber:this.accountNumber+"", money: this.money, valid:true, dateOfOpening:date, client:this.selectedClient, bank:this.selectedBank, currency:this.selectedCurrency}
-    this.bankAccountService.registerBankAccount({accountNumber:this.accountNumber+"", money: this.money, valid:true, dateOfOpening:date, clientID:this.selectedClient, bankID:this.selectedBank, currencyID:this.selectedCurrency}).subscribe(data => {
-      
-      if(data){
+    this.bankAccountService.registerBankAccount({ accountNumber: this.accountNumber + "", money: this.money, valid: true, dateOfOpening: date, clientID: this.selectedClient, bankID: this.selectedBank, currencyID: this.selectedCurrency }).subscribe(data => {
+
+      if (data) {
         alert("You have successfully registered an account!");
         this.getBankAccounts();
-      } 
+      }
       else {
         alert("An error has occurred.");
-      }     
-      
+      }
+
     });
   }
 
@@ -209,74 +210,76 @@ export class HomeComponent implements OnInit {
 
 
 
-  deleteClient(clientID : any){
-      this.clientService.deleteClient(clientID).subscribe(data=> {
-  
-        if(data){
-          alert("You have successfully deleted a client!");
-          this.getClients();
+  deleteClient(clientID: any) {
+    this.clientService.deleteClient(clientID).subscribe(data => {
 
-        } else {
-          alert("You can't delete this client.");
-        }
+      if (data) {
+        alert("You have successfully deleted a client!");
+        this.getClients();
 
-      });
+      } else {
+        alert("You can't delete this client.");
+      }
+
+    });
 
   }
 
   openAddClientModal(addClientModal) {
 
     this.modalService.open(addClientModal).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
-    
+
   }
 
 
   addClient() {
 
     this.clientService.registerClient(
-      {name:this.client_name, address:this.client_address, phone:this.client_phone, fax:this.client_fax, email:this.client_email,
-        addressForStatements:this.client_addressForStatements, emailStatements:this.client_emailStatements, jmbg:this.client_jmbg,
-        typeOfClient:this.client_typeOfClient, residenceID:this.client_residence, pib:this.client_pib}).subscribe(data => {
-      
-      if(data){
-        alert("You have successfully registered a client!");
-        this.getClients();
+      {
+        name: this.client_name, address: this.client_address, phone: this.client_phone, fax: this.client_fax, email: this.client_email,
+        addressForStatements: this.client_addressForStatements, emailStatements: this.client_emailStatements, jmbg: this.client_jmbg,
+        typeOfClient: this.client_typeOfClient, residenceID: this.client_residence, pib: this.client_pib
+      }).subscribe(data => {
 
-        this.client_id = null;
-        this.client_name = null;
-        this.client_address = null;
-        this.client_phone = null;
-        this.client_fax = null;
-        this.client_email = null;
-        this.client_addressForStatements = null;
-        this.client_emailStatements = false;
-        this.client_jmbg = null;
-        this.client_typeOfClient = null;
-        this.client_residence = null;
-        this.client_pib = null;
+        if (data) {
+          alert("You have successfully registered a client!");
+          this.getClients();
 
-      } 
-      else {
-        alert("An error has occurred.");
-      }
+          this.client_id = null;
+          this.client_name = null;
+          this.client_address = null;
+          this.client_phone = null;
+          this.client_fax = null;
+          this.client_email = null;
+          this.client_addressForStatements = null;
+          this.client_emailStatements = false;
+          this.client_jmbg = null;
+          this.client_typeOfClient = null;
+          this.client_residence = null;
+          this.client_pib = null;
 
-    });
+        }
+        else {
+          alert("An error has occurred.");
+        }
+
+      });
   }
 
 
-  selectTypeOfClient(){
+  selectTypeOfClient() {
 
     console.log(this.client_typeOfClient);
 
-    if(this.client_typeOfClient === "fizicko"){
+    if (this.client_typeOfClient === "fizicko") {
       this.isFizicko = true;
       this.client_pib = null;
     }
-    else{
+    else {
       this.isFizicko = false;
     }
   }
@@ -298,36 +301,38 @@ export class HomeComponent implements OnInit {
     this.client_pib = client.pib;
 
     this.modalService.open(UpdateClientModal).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
-    
+
   }
 
 
-  updateClient(){
+  updateClient() {
     this.clientService.updateClient(
-      {id:this.client_id, name:this.client_name, address:this.client_address, phone:this.client_phone, fax:this.client_fax, email:this.client_email,
-        addressForStatements:this.client_addressForStatements, emailStatements:this.client_emailStatements, jmbg:this.client_jmbg,
-        typeOfClient:this.client_typeOfClient, residenceID:this.client_residence, pib:this.client_pib}).subscribe(data => {
-      
-      if(data){
-        alert("You have successfully updated a client!");
-        this.getClients();
+      {
+        id: this.client_id, name: this.client_name, address: this.client_address, phone: this.client_phone, fax: this.client_fax, email: this.client_email,
+        addressForStatements: this.client_addressForStatements, emailStatements: this.client_emailStatements, jmbg: this.client_jmbg,
+        typeOfClient: this.client_typeOfClient, residenceID: this.client_residence, pib: this.client_pib
+      }).subscribe(data => {
 
-      } 
-      else {
-        alert("An error has occurred.");
-      }
+        if (data) {
+          alert("You have successfully updated a client!");
+          this.getClients();
 
-    });
+        }
+        else {
+          alert("An error has occurred.");
+        }
+
+      });
   }
 
-  deleteCurrency(currencyID : any){
-    this.currencyService.deleteCurrency(currencyID).subscribe(data=> {
+  deleteCurrency(currencyID: any) {
+    this.currencyService.deleteCurrency(currencyID).subscribe(data => {
 
-      if(data){
+      if (data) {
         alert("You have successfully deleted a currency!");
         this.getCurrencies();
 
@@ -342,11 +347,11 @@ export class HomeComponent implements OnInit {
   openAddCurrencyModal(addCurrencyModal) {
 
     this.modalService.open(addCurrencyModal).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
-    
+
   }
 
   openUpdateCurrencyModal(updateCurrencyModal, currency) {
@@ -358,57 +363,57 @@ export class HomeComponent implements OnInit {
     this.currency_countryID = currency.country.id;
 
     this.modalService.open(updateCurrencyModal).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
-    
+
   }
 
   addCurrency() {
 
     console.log(this.currency_countryID);
     this.currencyService.registerCurrency(
-      {name:this.currency_name, official_code:this.currency_official_code, countryID:this.currency_countryID, domicilna:this.currency_domicilna}).subscribe(data => {
-      
-      if(data){
-        alert("You have successfully added a currecny!");
-        this.getCurrencies();
+      { name: this.currency_name, official_code: this.currency_official_code, countryID: this.currency_countryID, domicilna: this.currency_domicilna }).subscribe(data => {
 
-        this.currency_id = null;
-        this.currency_official_code = null;
-        this.currency_name = null;
-        this.currency_domicilna = false;
-        this.currency_countryID = null;
+        if (data) {
+          alert("You have successfully added a currecny!");
+          this.getCurrencies();
 
-      } 
-      else {
-        alert("An error has occurred.");
-      }
+          this.currency_id = null;
+          this.currency_official_code = null;
+          this.currency_name = null;
+          this.currency_domicilna = false;
+          this.currency_countryID = null;
 
-    });
+        }
+        else {
+          alert("An error has occurred.");
+        }
+
+      });
   }
 
   updateCurrency() {
 
     this.currencyService.updateCurrency(
-      {id:this.currency_id, name:this.currency_name, official_code:this.currency_official_code, countryID:this.currency_countryID, domicilna:this.currency_domicilna}).subscribe(data => {
-      
-      if(data){
-        alert("You have successfully udpated a currecny!");
-        this.getCurrencies();
+      { id: this.currency_id, name: this.currency_name, official_code: this.currency_official_code, countryID: this.currency_countryID, domicilna: this.currency_domicilna }).subscribe(data => {
 
-      } 
-      else {
-        alert("An error has occurred.");
-      }
-    });
+        if (data) {
+          alert("You have successfully udpated a currecny!");
+          this.getCurrencies();
+
+        }
+        else {
+          alert("An error has occurred.");
+        }
+      });
   }
 
 
   getClearingItems() {
 
-    this.analyticsOfStatementsService.getAnalyticsForClearing().subscribe(data=> {   
+    this.analyticsOfStatementsService.getAnalyticsForClearing().subscribe(data => {
       this.clearingItems = data;
       console.log(data);
     });
@@ -421,17 +426,17 @@ export class HomeComponent implements OnInit {
   }
 
   // NOVO
-  exportAccount(bank){
-    this.bankAccountService.exportAccount(bank).subscribe( data => {
-    console.log(data);
+  exportAccount(bank) {
+    this.bankAccountService.exportAccount(bank).subscribe(data => {
+      console.log(data);
     });
   }
   // NOVO
 
-  getAnalytics(){
+  getAnalytics() {
     let putanja = document.getElementById("putanjaInput") as HTMLInputElement;
     console.log(putanja.value);
-    this.analyticService.loadAnalytics(putanja.value).subscribe( data => {
+    this.analyticService.loadAnalytics(putanja.value).subscribe(data => {
       console.log(data);
 
     });
@@ -441,56 +446,56 @@ export class HomeComponent implements OnInit {
 
     this.selectedBankAccount = account;
     this.modalService.open(exportXmlModal).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
-    
+
   }
 
-  exportXML(){
-    let startDateModified = ""+this.startDate.year + "-";
-    if(this.startDate.month<10)
-    startDateModified += "0"+this.startDate.month + "-";
+  exportXML() {
+    let startDateModified = "" + this.startDate.year + "-";
+    if (this.startDate.month < 10)
+      startDateModified += "0" + this.startDate.month + "-";
     else
-    startDateModified += this.startDate.month + "-";
+      startDateModified += this.startDate.month + "-";
 
-    if(this.startDate.day<10)
-    startDateModified += "0"+this.startDate.day;
+    if (this.startDate.day < 10)
+      startDateModified += "0" + this.startDate.day;
     else
-    startDateModified += this.startDate.day;
+      startDateModified += this.startDate.day;
 
 
-    let endDateModified = ""+this.endDate.year + "-";
-    if(this.endDate.month<10)
-    endDateModified += "0"+this.endDate.month + "-";
+    let endDateModified = "" + this.endDate.year + "-";
+    if (this.endDate.month < 10)
+      endDateModified += "0" + this.endDate.month + "-";
     else
-    endDateModified += this.endDate.month + "-";
+      endDateModified += this.endDate.month + "-";
 
-    if(this.endDate.day<10)
-    endDateModified += "0"+this.endDate.day;
+    if (this.endDate.day < 10)
+      endDateModified += "0" + this.endDate.day;
     else
-    endDateModified += this.endDate.day;
+      endDateModified += this.endDate.day;
 
     this.bankAccountService.exportBankAccountXml(
-      startDateModified,endDateModified, this.selectedBankAccount).subscribe(data => {
-      
-      if(data){
-        alert("You have successfully added a currecny!");
-        this.getCurrencies();
+      startDateModified, endDateModified, this.selectedBankAccount).subscribe(data => {
 
-        this.currency_id = null;
-        this.currency_official_code = null;
-        this.currency_name = null;
-        this.currency_domicilna = false;
-        this.currency_countryID = null;
+        if (data) {
+          alert("You have successfully added a currecny!");
+          this.getCurrencies();
 
-      } 
-      else {
-        alert("An error has occurred.");
-      }
+          this.currency_id = null;
+          this.currency_official_code = null;
+          this.currency_name = null;
+          this.currency_domicilna = false;
+          this.currency_countryID = null;
 
-    });
+        }
+        else {
+          alert("An error has occurred.");
+        }
+
+      });
 
 
 

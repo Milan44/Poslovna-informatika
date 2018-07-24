@@ -101,7 +101,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public void updateDebtor(AnalyticsOfStatements analytic) {
 		//uvek je nalog za placanje pa se uzima debitorov nalog
 		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getDebtorAccount());
-		DailyAccountBalance result = findByAccountNumberAndDate(bankAccount, analytic.getDateOfReceipt());
+		DailyAccountBalance result = findAccountStateAt(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
 //		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
@@ -120,7 +120,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public void updateCreditor(AnalyticsOfStatements analytic) {
 		//uvek je nalog za placanje pa se uzima debitorov nalog
 		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getAccountCreditor());
-		DailyAccountBalance result = findByAccountNumberAndDate(bankAccount, analytic.getDateOfReceipt());
+		DailyAccountBalance result = findAccountStateAt(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
 //		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);

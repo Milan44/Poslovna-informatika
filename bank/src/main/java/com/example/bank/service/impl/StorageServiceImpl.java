@@ -1,11 +1,16 @@
 package com.example.bank.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
- 
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.service.StorageService;
 
 @Service
@@ -21,14 +27,30 @@ public class StorageServiceImpl implements StorageService{
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	private final Path rootLocation = Paths.get("upload-dir");
 	
-	public void store(MultipartFile file){
+	public Path store(MultipartFile file){
 		try{
 			Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+			return this.rootLocation.resolve(file.getOriginalFilename());
 		}catch(Exception e){
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
+	public AnalyticsOfStatements loadAnalyticOfStatements(Path path) {
+		File file = path.toFile();
+		JAXBContext jaxbContext;
+		try {
+			
+			jaxbContext = JAXBContext.newInstance(AnalyticsOfStatements.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+	    	AnalyticsOfStatements analyticParsed = (AnalyticsOfStatements) jaxbUnmarshaller.unmarshal(file);
+	    	return  analyticParsed;
+		} catch (JAXBException e) {					 
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public Resource loadFile(String filename) {
 		try {
 			Path file = rootLocation.resolve(filename);
