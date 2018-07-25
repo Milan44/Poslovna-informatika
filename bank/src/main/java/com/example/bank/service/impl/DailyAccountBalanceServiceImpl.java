@@ -104,8 +104,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 		DailyAccountBalance result = findAccountStateAt(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
-//		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
-		result.getAnalyticsOfStatements().add(analytic);
+//		result.getAnalyticsOfStatements().add(analytic);
 		result.setTrafficToTheBurden(result.getTrafficToTheBurden()+analytic.getSum());
 		result.setNewState(result.getNewState()-analytic.getSum());
 		analytic.setDailyAccountBalance(result);
@@ -124,7 +123,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 
 		//prva tri broja oznacavaju banku 
 //		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
-		result.getAnalyticsOfStatements().add(analytic);
+//		result.getAnalyticsOfStatements().add(analytic);
 		result.setTrafficToBenefit(result.getTrafficToBenefit()+analytic.getSum());
 		result.setNewState(result.getNewState()+analytic.getSum());
 		analytic.setDailyAccountBalance(result);

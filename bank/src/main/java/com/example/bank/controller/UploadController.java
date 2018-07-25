@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import com.example.bank.model.AnalyticsOfStatements;
+import com.example.bank.service.AnalyticsOfStatementsService;
 import com.example.bank.service.DailyAccountBalanceService;
 import com.example.bank.service.StorageService;
 
@@ -36,6 +37,9 @@ public class UploadController {
 	@Autowired
 	private DailyAccountBalanceService dailyAccountBalanceService;
 	
+	@Autowired
+	private AnalyticsOfStatementsService service;
+	
 	List<String> files = new ArrayList<String>();
 	
 	@PostMapping("/post")
@@ -47,6 +51,7 @@ public class UploadController {
 			files.add(file.getOriginalFilename());
 			AnalyticsOfStatements analyticParsed=storageService.loadAnalyticOfStatements(path);
 			dailyAccountBalanceService.updateDebtor(analyticParsed);
+			service.save(analyticParsed);
 
 			message = "You successfully uploaded " + file.getOriginalFilename() + "!";
 			return ResponseEntity.status(HttpStatus.OK).body(message);			
