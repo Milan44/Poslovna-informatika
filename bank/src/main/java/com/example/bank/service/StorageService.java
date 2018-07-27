@@ -13,4 +13,5 @@ public interface StorageService {
 	Resource loadFile(String filename);
 	void deleteAll();
 	void init();
+	Resource loadFileWithRoot(Path rootLocation,String filename);
 }

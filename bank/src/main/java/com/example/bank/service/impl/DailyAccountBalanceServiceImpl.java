@@ -105,8 +105,12 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 
 		//prva tri broja oznacavaju banku 
 //		result.getAnalyticsOfStatements().add(analytic);
+		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
+			result.setNewState(result.getPreviousState()-analytic.getSum());
+		}else {
+			result.setNewState(result.getNewState()-analytic.getSum());
+		}
 		result.setTrafficToTheBurden(result.getTrafficToTheBurden()+analytic.getSum());
-		result.setNewState(result.getNewState()-analytic.getSum());
 		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
@@ -247,7 +251,9 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public List<DailyAccountBalance> findBalances(BankAccount account, java.util.Date start,
 			java.util.Date end) {
 		// TODO Auto-generated method stub
-		return repository.findBalances(account.getAccountNumber(), start, end);
+		Date dateStartSql= new Date(start.getTime());
+		Date dateEndSql= new Date(end.getTime());
+		return repository.findBalances(account.getAccountNumber(), dateStartSql, dateEndSql);
 	}
 
 }

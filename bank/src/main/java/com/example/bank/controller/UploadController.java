@@ -50,6 +50,7 @@ public class UploadController {
 			Path path=storageService.store(file);
 			files.add(file.getOriginalFilename());
 			AnalyticsOfStatements analyticParsed=storageService.loadAnalyticOfStatements(path);
+			//deo za kreiranje dnevnog izvestaja
 			dailyAccountBalanceService.updateDebtor(analyticParsed);
 			service.save(analyticParsed);
 
