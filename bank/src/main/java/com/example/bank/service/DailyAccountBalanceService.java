@@ -26,5 +26,7 @@ public interface DailyAccountBalanceService {
 
 	void  updateDebtor(AnalyticsOfStatements analytic);
 	void  updateCreditor(AnalyticsOfStatements analytic);
+	public void klasifikujAnalitiku(AnalyticsOfStatements analytics);
+
 
 }

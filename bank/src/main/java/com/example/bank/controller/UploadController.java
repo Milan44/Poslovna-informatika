@@ -31,6 +31,9 @@ import com.example.bank.service.StorageService;
 @CrossOrigin(origins = "*")
 @RequestMapping("/public/upload")
 public class UploadController {
+	
+	private String currentBank="555";
+	
 	@Autowired
 	StorageService storageService;
 	
@@ -50,9 +53,8 @@ public class UploadController {
 			Path path=storageService.store(file);
 			files.add(file.getOriginalFilename());
 			AnalyticsOfStatements analyticParsed=storageService.loadAnalyticOfStatements(path);
-			//deo za kreiranje dnevnog izvestaja
-			dailyAccountBalanceService.updateDebtor(analyticParsed);
-			service.save(analyticParsed);
+
+			dailyAccountBalanceService.klasifikujAnalitiku(analyticParsed);
 
 			message = "You successfully uploaded " + file.getOriginalFilename() + "!";
 			return ResponseEntity.status(HttpStatus.OK).body(message);			
@@ -80,4 +82,6 @@ public class UploadController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 	}	
+	
+
 }

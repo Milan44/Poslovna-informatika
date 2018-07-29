@@ -179,11 +179,16 @@ public class BankAccountController {
 //			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
 //					"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, dailyAccountBalance.getNewState(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
 		
+//		double suma=
 		AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
-				"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, dailyAccountBalance.getNewState(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+				"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, Math.abs(dailyAccountBalance.getNewState()), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
 
-			klasifikujAnalitiku(nova);
 			
+		dailyAccountBalanceService.klasifikujAnalitiku(nova);
+			origin.setMoney(0);
+			bankAccountService.save(origin);
+			trasfer.setMoney(nova.getDailyAccountBalance().getNewState());
+			bankAccountService.save(trasfer);
 			//dodaj pozivanje metode i setovanje money-a
 //			analyticService.save(nova);
 //			bankAccountService.deleteById(id);
@@ -193,48 +198,7 @@ public class BankAccountController {
 		return bankAccountService.getAll();
 	}
 	
-public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
-		
-		String currentBank = "555";
-		
-		
-		if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount() == null) { //uplata na racun
-			
-			dailyAccountBalanceService.updateCreditor(analytics);
-			
-//			service.save(analytics);
-			
-		} else if (analytics.getAccountCreditor() == null && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //isplata
-			
-			dailyAccountBalanceService.updateDebtor(analytics);
-			
-//			service.save(analytics);
-			
-		} else if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //unutarbankarski transfer
-			
-			
-			AnalyticsOfStatements analyticsCredit = analytics;
-			analyticsCredit.setDebtorAccount(null);
-			
-			AnalyticsOfStatements analyticsDebt = analytics;
-			analyticsDebt.setAccountCreditor(null);
-			
-			dailyAccountBalanceService.updateCreditor(analyticsCredit);
-			dailyAccountBalanceService.updateDebtor(analyticsDebt);
-			
-//			service.save(analyticsCredit);
-//			service.save(analyticsDebt);
-			
-		} else if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank) && !analytics.getAccountCreditor().substring(0,  3).equals(currentBank)) { //medjubankarski transfer
-			
 
-			dailyAccountBalanceService.updateDebtor(analytics);
-			
-//			service.save(analytics);
-			
-			//generateInterbankTransfer(analytics);
-		}
-	}
 
 
 

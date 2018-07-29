@@ -349,5 +349,27 @@ public class AnalyticsOfStatements {
 		this.itemTransfer = itemTransfer;
 		this.place = place;
 	}
-	
+	public AnalyticsOfStatements(AnalyticsOfStatements analyticOfStatements) {
+		super();
+		this.debtor_originator = analyticOfStatements.debtor_originator;
+		this.purposeOfPayment = analyticOfStatements.purposeOfPayment;
+		this.creditor_recipient = analyticOfStatements.creditor_recipient;
+		this.dateOfReceipt = analyticOfStatements.dateOfReceipt;
+		this.currencyDate = analyticOfStatements.currencyDate;
+		this.debtorAccount = analyticOfStatements.debtorAccount;
+		this.modelAssigments = analyticOfStatements.modelAssigments;
+		this.referenceNumberAssigments = analyticOfStatements.referenceNumberAssigments;
+		this.accountCreditor = analyticOfStatements.accountCreditor;
+		this.modelApproval = analyticOfStatements.modelApproval;
+		this.referenceNumberCreditor = analyticOfStatements.referenceNumberCreditor;
+		this.emergency = analyticOfStatements.emergency;
+		this.sum = analyticOfStatements.sum;
+		this.typeOfMistake = analyticOfStatements.typeOfMistake;
+		this.status = analyticOfStatements.status;
+		this.dailyAccountBalance = analyticOfStatements.dailyAccountBalance;
+		this.paymentType = analyticOfStatements.paymentType;
+		this.paymentCurrency = analyticOfStatements.paymentCurrency;
+		this.itemTransfer = analyticOfStatements.itemTransfer;
+		this.place = analyticOfStatements.place;
+	}
 }
