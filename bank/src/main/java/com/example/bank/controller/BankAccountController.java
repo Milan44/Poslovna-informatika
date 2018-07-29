@@ -130,6 +130,21 @@ public class BankAccountController {
 		
 	}
 	
+	
+	@RequestMapping(
+			value = "/searchBankAccount",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<BankAccount> searchBankAccount(@RequestBody BankAccountDTO account) {
+		
+		//System.out.println("POGODIO PRETRAGU.");
+		//System.out.println(account.getAccountNumber());
+		
+		return bankAccountService.searchBankAccounts(account.getAccountNumber(),account.getMoney(),
+				account.getClientID(),account.getBankID(),account.getCurrencyID());
+	}
+	
 	@RequestMapping(
 			value = "/getClientAccounts/{id}/{account}",
 			method = RequestMethod.GET, 

@@ -39,5 +39,10 @@ public class BankServiceImpl implements BankService{
 	public Bank findOne(Long id) {
 		return (Bank)bankRepository.findById(id).get();
 	}
+
+	@Override
+	public List<Bank> searchBanks(String name, String bankCode, String pib, String address) {
+		return bankRepository.searchBanks(name, bankCode, pib, address);
+	}
 }
 

@@ -43,6 +43,13 @@ export class ClientService {
       JSON.stringify(clientDTO), { headers : headers }).map((data : Response) => data.json());
   }
 
+  searchClient(clientDTO : any){
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/public/clients/searchClient', 
+      JSON.stringify(clientDTO), { headers : headers }).map((data : Response) => data.json());
+  }
+
   updateClient(client : any) {
 
     const headers = new Headers();

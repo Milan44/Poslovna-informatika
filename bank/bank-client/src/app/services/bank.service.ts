@@ -33,4 +33,11 @@ export class BankService {
   
   }
 
+  searchBanks(bankParams: any){
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/public/banks/searchBanks', 
+      JSON.stringify(bankParams), { headers : headers }).map((data : Response) => data.json());
+  }
+
 }

@@ -35,7 +35,8 @@ import { CountryService } from './services/country.service';
 import { UploadFileService } from './services/upload.service';
 import { UploadComponent } from './components/upload/upload.component'
 import { FormUploadComponent } from './components/form-upload/form-upload.component';
-import { DetailUploadComponent } from './components/detail-upload/detail-upload.component'
+import { DetailUploadComponent } from './components/detail-upload/detail-upload.component';
+
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { DetailUploadComponent } from './components/detail-upload/detail-upload.
     LoginComponent,
     UploadComponent,
     FormUploadComponent,
-    DetailUploadComponent
+    DetailUploadComponent,
   ],
   imports: [
     BrowserAnimationsModule,
