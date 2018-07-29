@@ -146,8 +146,8 @@ public class AnalyticsController {
 			    	
 			    	
 			    	klasifikujAnalitiku(analyticParsed);
-			    	service.save(analyticParsed);
-//			    	//updateDailyAccountBalance(analyticParsed);
+//			    	service.save(analyticParsed);
+//			    	updateDailyAccountBalance(analyticParsed);
 				} catch (JAXBException e) {					 
 					e.printStackTrace();
 				}

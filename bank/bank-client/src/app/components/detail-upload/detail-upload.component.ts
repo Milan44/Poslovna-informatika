@@ -8,10 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DetailUploadComponent implements OnInit {
 
   @Input() fileUpload: string;
-
+  public fileUploadName: string;
   constructor() { }
 
   ngOnInit() {
+    let splitedString = this.fileUpload.split("/");
+    this.fileUploadName = splitedString[splitedString.length - 1];
+    console.log(this.fileUploadName);
   }
 
 }

@@ -101,13 +101,16 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public void updateDebtor(AnalyticsOfStatements analytic) {
 		//uvek je nalog za placanje pa se uzima debitorov nalog
 		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getDebtorAccount());
-		DailyAccountBalance result = findByAccountNumberAndDate(bankAccount, analytic.getDateOfReceipt());
+		DailyAccountBalance result = findAccountStateAt(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
-//		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
-		result.getAnalyticsOfStatements().add(analytic);
+//		result.getAnalyticsOfStatements().add(analytic);
+		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
+			result.setNewState(result.getPreviousState()-analytic.getSum());
+		}else {
+			result.setNewState(result.getNewState()-analytic.getSum());
+		}
 		result.setTrafficToTheBurden(result.getTrafficToTheBurden()+analytic.getSum());
-		result.setNewState(result.getNewState()-analytic.getSum());
 		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
@@ -120,11 +123,11 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public void updateCreditor(AnalyticsOfStatements analytic) {
 		//uvek je nalog za placanje pa se uzima debitorov nalog
 		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getAccountCreditor());
-		DailyAccountBalance result = findByAccountNumberAndDate(bankAccount, analytic.getDateOfReceipt());
+		DailyAccountBalance result = findAccountStateAt(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
 //		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
-		result.getAnalyticsOfStatements().add(analytic);
+//		result.getAnalyticsOfStatements().add(analytic);
 		result.setTrafficToBenefit(result.getTrafficToBenefit()+analytic.getSum());
 		result.setNewState(result.getNewState()+analytic.getSum());
 		analytic.setDailyAccountBalance(result);
@@ -248,7 +251,9 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public List<DailyAccountBalance> findBalances(BankAccount account, java.util.Date start,
 			java.util.Date end) {
 		// TODO Auto-generated method stub
-		return repository.findBalances(account.getAccountNumber(), start, end);
+		Date dateStartSql= new Date(start.getTime());
+		Date dateEndSql= new Date(end.getTime());
+		return repository.findBalances(account.getAccountNumber(), dateStartSql, dateEndSql);
 	}
 
 }
