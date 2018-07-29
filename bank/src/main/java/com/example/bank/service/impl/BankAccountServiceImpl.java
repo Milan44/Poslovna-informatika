@@ -104,6 +104,12 @@ public class BankAccountServiceImpl implements BankAccountService{
 		return bankAccountRepository.findAccountsByClientIDandBankID(clientID, bankID);
 	}
 
+	@Override
+	public List<BankAccount> searchBankAccounts(String accountNumber, double money, Long clientID, Long bankId,
+			Long currencyID) {		
+		return bankAccountRepository.searchBankAccountr(clientID, bankId, accountNumber, money, currencyID);
+	}
+
 
 
 

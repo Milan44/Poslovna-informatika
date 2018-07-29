@@ -31,5 +31,6 @@ public interface BankAccountService {
 	
 	BankAccount findByAccNumber(String number);
 
+	List<BankAccount> searchBankAccounts(String accountNumber, double money, Long clientID, Long bankId, Long currencyID);
 
 }

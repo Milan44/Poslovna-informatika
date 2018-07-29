@@ -20,7 +20,7 @@
                 
                   <table class="table">
                       <thead>
-                          <tr>
+                          <tr id="bankAccHead">
           
                               <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
                               <th style="width: 30%; text-align:center;vertical-align:middle; visibility: hidden;" >ID</th>
@@ -31,7 +31,7 @@
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Client</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Bank</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Currency</th>
-                              <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                              <!-- <th style="width: 20%; text-align:center;vertical-align:middle" ></th> -->
                               
       
                           </tr>
@@ -40,7 +40,7 @@
                           <tr class="active" *ngFor="let account of bankAccounts; let i = index">
       
                                   <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
-                                  <td style = "text-align:center;vertical-align:middle" >{{account.id}}</td>
+                                  <td style = "text-align:center;vertical-align:middle; visibility: hidden;" >{{account.id}}</td>
                                   <td style = "text-align:center;vertical-align:middle" >{{account.accountNumber}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.dateOfOpening}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.valid}}</td>
@@ -65,6 +65,8 @@
                       </tbody>
                   </table>
                   <button id="addBankAccount"  (click) = "openAddBankAccountModal(addBankAccountModal)" type="button" class="btn btn-primary  center" >Register account</button>
+                  <button (click) = "openSearchBankAccountModal(addBankAccountModal)" type="button" class="btn btn-primary center">Search</button>
+                  <button (click) = "resetSearchBankAccount()" type="button" class="btn btn-primary center">Reset</button>
               </ng-template>
             </ngb-tab>
       
@@ -74,23 +76,23 @@
                 
                   <table class="table">
                       <thead>
-                          <tr>
+                          <tr id="clientsHead">
           
                               <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >ID</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle; visibility: hidden;" >ID</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Address</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Address for statements</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >email</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >email statements</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >phone</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >fax</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >jmbg</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >Email</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >Email Statements</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >Phone</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >Fax</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >JMBG</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Type of client</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >pib</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >residence</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >PIB</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle" >Residence</th>
       
-                              <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                              <!-- <th style="width: 20%; text-align:center;vertical-align:middle" ></th> -->
                               
       
                           </tr>
@@ -99,7 +101,7 @@
                           <tr class="active" *ngFor="let client of clients; let i = index">
       
                                   <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
-                                  <td style = "text-align:center;vertical-align:middle" >{{client.id}}</td>
+                                  <td style = "text-align:center;vertical-align:middle; visibility: hidden;" >{{client.id}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{client.name}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{client.address}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{client.addressForStatements}}</td>
@@ -115,7 +117,7 @@
                                     <button id="updateClient"  (click) = "openUpdateClientModal(updateClientModal,client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
                                   <!-- </td>
                                   <td style = "text-align:center;vertical-align:middle">  -->
-                                     <button id="deleteClient"  (click) = "deleteClient(client.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
+                                     <button id="deleteClient"  (click) = "deleteClient(client.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>                                     
                                   </td> 
                                                    
                           </tr>
@@ -124,6 +126,8 @@
                       </tbody>
                   </table>
                   <button id="addClient"  (click) = "openAddClientModal(addClientModal)" type="button" class="btn btn-primary  center" >Register client</button>
+                  <button id="openSarchClientsModal" (click) = "openSarchClientsModal(addClientModal)" type="button" class="btn btn-primary center">Search</button>
+                  <button (click) = "resetSarchClientsModal()" type="button" class="btn btn-primary center">Reset</button>
               </ng-template>
             </ngb-tab>
       
@@ -140,7 +144,7 @@
                           <tr>
           
                               <th style="width: 20%; text-align:center;vertical-align:middle" >#</th>
-                              <th style="width: 30%; text-align:center;vertical-align:middle" >Id</th>
+                              <th style="width: 30%; text-align:center;vertical-align:middle; visibility: hidden;" >Id</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Purpose</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor</th>
@@ -154,7 +158,7 @@
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Sum</th>
                               <th style="width: 30%; text-align:center;vertical-align:middle" >Payment currency</th>
                               
-                              <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                              <!-- <th style="width: 20%; text-align:center;vertical-align:middle" ></th> -->
                               
       
                           </tr>
@@ -163,7 +167,7 @@
                           <tr class="active" *ngFor="let clearingItem of clearingItems; let i = index">
       
                                   <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td>
-                                  <td style = "text-align:center;vertical-align:middle" >{{clearingItem.itemNumber}}</td> 
+                                  <td style = "text-align:center;vertical-align:middle; visibility: hidden;" >{{clearingItem.itemNumber}}</td> 
                                   <td style = "text-align:center;vertical-align:middle">{{clearingItem.debtor_originator}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{clearingItem.purposeOfPayment}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{clearingItem.creditor_recipient}}</td>
@@ -197,12 +201,13 @@
                   <table class="table">
    
                     <thead>
-                        <tr>
+                        <tr id="bankHead">
                             <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
                             <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
                             <th style="width: 30%; text-align:center;vertical-align:middle" >Bank Code</th>
                             <th style="width: 30%; text-align:center;vertical-align:middle" >PIB</th>
-                            <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Address</th>
+                            <!--     -->
                         </tr>
                     </thead>
                     <tbody>
@@ -214,86 +219,28 @@
                             <td style = "text-align:center;vertical-align:middle" >{{bank.name}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{bank.bankCode}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{bank.pib}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{bank.address}}</td>
 
-                            <td style = "text-align:center;vertical-align:middle"> 
+                            <!-- <td style = "text-align:center;vertical-align:middle"> 
                               <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
-                            </td>                                                           
+                            </td>                                                            -->
                             <td>
                               <button id="exportPDF" (click) = "exportAccount(bank)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                             </td>
-                            <td style = "text-align:center;vertical-align:middle"> 
+                            <!-- <td style = "text-align:center;vertical-align:middle"> 
                               <button id="suspendAccount"  (click) = "suspend(account)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
-                            </td>
+                            </td> -->
                                              
                     </tr>
   
 
                 </tbody>
             </table>
-            <button id="addBankAccount"  (click) = "openAddBankAccountModal(addBankAccountModal)" type="button" class="btn btn-primary  center" >Register account</button>
+            <!-- <button id="addBankAccount"  (click) = "openAddBankAccountModal(addBankAccountModal)" type="button" class="btn btn-primary  center" >Register account</button> -->
+            <button (click) = "openSearchBankModal(searchBankModal)" type="button" class="btn btn-primary center">Search</button>
+            <button (click) = "resetSearchBank()" type="button" class="btn btn-primary center">Reset</button>
         </ng-template>
-      </ngb-tab>
-
-
-      <ngb-tab title="Clients">
-        <ng-template ngbTabContent>
-          
-            <table class="table">
-                <thead>
-                    <tr>
-    
-                        <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >ID</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >Address</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >Address for statements</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >email</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >email statements</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >phone</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >fax</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >jmbg</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >Type of client</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >pib</th>
-                        <th style="width: 30%; text-align:center;vertical-align:middle" >residence</th>
-
-                        <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
-                        
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="active" *ngFor="let client of clients; let i = index">
-
-                            <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
-                            <td style = "text-align:center;vertical-align:middle" >{{client.id}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.name}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.address}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.addressForStatements}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.email}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.emailStatements}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.phone}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.fax}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.jmbg}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.typeOfClient}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.pib}}</td>
-                            <td style = "text-align:center;vertical-align:middle">{{client.residence.name}}</td>
-                            <td style = "text-align:center;vertical-align:middle"> 
-                              <button id="updateClient"  (click) = "openUpdateClientModal(updateClientModal,client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
-                            <!-- </td>
-                            <td style = "text-align:center;vertical-align:middle">  -->
-                               <button id="deleteClient"  (click) = "deleteClient(client.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
-                            </td> 
-                                             
-                    </tr>
-                   
-
-                </tbody>
-            </table>
-            <button id="addClient"  (click) = "openAddClientModal(addClientModal)" type="button" class="btn btn-primary  center" >Register client</button>
-        </ng-template>
-      </ngb-tab>
-
-
+      </ngb-tab>      
 
 <!-- 
       <ngb-tab title="InterBankTransfers">
@@ -353,47 +300,7 @@
             <button id="exportClearing"  type="button" class="btn btn-primary  center" >Export</button>
         </ng-template>
       </ngb-tab> -->
-
-
-
-      <ngb-tab title="Banks">
-        <ng-template ngbTabContent>
-          
-            <table class="table">
-              <thead>
-                  <tr>
-                      <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
-                      <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
-                      <th style="width: 30%; text-align:center;vertical-align:middle" >Bank Code</th>
-                      <th style="width: 30%; text-align:center;vertical-align:middle" >PIB</th>
-                      <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  
-                  <tr class="active" *ngFor="let bank of banks; let i = index">
-
-                      <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
-                      <td style = "text-align:center;vertical-align:middle" >{{bank.name}}</td>
-                      <td style = "text-align:center;vertical-align:middle">{{bank.bankCode}}</td>
-                      <td style = "text-align:center;vertical-align:middle">{{bank.pib}}</td>
-                    
-                      <td style = "text-align:center;vertical-align:middle"> 
-
-                        <!-- <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
-                      </td>                                                           
-              </tr> -->
-
-                        <button id="exportPDF" (click) = "exportAccount(bank)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
-                      </td>
-                                                             
-                  </tr>
-
-
-              </tbody>
-            </table>
-        </ng-template>
-      </ngb-tab>
+      
 
 
 
@@ -449,7 +356,7 @@
       <ng-template #addBankAccountModal let-c="close" let-d="dismiss">
           
         <div class="modal-header">
-            <h4 class="modal-title">Add bank account</h4>
+            <h4 class="modal-title">{{action}} bank account</h4>
           </div>
           <div class="modal-body">
             
@@ -466,15 +373,15 @@
             </div>
       
             <div class="form-group">
-              <label for="broj_racuna">Date of opening: </label>
+              <label *ngIf="actionId==0" for="broj_racuna">Date of opening: </label>
               <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" disabled
+                <input *ngIf="actionId==0" class="form-control" placeholder="yyyy-mm-dd" disabled
                         name="datePicker" [(ngModel)]="dateOfOpening" ngbDatepicker #dt="ngbDatepicker" required>
                 <!-- <div class="input-group-append">
                   <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
                     <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                   </button>
-                </div> -->
+                </div> -->                
               </div>
             </div>
       
@@ -508,7 +415,8 @@
       
               <div class="form-group">
       
-                  <button id="submitBankAccount" (click) = "addBankAccount()" type="button" class="btn btn-primary  center" > Submit </button>
+                  <button id="submitBankAccount" *ngIf="actionId==0" (click) = "addBankAccount()" type="button" class="btn btn-primary  center" > Submit </button>
+                  <button *ngIf="actionId==1" (click) = "searchBankAccount()" type="button" class="btn btn-primary  center" > Search </button>
       
               </div>
           </div>
@@ -518,7 +426,7 @@
       
       <ng-template #addClientModal let-c="close" let-d="dismiss">
           <div class="modal-header">
-              <h4 class="modal-title">Add client</h4>
+              <h4 class="modal-title">{{action}} client</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
@@ -557,10 +465,10 @@
                   <span id="error_ptt_broj" class="text-danger"></span>
               </div>
       
-              <div class="form-group">
+              <div *ngIf="actionId==0" class="form-group">
                       <div class="form-check">
                           <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" [(ngModel)]="client_emailStatements" name="emailStatements"> Email statements
+                              <input  class="form-check-input" type="checkbox" [(ngModel)]="client_emailStatements" name="emailStatements"> Email statements
                           </label>
                       </div>
               </div>
@@ -596,7 +504,8 @@
               </div>
                 <div class="form-group">
         
-                    <button id="submitAddClient" (click) = "addClient()" type="button" class="btn btn-primary  center" > Submit </button>
+                    <button *ngIf="actionId==0" id="submitAddClient" (click) = "addClient()" type="button" class="btn btn-primary  center" > Submit </button>
+                    <button *ngIf="actionId==1" (click) = "searchClient()" type="button" class="btn btn-primary  center" > Search </button>
         
                 </div>
             </div>
@@ -819,5 +728,47 @@
           
                   </div>
           
+                </ng-template>             
+            
+              <ng-template #searchBankModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4>Search Bank</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <div class="input-group-append">
+                            <input class="form-control" type="text" [(ngModel)]="bank_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Bank Code:</label>
+                        <div class="input-group-append">
+                            <input class="form-control" type="text" [(ngModel)]="bank_code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>PIB:</label>
+                        <div class="input-group-append">
+                            <input class="form-control" type="text" [(ngModel)]="bank_pib"> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Adress:</label>
+                        <div class="input-group-append">
+                            <input class="form-control" type="text" [(ngModel)]="bank_address"> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button (click) = "searchBank()" type="button" class="btn btn-primary  center" > Search </button>
+                    </div>
+                </div>                
               </ng-template>
+
+              
+
+              
+
+              
+              
 

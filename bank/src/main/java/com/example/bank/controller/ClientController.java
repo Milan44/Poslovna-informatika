@@ -81,6 +81,17 @@ public class ClientController {
 		
 	}
 	
+	@RequestMapping(
+			value = "/searchClient",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<Client> searchClient(@RequestBody ClientDTO client) {
+		
+		return clientService.searchClients(client.getAddress(),client.getAddressForStatements(),client.getEmail(),client.getFax(),
+				client.getJmbg(), client.getName(), client.getPhone(), client.getPib(), client.getTypeOfClient(), client.getResidenceID());
+	}
+	
 	
 	@RequestMapping(
 			value = "/updateClient",

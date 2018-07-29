@@ -15,7 +15,10 @@ public interface ClientService {
 	
 	void deleteClient(Long id);
 	
-	Client getClientById(Long id);
+	Client getClientById(Long id);	
+
+	List<Client> searchClients(String address, String addressForStatements, String email, String fax, String jmbg,
+			String name, String phone, String pib, String typeOfClient, Long residence);
 	
 
 }

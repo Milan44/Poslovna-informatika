@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 
@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   private accountNumber : any;
   private money : any;
   private dateOfOpening : any;
+  private dateOfOpeningSearch: any;
   private selectedClient : any;
   private selectedBank : any;
   private selectedCurrency : any;
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
   private clearingItems : any[] = [];
 
-  private clientTypes = ["fizicko", "pravno"];
+  private clientTypes = ["fizicko lice", "pravno lice"];
 
   private client_id : any;
   private client_name : any;
@@ -78,6 +79,14 @@ export class HomeComponent implements OnInit {
   private endDate : any;
   private selectedBankAccount : any;
 
+  private bank_name: any;
+  private bank_code: any;
+  private bank_pib: any;
+  private bank_address: any;
+
+  private action: string;
+  private actionId: number;
+  private modalRef: NgbModalRef;
  
 
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
@@ -151,6 +160,8 @@ export class HomeComponent implements OnInit {
 
   openAddBankAccountModal(addBankAccountModal) {
 
+    this.action="Add";
+    this.actionId = 0;
     this.modalService.open(addBankAccountModal).result.then((result) => {
       
     }, (reason) => {
@@ -226,6 +237,9 @@ export class HomeComponent implements OnInit {
 
   openAddClientModal(addClientModal) {
 
+    this.action = "Add"
+    this.actionId = 0;
+
     this.modalService.open(addClientModal).result.then((result) => {
       
     }, (reason) => {
@@ -235,7 +249,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  addClient() {
+  addClient() {    
 
     this.clientService.registerClient(
       {name:this.client_name, address:this.client_address, phone:this.client_phone, fax:this.client_fax, email:this.client_email,
@@ -437,6 +451,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
   openExportXmlModal(exportXmlModal, account) {
 
     this.selectedBankAccount = account;
@@ -491,10 +506,86 @@ export class HomeComponent implements OnInit {
       }
 
     });
-
-
-
-
   }
 
+  openSearchBankAccountModal(modal){
+    this.action = "Search"
+    this.actionId = 1;
+    this.modalRef = this.modalService.open(modal);
+  }
+
+  searchBankAccount(){
+    this.modalRef.close();
+
+    this.bankAccountService.searchBankAccount({accountNumber:this.accountNumber, money: this.money,
+    clientID:this.selectedClient, bankID:this.selectedBank, currencyID:this.selectedCurrency}).subscribe(data => this.bankAccounts = data);
+
+    this.accountNumber = null;
+    this.money = null;   
+    this.selectedClient = null;
+    this.selectedBank = null;
+    this.selectedCurrency = null;
+
+  }
+  resetSearchBankAccount(){
+    this.getBankAccounts(); 
+  }
+
+  openSarchClientsModal(modal){
+    this.action = "Search"
+    this.actionId = 1;
+    this.modalRef = this.modalService.open(modal);
+  }
+
+  searchClient(){
+    this.modalRef.close();
+
+    this.clientService.searchClient(
+      {name:this.client_name, address:this.client_address, phone:this.client_phone, fax:this.client_fax, email:this.client_email,
+        addressForStatements:this.client_addressForStatements, emailStatements:this.client_emailStatements, jmbg:this.client_jmbg,
+        typeOfClient:this.client_typeOfClient, residenceID:this.client_residence, pib:this.client_pib}).subscribe(data=>{
+          this.clients = data;
+        });
+
+        this.client_id = null;
+        this.client_name = null;
+        this.client_address = null;
+        this.client_phone = null;
+        this.client_fax = null;
+        this.client_email = null;
+        this.client_addressForStatements = null;
+        this.client_emailStatements = false;
+        this.client_jmbg = null;
+        this.client_typeOfClient = null;
+        this.client_residence = null;
+        this.client_pib = null;
+  }
+
+  resetSarchClientsModal(){
+    this.getClients();
+  }
+
+  openSearchBankModal(modal){
+    this.action = "Search";
+    this.actionId = 1;
+    this.modalRef = this.modalService.open(modal);
+  }
+
+  searchBank(){
+
+    this.modalRef.close();
+
+    this.bankService.searchBanks({bankCode: this.bank_code, pib:this.bank_pib, name: this.bank_name, address: this.bank_address}).subscribe(data => {
+      this.banks = data;
+    });
+
+    this.bank_code = null;
+    this.bank_pib = null;
+    this.bank_address = null;
+    this.bank_name = null;
+  }
+
+  resetSearchBank(){
+    this.getBanks();
+  }
 }
