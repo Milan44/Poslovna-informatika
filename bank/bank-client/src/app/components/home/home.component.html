@@ -58,7 +58,7 @@
                                     <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                                   </td>
                                   <td style = "text-align:center;vertical-align:middle"> 
-                                    <button id="suspendAccount"  (click) = "suspend(account)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
+                                    <button id="suspendAccount"  (click) = "suspend(account, suspendAccountModal)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
                                   </td>
                                                    
                           </tr>
@@ -768,4 +768,32 @@
             </div>
         </div>                
       </ng-template>
+
+      <ng-template #suspendAccountModal let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4>Suspend account</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label>Select acccount to transfer the funds to:</label>
+                <div class="input-group-append" >
+                    <select id="accountSelect" class="form-control">
+                          <option *ngFor="let acc of clientBankAccounts">{{acc.accountNumber}}</option>
+                    </select> 
+                </div>
+            </div>
+            <div class="form_group">
+                <button (click) = "confirmSuspend()" type="button" class = "btn btn-primary  center">Confirm</button>
+            </div>
+          </div>
+      </ng-template>
+
+      <!-- <div class="form-group">
+        <label for="drzava">Type of client: </label>
+        <div class="input-group-append" >
+          <select [(ngModel)]="client_typeOfClient"  (change) = "selectTypeOfClient()" name="client_type" class="form-control">
+                <option *ngFor="let type of clientTypes" [value]="type">{{type}}</option>
+          </select> 
+        </div>
+    </div> -->
 

@@ -20,6 +20,7 @@ import { CountryService } from '../../services/country.service'
 import { AnalyticsService } from '../../services/analytics.service';
 
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
+import { SuspendAccountService} from '../../services/suspend-account.service';
 import { AnalyticsOfStatementsService } from '../../services/analytics-of-statements.service'
 
 
@@ -34,6 +35,9 @@ export class HomeComponent implements OnInit {
 
 
   private bankAccounts: any[] = [];
+  private clientBankAccounts: any[];
+  private accToSuspend: any;
+
   private clients: any[] = [];
   private banks: any[] = [];
   private places: any[] = [];
@@ -87,12 +91,12 @@ export class HomeComponent implements OnInit {
   private action: string;
   private actionId: number;
   private modalRef: NgbModalRef;
- 
+  
 
 
   constructor(private router: Router, private modalService: NgbModal, private bankAccountService: BankAccountService, private clientService: ClientService,
     private bankService: BankService, private currencyService: CurrencyService, private countryService: CountryService, private suspendDialog: MatDialog, private placeService: PlaceService,
-    private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService) { }
+    private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService, private suspendAccountService: SuspendAccountService) { }
 
 
 
@@ -113,6 +117,40 @@ export class HomeComponent implements OnInit {
     this.dateOfOpening = { year: yyyy, month: mm, day: dd };
     this.startDate = this.dateOfOpening;
     this.endDate = this.dateOfOpening;
+  }
+
+  getClientBankAcconunts(){
+   
+  }
+
+  suspend(account, suspendModal) {
+
+    // console.log(account);
+    // localStorage.setItem("client", account.client.id);
+    // localStorage.setItem("account", account.id);
+
+    // this.suspendDialogRef = this.suspendDialog.open(SuspendAccountComponent, {
+    //   height: '200px',
+    //   width: '400px',
+    // });
+    this.accToSuspend = account.id;
+
+    this.suspendAccountService.getClientAccounts(account.client.id, account.id).subscribe(data => {
+      this.clientBankAccounts = data;    
+      this.modalRef = this.modalService.open(suspendModal);
+    });
+  }
+
+  confirmSuspend(){
+    let selector = document.getElementById("accountSelect") as HTMLSelectElement;
+    let accountTransfer = selector.options[selector.selectedIndex].text;
+
+    console.log(accountTransfer);
+
+    this.suspendAccountService.suspendAccount(this.accToSuspend, accountTransfer).subscribe( data => {
+      console.log(data);
+      this.modalRef.close();
+    });
   }
 
   getBankAccounts() {
@@ -198,20 +236,6 @@ export class HomeComponent implements OnInit {
         alert("An error has occurred.");
       }
 
-    });
-  }
-
-
-
-  suspend(account) {
-
-    console.log(account);
-    localStorage.setItem("client", account.client.id);
-    localStorage.setItem("account", account.id);
-
-    this.suspendDialogRef = this.suspendDialog.open(SuspendAccountComponent, {
-      height: '200px',
-      width: '400px',
     });
   }
 
