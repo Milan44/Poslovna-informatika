@@ -139,18 +139,18 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 
 		//prva tri broja oznacavaju banku 
 //		result.getAnalyticsOfStatements().add(analytic);
-		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
-			result.setNewState(result.getPreviousState()-analytic.getSum());
-		}else {
+//		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
+//			result.setNewState(result.getPreviousState()-analytic.getSum());
+//		}else {
 			result.setNewState(result.getNewState()-analytic.getSum());
-		}
+//		}
 		result.setTrafficToTheBurden(result.getTrafficToTheBurden()+analytic.getSum());
 		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
 		System.out.println("result:"+result);
-		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
-		System.out.println("result2:"+result2);
+//		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
+//		System.out.println("result2:"+result2);
 //		analytic.setDailyAccountBalance(result2);
 	}
 	@Override
@@ -163,13 +163,17 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 //		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
 //		result.getAnalyticsOfStatements().add(analytic);
 		result.setTrafficToBenefit(result.getTrafficToBenefit()+analytic.getSum());
-		result.setNewState(result.getNewState()+analytic.getSum());
+//		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
+//			result.setNewState(result.getPreviousState()+analytic.getSum());
+//		}else {
+			result.setNewState(result.getNewState()+analytic.getSum());
+//		}
 		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
 		System.out.println("result:"+result);
-		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
-		System.out.println("result2:"+result2);
+//		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
+//		System.out.println("result2:"+result2);
 //		analytic.setDailyAccountBalance(result2);
 	}
 	
@@ -257,7 +261,10 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 				result = new DailyAccountBalance();
 				result.setLegalEntityAccount(creditorAccount);
 				result.setPreviousState(max.getNewState());
-				result.setNewState((float) 0.0);
+				//promenjeno 
+//				result.setNewState((float) 0.0);
+				result.setNewState((float) result.getPreviousState());
+				//
 				result.setTrafficToBenefit((float) 0.0);
 				result.setTrafficToTheBurden((float) 0.0);
 				result.setTrafficDate(date);

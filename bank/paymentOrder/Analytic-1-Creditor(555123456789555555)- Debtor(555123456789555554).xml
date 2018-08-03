@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <analyticsOfStatements>
     <itemNumber>1</itemNumber>
-    <debtor_originator>Cubric i minimum pet sinova,Inc</debtor_originator>
+    <debtor_originator>CubricInc</debtor_originator>
     <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
     <creditor_recipient>Naovis</creditor_recipient>
     <dateOfReceipt>2018-07-10</dateOfReceipt>
     <currencyDate>2018-07-10</currencyDate>
-    <debtorAccount>555123456789555555</debtorAccount>
+    <debtorAccount>555123456789555554</debtorAccount>
     <modelAssigments>97</modelAssigments>
-    <accountCreditor>4</accountCreditor>
+    <accountCreditor>555123456789555555</accountCreditor>
     <emergency>false</emergency>
     <sum>8000.0</sum>
     <paymentCurrency>
