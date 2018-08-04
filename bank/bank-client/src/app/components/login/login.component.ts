@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   
         if (data == 'SUCCESS') {
   
-          this.router.navigateByUrl('/getAnalytics');
+          this.router.navigateByUrl('/home');
           this.wrongEmail = false;
           this.wrongPassword = false;
   

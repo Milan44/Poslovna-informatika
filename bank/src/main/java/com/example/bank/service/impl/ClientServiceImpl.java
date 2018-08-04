@@ -66,4 +66,13 @@ public class ClientServiceImpl implements ClientService{
 		return clientRepository.findOneById(id);
 	}
 
+	@Override
+	public List<Client> searchClients(String address, String addressForStatements, String email, String fax,
+			String jmbg, String name, String phone, String pib, String typeOfClient, Long residence) {
+		return clientRepository.searchClients(address, addressForStatements, email, fax, jmbg, 
+				name, phone, pib, typeOfClient, residence);
+	}
+
+	
+
 }

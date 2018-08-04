@@ -53,4 +53,22 @@ export class BankAccountService {
 
   }
 
+  searchBankAccount(bankAccountDTO : any) {
+    console.log("SALJE NA PRETRAGU::" + bankAccountDTO);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/public/bankAccounts/searchBankAccount', 
+      JSON.stringify(bankAccountDTO), { headers : headers }).map((data : Response) => data.json());
+  }
+
+  exportBankAccountXml(startDate:any, endDate:any, bankAccount: any) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/dailyAccountBalance/xml/'+
+    startDate +"/"+ endDate, 
+      JSON.stringify(bankAccount), { headers : headers });
+      // .map((data : Response) => data.json()
+
+  }
+
 }

@@ -24,7 +24,6 @@ import {CurrencyService} from '../app/services/currency.service'
 
 import { SuspendAccountService } from './services/suspend-account.service';
 import { LoginComponent } from './components/login/login.component'
-import { AnalyticsComponent } from './components/analytics/analytics.component'
 
 
 import { UserService } from './services/user.service';
@@ -32,8 +31,13 @@ import { UserService } from './services/user.service';
 import {AnalyticsOfStatementsService} from './services/analytics-of-statements.service';
 import { AnalyticsService } from './services/analytics.service'
 import { PlaceService } from './services/place.service'
-import { CountryService } from './services/country.service'
 import { ClearingService } from './services/clearing.service'
+import { CountryService } from './services/country.service';
+import { UploadFileService } from './services/upload.service';
+import { UploadComponent } from './components/upload/upload.component'
+import { FormUploadComponent } from './components/form-upload/form-upload.component';
+import { DetailUploadComponent } from './components/detail-upload/detail-upload.component';
+
 
 
 @NgModule({
@@ -42,7 +46,9 @@ import { ClearingService } from './services/clearing.service'
     HomeComponent,
     SuspendAccountComponent,
     LoginComponent,
-    AnalyticsComponent
+    UploadComponent,
+    FormUploadComponent,
+    DetailUploadComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -56,9 +62,7 @@ import { ClearingService } from './services/clearing.service'
   ],
 
 
-  providers: [BankAccountService, ClearingService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService, PlaceService,CountryService],
-
-
+  providers: [BankAccountService, ClearingService, , UploadFileService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService, PlaceService,CountryService],
   entryComponents: [SuspendAccountComponent],
   bootstrap: [AppComponent]
 })

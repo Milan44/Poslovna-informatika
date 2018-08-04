@@ -37,11 +37,14 @@ import com.example.bank.service.DailyAccountBalanceService;
 import com.example.bank.service.PaymentTypeService;
 import com.example.bank.service.PlaceService;
 
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+//import net.sf.jasperreports.engine.JREmptyDataSource;
+//import net.sf.jasperreports.engine.JasperExportManager;
+//import net.sf.jasperreports.engine.JasperFillManager;
+//import net.sf.jasperreports.engine.JasperPrint;
+//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.example.bank.service.ClientService;
 import com.example.bank.service.CurrencyService;
@@ -127,6 +130,21 @@ public class BankAccountController {
 		
 	}
 	
+	
+	@RequestMapping(
+			value = "/searchBankAccount",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<BankAccount> searchBankAccount(@RequestBody BankAccountDTO account) {
+		
+		//System.out.println("POGODIO PRETRAGU.");
+		//System.out.println(account.getAccountNumber());
+		
+		return bankAccountService.searchBankAccounts(account.getAccountNumber(),account.getMoney(),
+				account.getClientID(),account.getBankID(),account.getCurrencyID());
+	}
+	
 	@RequestMapping(
 			value = "/getClientAccounts/{id}/{account}",
 			method = RequestMethod.GET, 
@@ -142,7 +160,8 @@ public class BankAccountController {
 		
 		System.out.println("TRANSFER NUMBER JE ::::: " + transferAccount);
 		
-		double trasferedMoney = bankAccountService.findById(id).getMoney();
+//		double trasferedMoney = bankAccountService.findById(id).getMoney();
+		
 		BankAccount trasfer = bankAccountService.findByAccNumber(transferAccount);
 		
 		
@@ -154,7 +173,13 @@ public class BankAccountController {
 		boolean emergencyBool = false;
 		if(trasfer.getMoney() > 250000.0) emergencyBool = true;
 		
-		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(origin, currentDate);
+//		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(origin, currentDate);
+		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findAccountStateAt(origin, currentDate);
+		
+		//ne sme biti negativno stanje  treba i na frontu
+		if(dailyAccountBalance.getNewState() < 0) {
+			return bankAccountService.getAll();
+		}
 		PaymentType pt = paymentTypeService.findById(2l);
 		
 //		
@@ -176,11 +201,16 @@ public class BankAccountController {
 //			AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
 //					"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, dailyAccountBalance.getNewState(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
 		
+//		double suma=
 		AnalyticsOfStatements nova = new AnalyticsOfStatements(origin.getClient().getName(), "Tansfer", trasfer.getClient().getName(), currentDate, currentDate, origin.getAccountNumber(), 97,
-				"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, dailyAccountBalance.getNewState(), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
+				"555123456789555553", trasfer.getAccountNumber(), 15, "4654-6216", emergencyBool, Math.abs(dailyAccountBalance.getNewState()), 1, "0", dailyAccountBalance, pt, currencyService.getCurrencyById(1l), null, placeService.findById(1l));
 
-			klasifikujAnalitiku(nova);
 			
+		dailyAccountBalanceService.klasifikujAnalitiku(nova);
+			origin.setMoney(0);
+			bankAccountService.save(origin);
+			trasfer.setMoney(nova.getDailyAccountBalance().getNewState());
+			bankAccountService.save(trasfer);
 			//dodaj pozivanje metode i setovanje money-a
 //			analyticService.save(nova);
 //			bankAccountService.deleteById(id);
@@ -190,48 +220,7 @@ public class BankAccountController {
 		return bankAccountService.getAll();
 	}
 	
-public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
-		
-		String currentBank = "555";
-		
-		
-		if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount() == null) { //uplata na racun
-			
-			dailyAccountBalanceService.updateCreditor(analytics);
-			
-//			service.save(analytics);
-			
-		} else if (analytics.getAccountCreditor() == null && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //isplata
-			
-			dailyAccountBalanceService.updateDebtor(analytics);
-			
-//			service.save(analytics);
-			
-		} else if (analytics.getAccountCreditor().substring(0,  3).equals(currentBank) && analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) { //unutarbankarski transfer
-			
-			
-			AnalyticsOfStatements analyticsCredit = analytics;
-			analyticsCredit.setDebtorAccount(null);
-			
-			AnalyticsOfStatements analyticsDebt = analytics;
-			analyticsDebt.setAccountCreditor(null);
-			
-			dailyAccountBalanceService.updateCreditor(analyticsCredit);
-			dailyAccountBalanceService.updateDebtor(analyticsDebt);
-			
-//			service.save(analyticsCredit);
-//			service.save(analyticsDebt);
-			
-		} else if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank) && !analytics.getAccountCreditor().substring(0,  3).equals(currentBank)) { //medjubankarski transfer
-			
 
-			dailyAccountBalanceService.updateDebtor(analytics);
-			
-//			service.save(analytics);
-			
-			//generateInterbankTransfer(analytics);
-		}
-	}
 
 
 
@@ -271,10 +260,10 @@ public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 		parameters.put("BankName", bank.getName());
 		parameters.put("Date", date);
 		
-		JasperPrint jasperPrint = JasperFillManager.fillReport("excerptBank.jasper", parameters, new JREmptyDataSource());
+	//	JasperPrint jasperPrint = JasperFillManager.fillReport("excerptBank.jasper", parameters, new JREmptyDataSource());
 	    File file = new File("../bank/accounts.pdf");
 	    OutputStream outputStream = new FileOutputStream(file);
-	    JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); 
+	   // JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); 
 	
 	}
 
