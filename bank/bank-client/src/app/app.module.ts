@@ -33,6 +33,7 @@ import {AnalyticsOfStatementsService} from './services/analytics-of-statements.s
 import { AnalyticsService } from './services/analytics.service'
 import { PlaceService } from './services/place.service'
 import { CountryService } from './services/country.service'
+import { ClearingService } from './services/clearing.service'
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import { CountryService } from './services/country.service'
   ],
 
 
-  providers: [BankAccountService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService, PlaceService,CountryService],
+  providers: [BankAccountService, ClearingService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService, PlaceService,CountryService],
 
 
   entryComponents: [SuspendAccountComponent],

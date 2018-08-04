@@ -13,6 +13,7 @@ import {BankAccountService} from '../../services/bank-account.service'
 import {ClientService} from '../../services/client.service'
 import {BankService} from '../../services/bank.service'
 import {CurrencyService} from '../../services/currency.service'
+import { ClearingService } from '../../services/clearing.service'
 
 import {PlaceService} from '../../services/place.service'
 import{CountryService} from '../../services/country.service'
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit {
   private clients : any[] = [];
   private banks : any[] = [];
   private places : any[] = [];
-
+  private clearings : any[] = [];
   private currencies : any[] = [];
   private countries : any[] = [];
 
@@ -78,7 +79,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
               private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService,
-              private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService) { }
+              private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService,
+              private clearingService : ClearingService) { }
 
     
 
@@ -91,7 +93,7 @@ export class HomeComponent implements OnInit {
     this.getCurrencies();
     this.getPlaces();
     this.getCountries();
-
+    this.getClearings();
     const today = new Date();
     const dd = today.getDate();
     const mm = today.getMonth() + 1; // January is 0!
@@ -121,6 +123,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getClearings() {
+    this.clearingService.getClearings().subscribe(data=> {   
+      this.clearings = data;
+      console.log(this.clearings);
+    });
+  }
 
   getCurrencies() {
     this.currencyService.getCurrencies().subscribe(data=> {   
@@ -431,6 +439,16 @@ export class HomeComponent implements OnInit {
       console.log(data);
 
     });
+  }
+
+  exportClearing(i) {
+
+    this.clearingService.exportClearing(JSON.stringify(this.clearings[i])).subscribe(data => {
+      
+      
+
+    });
+
   }
 
 }
