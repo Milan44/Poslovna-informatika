@@ -25,7 +25,7 @@ import { SuspendAccountComponent } from '../../components/suspend-account/suspen
 import { SuspendAccountService} from '../../services/suspend-account.service';
 import { AnalyticsOfStatementsService } from '../../services/analytics-of-statements.service'
 
-
+import { RtgsService } from '../../services/rtgs.service';
 
 
 @Component({
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   private countries : any[] = [];
   private clientBankAccounts: any[];
   private accToSuspend: any;
-
+  private rtgsList : any[] = [];
 
   private accountNumber : any;
   private money : any;
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
   constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
               private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService,
               private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService, private suspendAccountService: SuspendAccountService,
-              private clearingService : ClearingService) { }
+              private clearingService : ClearingService, private rtgsService : RtgsService) { }
  
   
 
@@ -113,6 +113,7 @@ export class HomeComponent implements OnInit {
     this.getPlaces();
     this.getCountries();
     this.getClearings();
+    this.getRtgs();
     const today = new Date();
     const dd = today.getDate();
     const mm = today.getMonth() + 1; // January is 0!
@@ -206,6 +207,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getRtgs() {
+    this.rtgsService.getRtgs().subscribe(data => {
+      this.rtgsList = data;
+      console.log(this.rtgsList);
+    });
+  }
 
   openAddBankAccountModal(addBankAccountModal) {
 
@@ -635,5 +642,12 @@ export class HomeComponent implements OnInit {
 
   resetSearchBank(){
     this.getBanks();
+  }
+
+  getRTGSList() {
+
+    this.rtgsList = [];
+    this.getRtgs();
+    
   }
 }

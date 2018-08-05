@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<analyticsOfStatements>
+    <itemNumber>3</itemNumber>
+    <debtor_originator>Fakultet tehnickih nauka</debtor_originator>
+    <purposeOfPayment>Novcana naknada za iznajmnjene prostorije</purposeOfPayment>
+    <creditor_recipient>NIS</creditor_recipient>
+    <dateOfReceipt>2018-08-05</dateOfReceipt>
+    <currencyDate>2018-08-05</currencyDate>
+    <debtorAccount>555356776543122145</debtorAccount>
+    <modelAssigments>97</modelAssigments>
+    <referenceNumberAssigments>547-789-587</referenceNumberAssigments>
+    <accountCreditor>552787843787856669</accountCreditor>
+    <modelApproval>15</modelApproval>
+    <referenceNumberCreditor>4610-1765</referenceNumberCreditor>
+    <emergency>true</emergency>
+    <sum>425000.0</sum>
+    <paymentCurrency>
+        <id>1</id>
+        <official_code>RSD</official_code>
+        <name>Dinar</name>
+        <domicilna>true</domicilna>
+        <country>
+            <id>1</id>
+            <country_code>100</country_code>
+            <name>Serbia</name>
+        </country>
+    </paymentCurrency>
+    <place>
+        <id>1</id>
+        <pttNumber>101</pttNumber>
+        <name>Belgrade</name>
+        <country>
+            <id>1</id>
+            <country_code>100</country_code>
+            <name>Serbia</name>
+        </country>
+    </place>
+</analyticsOfStatements>

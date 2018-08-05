@@ -1,5 +1,7 @@
 package com.example.bank.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,14 @@ public class RealTimeGrossSettlementService implements IRealTimeGrossSettlementS
 	private RealTimeGrossSettlementRepository realTimeGrossSettlementRepository;
 	@Override
 	public boolean registerRTGS(RealTimeGrossSettlement rtgs) {
-		
+		System.out.println("RTGS UPIS U BAZU SE POZVAO");
 		realTimeGrossSettlementRepository.save(rtgs);
 		return true;
+	}
+	@Override
+	public List<RealTimeGrossSettlement> getAll() {
+		
+		return realTimeGrossSettlementRepository.findAll();
 	}
 
 }

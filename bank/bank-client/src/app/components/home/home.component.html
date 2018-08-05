@@ -133,11 +133,11 @@
               </ng-template>
             </ngb-tab>
       
-            <!-- <ngb-tab >
+            <ngb-tab >
       
-              <ng-template ngbTabTitle>
+              <!-- <ng-template ngbTabTitle>
                       <div (click)="loadClearingItems()">Items for clearing</div>
-              </ng-template>
+              </ng-template> -->
 
               <ng-template ngbTabContent>
                 
@@ -195,7 +195,7 @@
                   </table>
                   
               </ng-template>
-            </ngb-tab> -->
+            </ngb-tab> 
       
             <ngb-tab title="Banks">
               <ng-template ngbTabContent>                
@@ -417,6 +417,72 @@
         </ng-template>
       </ngb-tab> -->
       
+        <ngb-tab >
+
+            
+            <ng-template ngbTabTitle>
+                <div (click)="getRTGSList()">RTGS</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+        
+                            <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Message ID</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor bank SWIFT</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor bank account</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor bank SWIFT</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor bank account</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Purpose of payment</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Date of receipt</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Currency date</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor account</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Model assigments</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number assigments</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor account</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Model approval</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number creditor</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Money</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Currency</th>
+                            <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                            
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active" *ngFor="let rtgs of rtgsList; let i = index">
+    
+                            <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle" >{{rtgs.porukaID}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.duznikSWIFT}}</td>
+                            <!-- <td style = "text-align:center;vertical-align:middle">{{rtgs.duznikObracunskiRacun}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.poverilacSWIFT}}</td>
+                            <!-- <td style = "text-align:center;vertical-align:middle">{{rtgs.poveriocObracunskiRacun}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.duznik}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.svrhaPlacanja}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.poverilac}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.datumNaloga.split("T")[0]}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.datumValute.split("T")[0]}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.duznikRacun}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.poverlacRacun}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.iznos}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.sifraValute}}</td>
+                            <td style = "text-align:center;vertical-align:middle"> 
+                              
+                                             
+                    </tr>
+                       
+    
+                    </tbody>
+                </table>
+
+            </ng-template>
+        </ngb-tab>
+
         <ngb-tab title="Analytics">
             <ng-template ngbTabContent>
                 <app-form-upload></app-form-upload>
