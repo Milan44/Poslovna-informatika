@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<realTimeGrossSettlement>
+    <id>113</id>
+    <porukaID>152</porukaID>
+    <duznikSWIFT>55555555</duznikSWIFT>
+    <duznikObracunskiRacun>555989898989812345</duznikObracunskiRacun>
+    <poverilacSWIFT>11111111</poverilacSWIFT>
+    <poveriocObracunskiRacun>553456789876543212</poveriocObracunskiRacun>
+    <duznik>Carnex</duznik>
+    <svrhaPlacanja>Isplata prekovremenog rada</svrhaPlacanja>
+    <poverilac>Pera Peric</poverilac>
+    <datumNaloga>2018-08-05T00:00:00+02:00</datumNaloga>
+    <datumValute>2018-08-05T00:00:00+02:00</datumValute>
+    <duznikRacun>555123456789874563</duznikRacun>
+    <modelZaduzenja>97</modelZaduzenja>
+    <pozivNaBrojZaduzenja>987-446-587</pozivNaBrojZaduzenja>
+    <poverlacRacun>553987633546212332</poverlacRacun>
+    <modelOdobrenja>15</modelOdobrenja>
+    <pozivNaBrojOdobrenja>4654-6216</pozivNaBrojOdobrenja>
+    <iznos>253000.0</iznos>
+    <sifraValute>RSD</sifraValute>
+</realTimeGrossSettlement>

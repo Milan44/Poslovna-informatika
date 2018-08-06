@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clearing>
+    <clearingId>118</clearingId>
+    <porukaID>361</porukaID>
+    <duznikSWIFT>55555555</duznikSWIFT>
+    <duznikObracunskiRacun>555989898989812345</duznikObracunskiRacun>
+    <poverilacSWIFT>11111111</poverilacSWIFT>
+    <poveriocObracunskiRacun>553456789876543212</poveriocObracunskiRacun>
+    <ukupanIznos>11000.0</ukupanIznos>
+    <sifraValute>RSD</sifraValute>
+    <datumValute>2018-08-05T00:00:00+02:00</datumValute>
+    <datum>2018-08-05T00:00:00+02:00</datum>
+    <exportovan>true</exportovan>
+    <nalozi>
+        <clearingItemId>117</clearingItemId>
+        <itemNumber>4</itemNumber>
+        <debtor_originator>Carnex</debtor_originator>
+        <purposeOfPayment>Putni trosak</purposeOfPayment>
+        <creditor_recipient>Pera Peric</creditor_recipient>
+        <dateOfReceipt>2018-08-05</dateOfReceipt>
+        <currencyDate>2018-08-05</currencyDate>
+        <debtorAccount>555123456789874563</debtorAccount>
+        <modelAssigments>97</modelAssigments>
+        <referenceNumberAssigments>117-446-285</referenceNumberAssigments>
+        <accountCreditor>553987633546212332</accountCreditor>
+        <modelApproval>15</modelApproval>
+        <referenceNumberCreditor>4488-9976</referenceNumberCreditor>
+        <iznos>11000.0</iznos>
+        <sifraValute>RSD</sifraValute>
+    </nalozi>
+</clearing>

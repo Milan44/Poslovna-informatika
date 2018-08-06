@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -52,6 +54,10 @@ public class ClearingController {
 	public boolean exportClearing(@RequestBody Clearing clearing) {
 		
 		System.out.println("pogodjenoo");
+		
+		clearingService.update(clearing);
+		
+		
 		String xmlString = "";
 	    try {
 	        JAXBContext context = JAXBContext.newInstance(Clearing.class);
@@ -73,7 +79,8 @@ public class ClearingController {
 	    
 	    String filename = "clearing-" + clearing.getPorukaID() +".xml";
 	    try{
-	    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\exportovaniCLearinzi\\" + filename);		    	
+	    	Path path = Paths.get("generisaniMedjubankarski");
+	    	fw = new FileWriter(path.toString() + "\\" + filename);		    	
 	    	bw = new BufferedWriter(fw);
 	    	bw.write(xmlString);
 	    	

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <analyticsOfStatements>
-    <itemNumber>1</itemNumber>
-    <debtor_originator>Carnex</debtor_originator>
-    <purposeOfPayment>Isplata prekovremenog rada</purposeOfPayment>
-    <creditor_recipient>Pera Peric</creditor_recipient>
+    <itemNumber>5</itemNumber>
+    <debtor_originator>Simpo</debtor_originator>
+    <purposeOfPayment>Isplata garancije kupcu</purposeOfPayment>
+    <creditor_recipient>Mercator</creditor_recipient>
     <dateOfReceipt>2018-08-05</dateOfReceipt>
     <currencyDate>2018-08-05</currencyDate>
-    <debtorAccount>555123456789874563</debtorAccount>
+    <debtorAccount>555123456789888845</debtorAccount>
     <modelAssigments>97</modelAssigments>
-    <referenceNumberAssigments>987-446-587</referenceNumberAssigments>
-    <accountCreditor>553987633546212332</accountCreditor>
+    <referenceNumberAssigments>213-666-787</referenceNumberAssigments>
+    <accountCreditor>556899654321354532</accountCreditor>
     <modelApproval>15</modelApproval>
-    <referenceNumberCreditor>4654-6216</referenceNumberCreditor>
+    <referenceNumberCreditor>6570-1000</referenceNumberCreditor>
     <emergency>false</emergency>
-    <sum>253000.0</sum>  
+    <sum>73000.0</sum>
     <paymentCurrency>
         <id>1</id>
         <official_code>RSD</official_code>

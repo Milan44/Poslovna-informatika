@@ -71,12 +71,23 @@ public class Clearing {
 	@XmlElement
 	private Date datum;
 	
-
+	@Column
+	@XmlElement
+	private Boolean exportovan;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "clearing_items", joinColumns = @JoinColumn(name = "clearingId"), inverseJoinColumns = @JoinColumn(name = "clearingItemId"))
     private List<ClearingItem> nalozi;
 	
+	
+	public Boolean getExportovan() {
+		return exportovan;
+	}
+
+	public void setExportovan(Boolean exportovan) {
+		this.exportovan = exportovan;
+	}
+
 	public String getPorukaID() {
 		return porukaID;
 	}
@@ -160,9 +171,11 @@ public class Clearing {
 	}
 
 	
+	
+
 	public Clearing(Long clearingId, String porukaID, String duznikSWIFT, String duznikObracunskiRacun,
 			String poverilacSWIFT, String poveriocObracunskiRacun, double ukupanIznos, String sifraValute,
-			Date datumValute, Date datum, List<ClearingItem> nalozi) {
+			Date datumValute, Date datum, Boolean exportovan, List<ClearingItem> nalozi) {
 		super();
 		this.clearingId = clearingId;
 		this.porukaID = porukaID;
@@ -174,6 +187,7 @@ public class Clearing {
 		this.sifraValute = sifraValute;
 		this.datumValute = datumValute;
 		this.datum = datum;
+		this.exportovan = exportovan;
 		this.nalozi = nalozi;
 	}
 

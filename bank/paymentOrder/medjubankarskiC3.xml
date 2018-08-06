@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <analyticsOfStatements>
-    <itemNumber>3</itemNumber>
+    <itemNumber>6</itemNumber>
     <debtor_originator>Fakultet tehnickih nauka</debtor_originator>
-    <purposeOfPayment>Novcana naknada za iznajmnjene prostorije</purposeOfPayment>
-    <creditor_recipient>NIS</creditor_recipient>
+    <purposeOfPayment>Isplata omogucenih studentskih praksi</purposeOfPayment>
+    <creditor_recipient>Naovis</creditor_recipient>
     <dateOfReceipt>2018-08-05</dateOfReceipt>
     <currencyDate>2018-08-05</currencyDate>
     <debtorAccount>555356776543122145</debtorAccount>
     <modelAssigments>97</modelAssigments>
-    <referenceNumberAssigments>547-789-587</referenceNumberAssigments>
-    <accountCreditor>552787843787856669</accountCreditor>
+    <referenceNumberAssigments>777-109-527</referenceNumberAssigments>
+    <accountCreditor>553787878787856454</accountCreditor>
     <modelApproval>15</modelApproval>
-    <referenceNumberCreditor>4610-1765</referenceNumberCreditor>
-    <emergency>true</emergency>
-    <sum>425000.0</sum>
+    <referenceNumberCreditor>8974-3336</referenceNumberCreditor>
+    <emergency>false</emergency>
+    <sum>81000.0</sum>
     <paymentCurrency>
         <id>1</id>
         <official_code>RSD</official_code>

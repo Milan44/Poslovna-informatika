@@ -8,5 +8,5 @@ public interface IClearingService {
 
 	List<Clearing> getAll();
 	boolean save(Clearing c);
-	
+	boolean update(Clearing c);
 }

@@ -21,6 +21,7 @@ INSERT INTO `bank`.`currency` (`currency_id`, `domicilna`, `name`, `official_cod
 INSERT INTO `bank`.`bank` (`id`, `address`, `bank`, `bankCode`, `email`, `fax`, `name`, `phone`, `pib`, `web`, `swift`, `racun`) VALUES ('1', 'Bulevar Kralaj Petra 18', b'1', 'UCB', 'uni@uni.com', '253-784-234', 'Unicredit Bank', '064566789', '11', 'www.unicredit.com', '11111111', '553456789876543212');
 INSERT INTO `bank`.`bank` (`id`, `address`, `bank`, `bankCode`, `email`, `fax`, `name`, `phone`, `pib`, `web`, `swift`, `racun`) VALUES ('2', 'Bulevar Oslobodjenja 24', b'1', 'IB', 'intesa@insta.com', '44444', 'Instesa Bank', '066333444', '22', 'www.intesa.com', '22222222', '552345678987656565');
 INSERT INTO `bank`.`bank` (`id`, `address`, `bank`, `bankCode`, `email`, `fax`, `name`, `phone`, `pib`, `racun`, `swift`, `web`) VALUES ('3', 'Laze Teleckog 5', b'1', 'NB', 'nasa@nasa', '323-545-786', 'Nasa Banka', '0698435522', '33', '555989898989812345', '55555555', 'www.nasa.com');
+INSERT INTO `bank`.`bank` (`id`, `address`, `bank`, `bankCode`, `email`, `fax`, `name`, `phone`, `pib`, `racun`, `swift`, `web`) VALUES ('4', 'Trifkovicev Trg 7', b'1', 'SGB', 'societe@societe', '323-372-323', 'Societe Generale Bank', '0612537788', '44', '556984532654194639', '66666666', 'www.societe.com');
 
 
 INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('1', 'Milovana Jelica 15', 'adressStatement1', 'naovis@gmai.com', b'1', '25223', '1004995830255', 'Naovis', '069782145', '11', 'pravno lice', '1');
@@ -28,6 +29,7 @@ INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `em
 INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `typeOfClient`, `residence_id`) VALUES ('3', 'Janka Cmelika 12', 'adresaStamenta3', 'pera@pera', b'1', '023711456', '1004995830266', 'Pera Peric', '060123456', 'fizicko lice', '3');
 INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('5', 'Brace Ribnikar 13', 'adressStatement5', 'simpo@simpo', b'1', '34567', '1265787654345', 'Simpo', '0607856633', '44', 'pravno lice', '1');
 INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('6', 'Dr Sime Milosevica 34', 'adressStatement6', 'ftn@ftn', b'1', '59845', '8745985632547', 'Fakultet tehnickih nauka', '0632156633', '55', 'pravno lice', '1');
+INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('7', 'Bulevar Oslobodjenja 76', 'adressStatement7', 'mercator@mercator', b'1', '94847', '7543363724515', 'Mercator', '0657854427', '66', 'pravno lice', '1');
 
 
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('2', '552787843787856669', '2018-08-05', '5500', b'1', '2', '2', '2');
@@ -35,6 +37,7 @@ INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('4', '555123456789874563', '2018-08-05', '12000', b'1', '3', '4', '1');
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('5', '555123456789888845', '2018-08-05', '7000', b'1', '3', '5', '1');
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('6', '555356776543122145', '2018-08-05', '39000', b'1', '3', '6', '1');
+INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('7', '556899654321354532', '2018-08-05', '11500', b'1', '4', '7', '1');
 
 
 INSERT INTO `bank`.`dailyaccountbalance` (`id`, `newState`, `previousState`, `trafficDate`, `trafficToBenefit`, `trafficToTheBurden`, `legalEntityAccount_id`) VALUES ('1', '3500.5', '2700.3', '2006-07-12', '2200.5', '1115.5', '1');

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<analyticsOfStatements>
+    <itemNumber>5</itemNumber>
+    <debtor_originator>Simpo</debtor_originator>
+    <purposeOfPayment>Isplata zalbe na ostecen lezaj</purposeOfPayment>
+    <creditor_recipient>Pera Peric</creditor_recipient>
+    <dateOfReceipt>2018-08-05</dateOfReceipt>
+    <currencyDate>2018-08-05</currencyDate>
+    <debtorAccount>555123456789888845</debtorAccount>
+    <modelAssigments>97</modelAssigments>
+    <referenceNumberAssigments>976-316-911</referenceNumberAssigments>
+    <accountCreditor>553987633546212332</accountCreditor>
+    <modelApproval>15</modelApproval>
+    <referenceNumberCreditor>3459-6400</referenceNumberCreditor>
+    <emergency>false</emergency>
+    <sum>9000.0</sum>
+    <paymentCurrency>
+        <id>1</id>
+        <official_code>RSD</official_code>
+        <name>Dinar</name>
+        <domicilna>true</domicilna>
+        <country>
+            <id>1</id>
+            <country_code>100</country_code>
+            <name>Serbia</name>
+        </country>
+    </paymentCurrency>
+    <place>
+        <id>1</id>
+        <pttNumber>101</pttNumber>
+        <name>Belgrade</name>
+        <country>
+            <id>1</id>
+            <country_code>100</country_code>
+            <name>Serbia</name>
+        </country>
+    </place>
+</analyticsOfStatements>

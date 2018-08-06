@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -300,7 +302,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 
 	public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 
-		System.out.println("POZIVA SE KLASIFIKUJ ANALITIKU!!");
+		//System.out.println("POZIVA SE KLASIFIKUJ ANALITIKU!!");
 		if(analytics.getAccountCreditor().isEmpty() && !analytics.getDebtorAccount().isEmpty()) { // isplata
 			if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) {
 				updateDebtor(analytics);
@@ -329,11 +331,11 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 		}
 		if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank) && !analytics.getAccountCreditor().substring(0,  3).equals(currentBank)) { //medjubankarski transfer
 			
-			System.out.println("POGODIO SAM IF");
+			//System.out.println("POGODIO SAM IF");
 			updateDebtor(analytics);
-			System.out.println("JOS SAM OVDE 1");
+			//System.out.println("JOS SAM OVDE 1");
 			service.save(analytics);
-			System.out.println("JOS SAM OVDE 2");
+			//System.out.println("JOS SAM OVDE 2");
 			
 			generateInterbankTransfer(analytics);
 		}
@@ -341,7 +343,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	
 	public void generateInterbankTransfer(AnalyticsOfStatements analytics) {
 		
-		System.out.println("POZIVA SE GENERISANJE INTERBANK TRANSFERa!");
+		//System.out.println("POZIVA SE GENERISANJE INTERBANK TRANSFERa!");
 		String currentBankSwift = "55555555";
 		String obracunskiRacunBankeDuznika = "555989898989812345";
 		
@@ -373,7 +375,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 			boolean pronadjen = false;
 			for (Clearing clearing : clearings) {
 				
-				if (clearing.getPoveriocObracunskiRacun().substring(0,  3).equals(analytics.getAccountCreditor().substring(0,  3))) {
+				if (clearing.getPoveriocObracunskiRacun().substring(0,  3).equals(analytics.getAccountCreditor().substring(0,  3)) && !clearing.getExportovan()) {
 					
 					List<ClearingItem> items = clearing.getNalozi();
 					items.add(ci);
@@ -422,6 +424,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 				cl.setSifraValute(analytics.getPaymentCurrency().getOfficial_code());
 				cl.setDatumValute(analytics.getCurrencyDate());
 				cl.setDatum(analytics.getDateOfReceipt());
+				cl.setExportovan(false);
 				
 				List<ClearingItem> items = cl.getNalozi();
 				items.add(ci);
@@ -498,7 +501,8 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 		    
 		    String filename = "rtgs-" + rtgs.getPorukaID() +".xml";
 		    try{
-		    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\drugaSansa\\" + filename);		    	
+		    	Path path = Paths.get("generisaniMedjubankarski");
+		    	fw = new FileWriter(path.toString() + "\\" + filename);		    	
 		    	bw = new BufferedWriter(fw);
 		    	bw.write(xmlString);
 		    	
