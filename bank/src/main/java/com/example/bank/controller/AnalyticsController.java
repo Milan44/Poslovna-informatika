@@ -172,7 +172,7 @@ public class AnalyticsController {
 	}
 	
 
-public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
+	public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 		
 		String currentBank = "555";
 		
@@ -381,7 +381,7 @@ public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 	    
 	    String filename = "rtgs-" + rtgs.getPorukaID() +".xml";
 	    try{
-	    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\exportovaniRTGSovi\\" + filename);		    	
+	    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\drugaSansa\\" + filename);		    	
 	    	bw = new BufferedWriter(fw);
 	    	bw.write(xmlString);
 	    	

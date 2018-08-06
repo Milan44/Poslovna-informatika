@@ -160,7 +160,8 @@ public class BankAccountController {
 		
 		System.out.println("TRANSFER NUMBER JE ::::: " + transferAccount);
 		
-		double trasferedMoney = bankAccountService.findById(id).getMoney();
+//		double trasferedMoney = bankAccountService.findById(id).getMoney();
+		
 		BankAccount trasfer = bankAccountService.findByAccNumber(transferAccount);
 		
 		
@@ -172,7 +173,13 @@ public class BankAccountController {
 		boolean emergencyBool = false;
 		if(trasfer.getMoney() > 250000.0) emergencyBool = true;
 		
-		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(origin, currentDate);
+//		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(origin, currentDate);
+		DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findAccountStateAt(origin, currentDate);
+		
+		//ne sme biti negativno stanje  treba i na frontu
+		if(dailyAccountBalance.getNewState() < 0) {
+			return bankAccountService.getAll();
+		}
 		PaymentType pt = paymentTypeService.findById(2l);
 		
 //		

@@ -27,10 +27,12 @@ import { LoginComponent } from './components/login/login.component'
 
 
 import { UserService } from './services/user.service';
+import { RtgsService } from './services/rtgs.service';
 
 import {AnalyticsOfStatementsService} from './services/analytics-of-statements.service';
 import { AnalyticsService } from './services/analytics.service'
 import { PlaceService } from './services/place.service'
+import { ClearingService } from './services/clearing.service'
 import { CountryService } from './services/country.service';
 import { UploadFileService } from './services/upload.service';
 import { UploadComponent } from './components/upload/upload.component'
@@ -61,10 +63,7 @@ import { DetailUploadComponent } from './components/detail-upload/detail-upload.
   ],
 
 
-  providers: [BankAccountService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService,
-     PlaceService,CountryService, UploadFileService],
-
-
+  providers: [BankAccountService, ClearingService, , UploadFileService, ClientService, BankService, CurrencyService, SuspendAccountService, UserService, AnalyticsService, AnalyticsOfStatementsService, PlaceService,CountryService, RtgsService],
   entryComponents: [SuspendAccountComponent],
   bootstrap: [AppComponent]
 })

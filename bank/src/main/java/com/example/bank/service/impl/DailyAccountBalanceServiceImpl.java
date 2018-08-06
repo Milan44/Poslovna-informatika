@@ -135,22 +135,23 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	public void updateDebtor(AnalyticsOfStatements analytic) {
 		//uvek je nalog za placanje pa se uzima debitorov nalog
 		BankAccount bankAccount= bankAccountRepository.findByAccountNumber(analytic.getDebtorAccount());
+		System.out.println("PRONADJEN RACUN: " + bankAccount.getAccountNumber());
 		DailyAccountBalance result = findAccountStateAt(bankAccount, analytic.getDateOfReceipt());
 
 		//prva tri broja oznacavaju banku 
 //		result.getAnalyticsOfStatements().add(analytic);
-		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
-			result.setNewState(result.getPreviousState()-analytic.getSum());
-		}else {
+//		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
+//			result.setNewState(result.getPreviousState()-analytic.getSum());
+//		}else {
 			result.setNewState(result.getNewState()-analytic.getSum());
-		}
+//		}
 		result.setTrafficToTheBurden(result.getTrafficToTheBurden()+analytic.getSum());
 		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
 		System.out.println("result:"+result);
-		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
-		System.out.println("result2:"+result2);
+//		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
+//		System.out.println("result2:"+result2);
 //		analytic.setDailyAccountBalance(result2);
 	}
 	@Override
@@ -163,13 +164,17 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 //		String bankKreditor=analytic.getAccountCreditor().substring(0, 3);
 //		result.getAnalyticsOfStatements().add(analytic);
 		result.setTrafficToBenefit(result.getTrafficToBenefit()+analytic.getSum());
-		result.setNewState(result.getNewState()+analytic.getSum());
+//		if(result.getTrafficToBenefit() == 0 && result.getTrafficToTheBurden() == 0) {
+//			result.setNewState(result.getPreviousState()+analytic.getSum());
+//		}else {
+			result.setNewState(result.getNewState()+analytic.getSum());
+//		}
 		analytic.setDailyAccountBalance(result);
 		result=repository.save(result);
 		
 		System.out.println("result:"+result);
-		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
-		System.out.println("result2:"+result2);
+//		DailyAccountBalance result2 = repository.findByAccountNumberAndDate(analytic.getDebtorAccount(), analytic.getDateOfReceipt().toString());
+//		System.out.println("result2:"+result2);
 //		analytic.setDailyAccountBalance(result2);
 	}
 	
@@ -257,7 +262,10 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 				result = new DailyAccountBalance();
 				result.setLegalEntityAccount(creditorAccount);
 				result.setPreviousState(max.getNewState());
-				result.setNewState((float) 0.0);
+				//promenjeno 
+//				result.setNewState((float) 0.0);
+				result.setNewState((float) result.getPreviousState());
+				//
 				result.setTrafficToBenefit((float) 0.0);
 				result.setTrafficToTheBurden((float) 0.0);
 				result.setTrafficDate(date);
@@ -292,6 +300,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 
 	public void klasifikujAnalitiku(AnalyticsOfStatements analytics) {
 
+		System.out.println("POZIVA SE KLASIFIKUJ ANALITIKU!!");
 		if(analytics.getAccountCreditor().isEmpty() && !analytics.getDebtorAccount().isEmpty()) { // isplata
 			if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank)) {
 				updateDebtor(analytics);
@@ -319,8 +328,12 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 			 }
 		}
 		if (analytics.getDebtorAccount().substring(0,  3).equals(currentBank) && !analytics.getAccountCreditor().substring(0,  3).equals(currentBank)) { //medjubankarski transfer
-			updateDebtor(analytics);			
+			
+			System.out.println("POGODIO SAM IF");
+			updateDebtor(analytics);
+			System.out.println("JOS SAM OVDE 1");
 			service.save(analytics);
+			System.out.println("JOS SAM OVDE 2");
 			
 			generateInterbankTransfer(analytics);
 		}
@@ -328,6 +341,7 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 	
 	public void generateInterbankTransfer(AnalyticsOfStatements analytics) {
 		
+		System.out.println("POZIVA SE GENERISANJE INTERBANK TRANSFERa!");
 		String currentBankSwift = "55555555";
 		String obracunskiRacunBankeDuznika = "555989898989812345";
 		
@@ -460,53 +474,54 @@ public class DailyAccountBalanceServiceImpl implements DailyAccountBalanceServic
 		}
 	}
 	
-public void exportRTGS(RealTimeGrossSettlement rtgs) {
-		
-		String xmlString = "";
-	    try {
-	        JAXBContext context = JAXBContext.newInstance(RealTimeGrossSettlement.class);
-	        Marshaller m = context.createMarshaller();
-
-	        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // To format XML
-
-	        StringWriter sw = new StringWriter();
-	        m.marshal(rtgs, sw);
-	        xmlString = sw.toString();
-
-	    } catch (JAXBException e) {
-	        e.printStackTrace();
-	    }
-	    System.out.println(xmlString);		
-	    
-	    BufferedWriter bw = null;
-		FileWriter fw = null;
-	    
-	    String filename = "rtgs-" + rtgs.getPorukaID() +".xml";
-	    try{
-	    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\exportovaniRTGSovi\\" + filename);		    	
-	    	bw = new BufferedWriter(fw);
-	    	bw.write(xmlString);
-	    	
-	    } catch (IOException ex) {
-
-			ex.printStackTrace();
-
-		} finally {
-			try {
-
-				if (bw != null)
-					bw.close();
-
-				if (fw != null)
-					fw.close();					
-					
-
-			} catch (IOException ex) {
-
+	public void exportRTGS(RealTimeGrossSettlement rtgs) {
+			
+			System.out.println("JA SAM POZVANAAAAAA");
+			String xmlString = "";
+		    try {
+		        JAXBContext context = JAXBContext.newInstance(RealTimeGrossSettlement.class);
+		        Marshaller m = context.createMarshaller();
+	
+		        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // To format XML
+	
+		        StringWriter sw = new StringWriter();
+		        m.marshal(rtgs, sw);
+		        xmlString = sw.toString();
+	
+		    } catch (JAXBException e) {
+		        e.printStackTrace();
+		    }
+		    System.out.println(xmlString);		
+		    
+		    BufferedWriter bw = null;
+			FileWriter fw = null;
+		    
+		    String filename = "rtgs-" + rtgs.getPorukaID() +".xml";
+		    try{
+		    	fw = new FileWriter("C:\\Users\\Arsenije\\Desktop\\drugaSansa\\" + filename);		    	
+		    	bw = new BufferedWriter(fw);
+		    	bw.write(xmlString);
+		    	
+		    } catch (IOException ex) {
+	
 				ex.printStackTrace();
-
+	
+			} finally {
+				try {
+	
+					if (bw != null)
+						bw.close();
+	
+					if (fw != null)
+						fw.close();					
+						
+	
+				} catch (IOException ex) {
+	
+					ex.printStackTrace();
+	
+				}
 			}
-		}
 	}
 
 }

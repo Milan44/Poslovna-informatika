@@ -135,9 +135,9 @@
       
             <ngb-tab >
       
-              <ng-template ngbTabTitle>
+              <!-- <ng-template ngbTabTitle>
                       <div (click)="loadClearingItems()">Items for clearing</div>
-              </ng-template>
+              </ng-template> -->
 
               <ng-template ngbTabContent>
                 
@@ -193,9 +193,9 @@
       
                       </tbody>
                   </table>
-                  <button id="exportClearing"  type="button" class="btn btn-primary  center" >Export</button>
+                  
               </ng-template>
-            </ngb-tab>
+            </ngb-tab> 
       
             <ngb-tab title="Banks">
               <ng-template ngbTabContent>                
@@ -242,6 +242,122 @@
         </ng-template>
       </ngb-tab>      
 
+
+      <ngb-tab title="Clients">
+        <ng-template ngbTabContent>
+          
+            <table class="table">
+                <thead>
+                    <tr>
+    
+                        <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >ID</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Address</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Address for statements</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >email</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >email statements</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >phone</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >fax</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >jmbg</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >Type of client</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >pib</th>
+                        <th style="width: 30%; text-align:center;vertical-align:middle" >residence</th>
+
+                        <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active" *ngFor="let client of clients; let i = index">
+
+                            <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle" >{{client.id}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.name}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.address}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.addressForStatements}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.email}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.emailStatements}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.phone}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.fax}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.jmbg}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.typeOfClient}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.pib}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{client.residence.name}}</td>
+                            <td style = "text-align:center;vertical-align:middle"> 
+                              <button id="updateClient"  (click) = "openUpdateClientModal(updateClientModal,client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
+                            <!-- </td>
+                            <td style = "text-align:center;vertical-align:middle">  -->
+                               <button id="deleteClient"  (click) = "deleteClient(client.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
+                            </td> 
+                                             
+                    </tr>
+                   
+
+                </tbody>
+            </table>
+            <button id="addClient"  (click) = "openAddClientModal(addClientModal)" type="button" class="btn btn-primary  center" >Register client</button>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab title="Clearing">
+            
+            <ng-template ngbTabContent>
+              
+                
+
+                <table class="table">
+                    <thead>
+                        <tr>
+        
+                            <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Id poruke</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Duznik SWIFT</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Racun duznika</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Poverilac SWIFT</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Racun poverioca</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Ukupan iznos</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Sifra valute</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Datum valute</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Datum</th>
+                            <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                            
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active" *ngFor="let clearing of clearings; let i = index">
+    
+                                <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                                <td style = "text-align:center;vertical-align:middle" >{{clearing.porukaID}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.duznikSWIFT}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.duznikObracunskiRacun}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.poverilacSWIFT}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.poveriocObracunskiRacun}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.ukupanIznos}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.sifraValute}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.datumValute}}</td>
+                                <td style = "text-align:center;vertical-align:middle">{{clearing.datum}}</td>
+                                <td style = "text-align:center;vertical-align:middle"> 
+                                  <!-- <button id="updateClient"  (click) = "openUpdateClientModal(updateClientModal,client)" type="button" class="btn btn-warning btn-sm center" >Update</button> -->
+                                <!-- </td>
+                                <td style = "text-align:center;vertical-align:middle">  -->
+                                   <button id="exportClearing"  (click) = "exportClearing(i)" type="button" class="btn btn-danger btn-sm center" >Export</button>
+                                </td> 
+                                                 
+                        </tr>
+                       
+    
+                    </tbody>
+                </table>
+                <!-- <button id="addClient"  (click) = "openAddClientModal(addClientModal)" type="button" class="btn btn-primary  center" >Register client</button> -->
+            </ng-template>
+          </ngb-tab>
+
+
+
+<!-- 
         <!-- 
       <ngb-tab title="InterBankTransfers">
         <ng-template ngbTabContent>    
@@ -301,6 +417,72 @@
         </ng-template>
       </ngb-tab> -->
       
+        <ngb-tab >
+
+            
+            <ng-template ngbTabTitle>
+                <div (click)="getRTGSList()">RTGS</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+        
+                            <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Message ID</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor bank SWIFT</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor bank account</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor bank SWIFT</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor bank account</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Purpose of payment</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Date of receipt</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Currency date</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Debtor account</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Model assigments</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number assigments</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Creditor account</th>
+                            <!-- <th style="width: 30%; text-align:center;vertical-align:middle" >Model approval</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Reference number creditor</th> -->
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Money</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Currency</th>
+                            <th style="width: 20%; text-align:center;vertical-align:middle" ></th>
+                            
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active" *ngFor="let rtgs of rtgsList; let i = index">
+    
+                            <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle" >{{rtgs.porukaID}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.duznikSWIFT}}</td>
+                            <!-- <td style = "text-align:center;vertical-align:middle">{{rtgs.duznikObracunskiRacun}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.poverilacSWIFT}}</td>
+                            <!-- <td style = "text-align:center;vertical-align:middle">{{rtgs.poveriocObracunskiRacun}}</td> -->
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.duznik}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.svrhaPlacanja}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.poverilac}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.datumNaloga.split("T")[0]}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.datumValute.split("T")[0]}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.duznikRacun}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.poverlacRacun}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.iznos}}</td>
+                            <td style = "text-align:center;vertical-align:middle">{{rtgs.sifraValute}}</td>
+                            <td style = "text-align:center;vertical-align:middle"> 
+                              
+                                             
+                    </tr>
+                       
+    
+                    </tbody>
+                </table>
+
+            </ng-template>
+        </ngb-tab>
+
         <ngb-tab title="Analytics">
             <ng-template ngbTabContent>
                 <app-form-upload></app-form-upload>

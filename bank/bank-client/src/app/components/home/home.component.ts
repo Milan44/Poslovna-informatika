@@ -9,10 +9,12 @@ import {NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-boots
 import { FormsModule } from '@angular/forms';
 
 
-import { BankAccountService } from '../../services/bank-account.service'
-import { ClientService } from '../../services/client.service'
-import { BankService } from '../../services/bank.service'
-import { CurrencyService } from '../../services/currency.service'
+import {BankAccountService} from '../../services/bank-account.service'
+import {ClientService} from '../../services/client.service'
+import {BankService} from '../../services/bank.service'
+import {CurrencyService} from '../../services/currency.service'
+import { ClearingService } from '../../services/clearing.service'
+
 
 import { PlaceService } from '../../services/place.service'
 import { CountryService } from '../../services/country.service'
@@ -23,7 +25,7 @@ import { SuspendAccountComponent } from '../../components/suspend-account/suspen
 import { SuspendAccountService} from '../../services/suspend-account.service';
 import { AnalyticsOfStatementsService } from '../../services/analytics-of-statements.service'
 
-
+import { RtgsService } from '../../services/rtgs.service';
 
 
 @Component({
@@ -34,16 +36,16 @@ import { AnalyticsOfStatementsService } from '../../services/analytics-of-statem
 export class HomeComponent implements OnInit {
 
 
-  private bankAccounts: any[] = [];
+  private bankAccounts : any[] = [];
+  private clients : any[] = [];
+  private banks : any[] = [];
+  private places : any[] = [];
+  private clearings : any[] = [];
+  private currencies : any[] = [];
+  private countries : any[] = [];
   private clientBankAccounts: any[];
   private accToSuspend: any;
-
-  private clients: any[] = [];
-  private banks: any[] = [];
-  private places: any[] = [];
-
-  private currencies: any[] = [];
-  private countries: any[] = [];
+  private rtgsList : any[] = [];
 
   private accountNumber : any;
   private money : any;
@@ -82,7 +84,6 @@ export class HomeComponent implements OnInit {
   private startDate: any;
   private endDate: any;
   private selectedBankAccount: any;
-
   private bank_name: any;
   private bank_code: any;
   private bank_pib: any;
@@ -94,10 +95,12 @@ export class HomeComponent implements OnInit {
   
 
 
-  constructor(private router: Router, private modalService: NgbModal, private bankAccountService: BankAccountService, private clientService: ClientService,
-    private bankService: BankService, private currencyService: CurrencyService, private countryService: CountryService, private suspendDialog: MatDialog, private placeService: PlaceService,
-    private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService, private suspendAccountService: SuspendAccountService) { }
-
+  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
+              private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService,
+              private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService, private suspendAccountService: SuspendAccountService,
+              private clearingService : ClearingService, private rtgsService : RtgsService) { }
+ 
+  
 
 
   ngOnInit() {
@@ -109,7 +112,8 @@ export class HomeComponent implements OnInit {
     this.getCurrencies();
     this.getPlaces();
     this.getCountries();
-
+    this.getClearings();
+    this.getRtgs();
     const today = new Date();
     const dd = today.getDate();
     const mm = today.getMonth() + 1; // January is 0!
@@ -174,6 +178,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getClearings() {
+    this.clearingService.getClearings().subscribe(data=> {   
+      this.clearings = data;
+      console.log(this.clearings);
+    });
+  }
 
   getCurrencies() {
     this.currencyService.getCurrencies().subscribe(data => {
@@ -197,6 +207,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getRtgs() {
+    this.rtgsService.getRtgs().subscribe(data => {
+      this.rtgsList = data;
+      console.log(this.rtgsList);
+    });
+  }
 
   openAddBankAccountModal(addBankAccountModal) {
 
@@ -481,6 +497,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  exportClearing(i) {
+
+    this.clearingService.exportClearing(JSON.stringify(this.clearings[i])).subscribe(data => {
+      
+      
+
+    });
+
+  }
+
 
   openExportXmlModal(exportXmlModal, account) {
 
@@ -616,5 +642,12 @@ export class HomeComponent implements OnInit {
 
   resetSearchBank(){
     this.getBanks();
+  }
+
+  getRTGSList() {
+
+    this.rtgsList = [];
+    this.getRtgs();
+    
   }
 }
