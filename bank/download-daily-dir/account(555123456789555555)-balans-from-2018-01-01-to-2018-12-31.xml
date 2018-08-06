@@ -4,16 +4,16 @@
     <toDate>2018-12-31T00:00:00+01:00</toDate>
     <accountNumber>555123456789555555</accountNumber>
     <startAccountState>0.0</startAccountState>
-    <countOfTrafficToBenefit>0</countOfTrafficToBenefit>
-    <countOfTrafficToBurden>1</countOfTrafficToBurden>
-    <stateAtTheEndOfPeriod>-8000.0</stateAtTheEndOfPeriod>
+    <countOfTrafficToBenefit>3</countOfTrafficToBenefit>
+    <countOfTrafficToBurden>2</countOfTrafficToBurden>
+    <stateAtTheEndOfPeriod>8000.0</stateAtTheEndOfPeriod>
     <dailyBalances>
-        <id>274</id>
+        <id>287</id>
         <trafficDate>2018-07-10T00:00:00+02:00</trafficDate>
         <previousState>0.0</previousState>
-        <trafficToBenefit>0.0</trafficToBenefit>
-        <trafficToTheBurden>8000.0</trafficToTheBurden>
-        <newState>-8000.0</newState>
+        <trafficToBenefit>24000.0</trafficToBenefit>
+        <trafficToTheBurden>16000.0</trafficToTheBurden>
+        <newState>8000.0</newState>
         <legalEntityAccount>
             <id>5</id>
             <accountNumber>555123456789555555</accountNumber>
@@ -69,8 +69,293 @@
         </legalEntityAccount>
     </dailyBalances>
     <statements>
-        <itemNumber>275</itemNumber>
-        <debtor_originator>Cubric i minimum pet sinova,Inc</debtor_originator>
+        <itemNumber>288</itemNumber>
+        <debtor_originator>Cubric Inc</debtor_originator>
+        <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
+        <creditor_recipient>Naovis</creditor_recipient>
+        <dateOfReceipt>2018-07-10</dateOfReceipt>
+        <currencyDate>2018-07-10</currencyDate>
+        <debtorAccount>555123456789555555</debtorAccount>
+        <modelAssigments>97</modelAssigments>
+        <accountCreditor></accountCreditor>
+        <emergency>false</emergency>
+        <sum>8000.0</sum>
+        <dailyAccountBalance>
+            <id>287</id>
+            <trafficDate>2018-07-10T00:00:00+02:00</trafficDate>
+            <previousState>0.0</previousState>
+            <trafficToBenefit>24000.0</trafficToBenefit>
+            <trafficToTheBurden>16000.0</trafficToTheBurden>
+            <newState>8000.0</newState>
+            <legalEntityAccount>
+                <id>5</id>
+                <accountNumber>555123456789555555</accountNumber>
+                <dateOfOpening>2013-04-13T00:00:00+02:00</dateOfOpening>
+                <valid>true</valid>
+                <money>5000.0</money>
+                <client>
+                    <id>2</id>
+                    <address>Marka Markovica 15</address>
+                    <phone>7894562</phone>
+                    <fax>44423</fax>
+                    <email>nis@nis.com</email>
+                    <addressForStatements>adressStatement2</addressForStatements>
+                    <emailStatements>true</emailStatements>
+                    <name>NIS</name>
+                    <jmbg>7888996542</jmbg>
+                    <typeOfClient>pravno lice</typeOfClient>
+                    <residence>
+                        <id>2</id>
+                        <pttNumber>202</pttNumber>
+                        <name>Barcelona</name>
+                        <country>
+                            <id>2</id>
+                            <country_code>200</country_code>
+                            <name>Spain</name>
+                        </country>
+                    </residence>
+                    <pib>22</pib>
+                </client>
+                <bank>
+                    <id>1</id>
+                    <bankCode>UCB</bankCode>
+                    <pib>11</pib>
+                    <name>Unicredit Bank</name>
+                    <address>Bulevar Kralaj Petra 18</address>
+                    <email>uni@uni.com</email>
+                    <web>www.unicredit.com</web>
+                    <phone>064566789</phone>
+                    <fax>253-784-234</fax>
+                    <bank>true</bank>
+                </bank>
+                <currency>
+                    <id>2</id>
+                    <official_code>€</official_code>
+                    <name>Euro</name>
+                    <domicilna>false</domicilna>
+                    <country>
+                        <id>2</id>
+                        <country_code>200</country_code>
+                        <name>Spain</name>
+                    </country>
+                </currency>
+            </legalEntityAccount>
+        </dailyAccountBalance>
+        <paymentCurrency>
+            <id>2</id>
+            <official_code>€</official_code>
+            <name>Euro</name>
+            <domicilna>false</domicilna>
+            <country>
+                <id>2</id>
+                <country_code>200</country_code>
+                <name>Spain</name>
+            </country>
+        </paymentCurrency>
+        <place>
+            <id>1</id>
+            <pttNumber>101</pttNumber>
+            <name>Belgrade</name>
+            <country>
+                <id>1</id>
+                <country_code>100</country_code>
+                <name>Serbia</name>
+            </country>
+        </place>
+    </statements>
+    <statements>
+        <itemNumber>289</itemNumber>
+        <debtor_originator>CubricInc</debtor_originator>
+        <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
+        <creditor_recipient>Naovis</creditor_recipient>
+        <dateOfReceipt>2018-07-10</dateOfReceipt>
+        <currencyDate>2018-07-10</currencyDate>
+        <debtorAccount></debtorAccount>
+        <modelAssigments>97</modelAssigments>
+        <accountCreditor>555123456789555555</accountCreditor>
+        <emergency>false</emergency>
+        <sum>8000.0</sum>
+        <dailyAccountBalance>
+            <id>287</id>
+            <trafficDate>2018-07-10T00:00:00+02:00</trafficDate>
+            <previousState>0.0</previousState>
+            <trafficToBenefit>24000.0</trafficToBenefit>
+            <trafficToTheBurden>16000.0</trafficToTheBurden>
+            <newState>8000.0</newState>
+            <legalEntityAccount>
+                <id>5</id>
+                <accountNumber>555123456789555555</accountNumber>
+                <dateOfOpening>2013-04-13T00:00:00+02:00</dateOfOpening>
+                <valid>true</valid>
+                <money>5000.0</money>
+                <client>
+                    <id>2</id>
+                    <address>Marka Markovica 15</address>
+                    <phone>7894562</phone>
+                    <fax>44423</fax>
+                    <email>nis@nis.com</email>
+                    <addressForStatements>adressStatement2</addressForStatements>
+                    <emailStatements>true</emailStatements>
+                    <name>NIS</name>
+                    <jmbg>7888996542</jmbg>
+                    <typeOfClient>pravno lice</typeOfClient>
+                    <residence>
+                        <id>2</id>
+                        <pttNumber>202</pttNumber>
+                        <name>Barcelona</name>
+                        <country>
+                            <id>2</id>
+                            <country_code>200</country_code>
+                            <name>Spain</name>
+                        </country>
+                    </residence>
+                    <pib>22</pib>
+                </client>
+                <bank>
+                    <id>1</id>
+                    <bankCode>UCB</bankCode>
+                    <pib>11</pib>
+                    <name>Unicredit Bank</name>
+                    <address>Bulevar Kralaj Petra 18</address>
+                    <email>uni@uni.com</email>
+                    <web>www.unicredit.com</web>
+                    <phone>064566789</phone>
+                    <fax>253-784-234</fax>
+                    <bank>true</bank>
+                </bank>
+                <currency>
+                    <id>2</id>
+                    <official_code>€</official_code>
+                    <name>Euro</name>
+                    <domicilna>false</domicilna>
+                    <country>
+                        <id>2</id>
+                        <country_code>200</country_code>
+                        <name>Spain</name>
+                    </country>
+                </currency>
+            </legalEntityAccount>
+        </dailyAccountBalance>
+        <paymentCurrency>
+            <id>2</id>
+            <official_code>€</official_code>
+            <name>Euro</name>
+            <domicilna>false</domicilna>
+            <country>
+                <id>2</id>
+                <country_code>200</country_code>
+                <name>Spain</name>
+            </country>
+        </paymentCurrency>
+        <place>
+            <id>1</id>
+            <pttNumber>101</pttNumber>
+            <name>Belgrade</name>
+            <country>
+                <id>1</id>
+                <country_code>100</country_code>
+                <name>Serbia</name>
+            </country>
+        </place>
+    </statements>
+    <statements>
+        <itemNumber>290</itemNumber>
+        <debtor_originator>CubricInc</debtor_originator>
+        <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
+        <creditor_recipient>Naovis</creditor_recipient>
+        <dateOfReceipt>2018-07-10</dateOfReceipt>
+        <currencyDate>2018-07-10</currencyDate>
+        <debtorAccount></debtorAccount>
+        <modelAssigments>97</modelAssigments>
+        <accountCreditor>555123456789555555</accountCreditor>
+        <emergency>false</emergency>
+        <sum>8000.0</sum>
+        <dailyAccountBalance>
+            <id>287</id>
+            <trafficDate>2018-07-10T00:00:00+02:00</trafficDate>
+            <previousState>0.0</previousState>
+            <trafficToBenefit>24000.0</trafficToBenefit>
+            <trafficToTheBurden>16000.0</trafficToTheBurden>
+            <newState>8000.0</newState>
+            <legalEntityAccount>
+                <id>5</id>
+                <accountNumber>555123456789555555</accountNumber>
+                <dateOfOpening>2013-04-13T00:00:00+02:00</dateOfOpening>
+                <valid>true</valid>
+                <money>5000.0</money>
+                <client>
+                    <id>2</id>
+                    <address>Marka Markovica 15</address>
+                    <phone>7894562</phone>
+                    <fax>44423</fax>
+                    <email>nis@nis.com</email>
+                    <addressForStatements>adressStatement2</addressForStatements>
+                    <emailStatements>true</emailStatements>
+                    <name>NIS</name>
+                    <jmbg>7888996542</jmbg>
+                    <typeOfClient>pravno lice</typeOfClient>
+                    <residence>
+                        <id>2</id>
+                        <pttNumber>202</pttNumber>
+                        <name>Barcelona</name>
+                        <country>
+                            <id>2</id>
+                            <country_code>200</country_code>
+                            <name>Spain</name>
+                        </country>
+                    </residence>
+                    <pib>22</pib>
+                </client>
+                <bank>
+                    <id>1</id>
+                    <bankCode>UCB</bankCode>
+                    <pib>11</pib>
+                    <name>Unicredit Bank</name>
+                    <address>Bulevar Kralaj Petra 18</address>
+                    <email>uni@uni.com</email>
+                    <web>www.unicredit.com</web>
+                    <phone>064566789</phone>
+                    <fax>253-784-234</fax>
+                    <bank>true</bank>
+                </bank>
+                <currency>
+                    <id>2</id>
+                    <official_code>€</official_code>
+                    <name>Euro</name>
+                    <domicilna>false</domicilna>
+                    <country>
+                        <id>2</id>
+                        <country_code>200</country_code>
+                        <name>Spain</name>
+                    </country>
+                </currency>
+            </legalEntityAccount>
+        </dailyAccountBalance>
+        <paymentCurrency>
+            <id>2</id>
+            <official_code>€</official_code>
+            <name>Euro</name>
+            <domicilna>false</domicilna>
+            <country>
+                <id>2</id>
+                <country_code>200</country_code>
+                <name>Spain</name>
+            </country>
+        </paymentCurrency>
+        <place>
+            <id>1</id>
+            <pttNumber>101</pttNumber>
+            <name>Belgrade</name>
+            <country>
+                <id>1</id>
+                <country_code>100</country_code>
+                <name>Serbia</name>
+            </country>
+        </place>
+    </statements>
+    <statements>
+        <itemNumber>291</itemNumber>
+        <debtor_originator>CubricInc</debtor_originator>
         <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
         <creditor_recipient>Naovis</creditor_recipient>
         <dateOfReceipt>2018-07-10</dateOfReceipt>
@@ -81,12 +366,107 @@
         <emergency>false</emergency>
         <sum>8000.0</sum>
         <dailyAccountBalance>
-            <id>274</id>
+            <id>287</id>
             <trafficDate>2018-07-10T00:00:00+02:00</trafficDate>
             <previousState>0.0</previousState>
-            <trafficToBenefit>0.0</trafficToBenefit>
-            <trafficToTheBurden>8000.0</trafficToTheBurden>
-            <newState>-8000.0</newState>
+            <trafficToBenefit>24000.0</trafficToBenefit>
+            <trafficToTheBurden>16000.0</trafficToTheBurden>
+            <newState>8000.0</newState>
+            <legalEntityAccount>
+                <id>5</id>
+                <accountNumber>555123456789555555</accountNumber>
+                <dateOfOpening>2013-04-13T00:00:00+02:00</dateOfOpening>
+                <valid>true</valid>
+                <money>5000.0</money>
+                <client>
+                    <id>2</id>
+                    <address>Marka Markovica 15</address>
+                    <phone>7894562</phone>
+                    <fax>44423</fax>
+                    <email>nis@nis.com</email>
+                    <addressForStatements>adressStatement2</addressForStatements>
+                    <emailStatements>true</emailStatements>
+                    <name>NIS</name>
+                    <jmbg>7888996542</jmbg>
+                    <typeOfClient>pravno lice</typeOfClient>
+                    <residence>
+                        <id>2</id>
+                        <pttNumber>202</pttNumber>
+                        <name>Barcelona</name>
+                        <country>
+                            <id>2</id>
+                            <country_code>200</country_code>
+                            <name>Spain</name>
+                        </country>
+                    </residence>
+                    <pib>22</pib>
+                </client>
+                <bank>
+                    <id>1</id>
+                    <bankCode>UCB</bankCode>
+                    <pib>11</pib>
+                    <name>Unicredit Bank</name>
+                    <address>Bulevar Kralaj Petra 18</address>
+                    <email>uni@uni.com</email>
+                    <web>www.unicredit.com</web>
+                    <phone>064566789</phone>
+                    <fax>253-784-234</fax>
+                    <bank>true</bank>
+                </bank>
+                <currency>
+                    <id>2</id>
+                    <official_code>€</official_code>
+                    <name>Euro</name>
+                    <domicilna>false</domicilna>
+                    <country>
+                        <id>2</id>
+                        <country_code>200</country_code>
+                        <name>Spain</name>
+                    </country>
+                </currency>
+            </legalEntityAccount>
+        </dailyAccountBalance>
+        <paymentCurrency>
+            <id>2</id>
+            <official_code>€</official_code>
+            <name>Euro</name>
+            <domicilna>false</domicilna>
+            <country>
+                <id>2</id>
+                <country_code>200</country_code>
+                <name>Spain</name>
+            </country>
+        </paymentCurrency>
+        <place>
+            <id>1</id>
+            <pttNumber>101</pttNumber>
+            <name>Belgrade</name>
+            <country>
+                <id>1</id>
+                <country_code>100</country_code>
+                <name>Serbia</name>
+            </country>
+        </place>
+    </statements>
+    <statements>
+        <itemNumber>295</itemNumber>
+        <debtor_originator>CubricInc</debtor_originator>
+        <purposeOfPayment>Isplata oko aplikacije preduzeca</purposeOfPayment>
+        <creditor_recipient>Naovis</creditor_recipient>
+        <dateOfReceipt>2018-07-10</dateOfReceipt>
+        <currencyDate>2018-07-10</currencyDate>
+        <debtorAccount>555123456789555554</debtorAccount>
+        <modelAssigments>97</modelAssigments>
+        <accountCreditor>555123456789555555</accountCreditor>
+        <emergency>false</emergency>
+        <sum>8000.0</sum>
+        <dailyAccountBalance>
+            <id>287</id>
+            <trafficDate>2018-07-10T00:00:00+02:00</trafficDate>
+            <previousState>0.0</previousState>
+            <trafficToBenefit>24000.0</trafficToBenefit>
+            <trafficToTheBurden>16000.0</trafficToTheBurden>
+            <newState>8000.0</newState>
             <legalEntityAccount>
                 <id>5</id>
                 <accountNumber>555123456789555555</accountNumber>
