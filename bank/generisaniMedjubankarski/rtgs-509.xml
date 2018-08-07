@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<realTimeGrossSettlement>
+    <id>115</id>
+    <porukaID>509</porukaID>
+    <duznikSWIFT>55555555</duznikSWIFT>
+    <duznikObracunskiRacun>555989898989812345</duznikObracunskiRacun>
+    <poverilacSWIFT>11111111</poverilacSWIFT>
+    <poveriocObracunskiRacun>553456789876543212</poveriocObracunskiRacun>
+    <duznik>Simpo</duznik>
+    <svrhaPlacanja>Isplate izrade web sajta</svrhaPlacanja>
+    <poverilac>Naovis</poverilac>
+    <datumNaloga>2018-08-05T00:00:00+02:00</datumNaloga>
+    <datumValute>2018-08-05T00:00:00+02:00</datumValute>
+    <duznikRacun>555123456789888845</duznikRacun>
+    <modelZaduzenja>97</modelZaduzenja>
+    <pozivNaBrojZaduzenja>987-446-111</pozivNaBrojZaduzenja>
+    <poverlacRacun>553787878787856454</poverlacRacun>
+    <modelOdobrenja>15</modelOdobrenja>
+    <pozivNaBrojOdobrenja>3456-6446</pozivNaBrojOdobrenja>
+    <iznos>15000.0</iznos>
+    <sifraValute>RSD</sifraValute>
+</realTimeGrossSettlement>

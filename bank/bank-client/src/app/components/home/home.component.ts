@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
   private selectedCurrency : any;
 
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
-  private clearingItems: any[] = [];
 
   private clientTypes = ["fizicko lice", "pravno lice"];
 
@@ -79,6 +78,7 @@ export class HomeComponent implements OnInit {
   private currency_domicilna: any;
   private currency_countryID: any;
 
+  private clickedClearing : any;
   private isFizicko = false;
 
   private startDate: any;
@@ -466,20 +466,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getClearingItems() {
-
-    this.analyticsOfStatementsService.getAnalyticsForClearing().subscribe(data => {
-      this.clearingItems = data;
-      console.log(data);
-    });
-  }
-
-  loadClearingItems() {
-
-    this.clearingItems = [];
-    this.getClearingItems();
-  }
-
   // NOVO
   exportAccount(bank) {
     this.bankAccountService.exportAccount(bank).subscribe(data => {
@@ -499,6 +485,7 @@ export class HomeComponent implements OnInit {
 
   exportClearing(i) {
 
+    this.clearings[i].exportovan = true;
     this.clearingService.exportClearing(JSON.stringify(this.clearings[i])).subscribe(data => {
       
       
@@ -648,6 +635,27 @@ export class HomeComponent implements OnInit {
 
     this.rtgsList = [];
     this.getRtgs();
-    
+
   }
+
+  refreshClearingList() {
+
+    this.clearings = [];
+    this.getClearings();
+    console.log("CLEARINGS:")
+    console.log(this.clearings);
+  }
+
+  openClearingItems(clearingItemsModal, i) {
+
+    this.clickedClearing = this.clearings[i] 
+    this.modalService.open(clearingItemsModal, { size: 'lg' }).result.then((result) => {
+      
+    }, (reason) => {
+      
+    });
+
+  }
+
+  
 }

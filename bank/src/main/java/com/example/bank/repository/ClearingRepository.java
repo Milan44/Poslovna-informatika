@@ -8,4 +8,5 @@ import com.example.bank.model.Clearing;
 @Repository
 public interface ClearingRepository extends JpaRepository<Clearing, Long> {
 
+	Clearing findOneByClearingId(Long id);
 }
