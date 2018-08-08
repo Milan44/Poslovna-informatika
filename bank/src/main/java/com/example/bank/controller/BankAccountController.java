@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;  
 import java.util.Date; 
 
@@ -27,6 +28,7 @@ import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.model.Bank;
 import com.example.bank.DTO.BankAccountDTO;
 import com.example.bank.model.BankAccount;
+import com.example.bank.model.Client;
 import com.example.bank.model.DailyAccountBalance;
 import com.example.bank.model.PaymentType;
 import com.example.bank.model.Place;
@@ -72,6 +74,7 @@ public class BankAccountController {
 	@Autowired
 	private DailyAccountBalanceService dailyAccountBalanceService;
 
+	@Autowired
 	private ClientService clientService;
 	
 	@Autowired
@@ -120,6 +123,8 @@ public class BankAccountController {
 			account.setMoney(accountDTO.getMoney());
 			account.setValid(accountDTO.getValid());
 			
+			System.out.println("id klijenta za racun je: "+ accountDTO.getClientID());
+			Client c = clientService.getClientById(accountDTO.getClientID());
 			account.setClient(clientService.getClientById(accountDTO.getClientID()));
 			account.setBank(bankService.getBankById(accountDTO.getBankID()));
 			account.setCurrency(currencyService.getCurrencyById(accountDTO.getCurrencyID()));

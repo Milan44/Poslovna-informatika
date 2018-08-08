@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
   private currency_countryID: any;
 
   private clickedClearing : any;
-  private isFizicko = false;
+  private isFizicko;
 
   private startDate: any;
   private endDate: any;
@@ -240,8 +240,9 @@ export class HomeComponent implements OnInit {
       date += this.dateOfOpening.day;
 
     console.log(date);
-
-    // let bankAccountDTO = {accountNumber:this.accountNumber+"", money: this.money, valid:true, dateOfOpening:date, client:this.selectedClient, bank:this.selectedBank, currency:this.selectedCurrency}
+    console.log("ID klijenta za racun koji se dodaje:");
+    console.log(this.selectedClient);
+ 
     this.bankAccountService.registerBankAccount({ accountNumber: this.accountNumber + "", money: this.money, valid: true, dateOfOpening: date, clientID: this.selectedClient, bankID: this.selectedBank, currencyID: this.selectedCurrency }).subscribe(data => {
 
       if (data) {
@@ -281,6 +282,7 @@ export class HomeComponent implements OnInit {
 
     this.action = "Add"
     this.actionId = 0;
+    this.isFizicko = false;
 
     this.modalService.open(addClientModal).result.then((result) => {
 
@@ -330,7 +332,7 @@ export class HomeComponent implements OnInit {
 
     console.log(this.client_typeOfClient);
 
-    if (this.client_typeOfClient === "fizicko") {
+    if (this.client_typeOfClient === "fizicko lice") {
       this.isFizicko = true;
       this.client_pib = null;
     }
@@ -401,6 +403,8 @@ export class HomeComponent implements OnInit {
 
   openAddCurrencyModal(addCurrencyModal) {
 
+    this.currency_domicilna = false;
+    
     this.modalService.open(addCurrencyModal).result.then((result) => {
 
     }, (reason) => {

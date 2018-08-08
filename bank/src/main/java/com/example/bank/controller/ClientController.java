@@ -143,7 +143,7 @@ public class ClientController {
 			
 		List<BankAccount> accounts = bankAccountService.getAccountsByClientID(clientID);
 		
-		if(accounts.isEmpty()) {						// ako nema ni jedan racun u toj banci onda tek moze da ga obrise
+		if(accounts.isEmpty()) {						// ako nema ni jedan racun u banci onda tek moze da ga obrise
 			clientService.deleteClient(clientID);
 			
 			return true;
