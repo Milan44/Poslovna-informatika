@@ -20,16 +20,17 @@ public class BankAccountServiceImpl implements BankAccountService{
 	
 	@Override
 	public List<BankAccount> getAll() {
-		List<BankAccount> accountList = bankAccountRepository.findAll();
-		List<BankAccount> ret = new ArrayList<BankAccount>();
-		
-		for(BankAccount acc: accountList){
-			if(!acc.getAccountNumber().equals("456987123")){
-				ret.add(acc);
-			}
-		}
-		
-		return ret;
+//		List<BankAccount> accountList = bankAccountRepository.findAll();
+//		List<BankAccount> ret = new ArrayList<BankAccount>();
+//		
+//		for(BankAccount acc: accountList){
+//			if(!acc.getAccountNumber().equals("456987123")){
+//				ret.add(acc);
+//			}
+//		}
+//		
+//		return ret;
+		return bankAccountRepository.findAll();
 	}
 
 	@Override

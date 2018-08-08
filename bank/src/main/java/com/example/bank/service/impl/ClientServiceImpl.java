@@ -63,6 +63,8 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public Client getClientById(Long id) {
 		// TODO Auto-generated method stub
+		Client c = clientRepository.findOneById(id);
+		System.out.println("ime klijenta iz servisa je: " + c.getName());
 		return clientRepository.findOneById(id);
 	}
 

@@ -243,14 +243,13 @@
       </ngb-tab>      
 
 
-      <ngb-tab title="Clients">
+      <!-- <ngb-tab title="Clients">
         <ng-template ngbTabContent>
           
             <table class="table">
                 <thead>
                     <tr>
     
-                        <!-- <th style="width: 20%; text-align:center;vertical-align:middle" >#</th> -->
                         <th style="width: 30%; text-align:center;vertical-align:middle" >ID</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
                         <th style="width: 30%; text-align:center;vertical-align:middle" >Address</th>
@@ -272,7 +271,7 @@
                 <tbody>
                     <tr class="active" *ngFor="let client of clients; let i = index">
 
-                            <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
+                           
                             <td style = "text-align:center;vertical-align:middle" >{{client.id}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.name}}</td>
                             <td style = "text-align:center;vertical-align:middle">{{client.address}}</td>
@@ -287,8 +286,7 @@
                             <td style = "text-align:center;vertical-align:middle">{{client.residence.name}}</td>
                             <td style = "text-align:center;vertical-align:middle"> 
                               <button id="updateClient"  (click) = "openUpdateClientModal(updateClientModal,client)" type="button" class="btn btn-warning btn-sm center" >Update</button>
-                            <!-- </td>
-                            <td style = "text-align:center;vertical-align:middle">  -->
+                            
                                <button id="deleteClient"  (click) = "deleteClient(client.id)" type="button" class="btn btn-danger btn-sm center" >Delete</button>
                             </td> 
                                              
@@ -299,7 +297,7 @@
             </table>
             <button id="addClient"  (click) = "openAddClientModal(addClientModal)" type="button" class="btn btn-primary  center" >Register client</button>
         </ng-template>
-      </ngb-tab>
+      </ngb-tab> -->
 
       <ngb-tab >
             
@@ -368,7 +366,6 @@
 
 
 <!-- 
-        <!-- 
       <ngb-tab title="InterBankTransfers">
         <ng-template ngbTabContent>    
             <table class="table">
@@ -506,14 +503,17 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab title="Currencies">
 
+        <ngb-tab title="Currencies">
             <ng-template ngbTabContent>
 
                 <table class="table">
                     <thead>
                         <tr>
-
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Official code</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Name</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Domicilna</th>
+                            <th style="width: 30%; text-align:center;vertical-align:middle" >Country</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -537,7 +537,7 @@
 
                     </tbody>
                 </table>
-                <button id="addCurrency" (click)="openAddCurrencyModal(addCurrencyModal)" type="button" class="btn btn-primary  center">Register client</button>
+                <button id="addCurrency" (click)="openAddCurrencyModal(addCurrencyModal)" type="button" class="btn btn-primary  center">Add currency</button>
             </ng-template>
         </ngb-tab>
 
@@ -681,6 +681,15 @@
                   <select [(ngModel)]="client_typeOfClient"  (change) = "selectTypeOfClient()" name="client_type" class="form-control">
                         <option *ngFor="let type of clientTypes" [value]="type">{{type}}</option>
                   </select> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="drzava">Residence: </label>
+                <div class="input-group-append">
+                    <select [(ngModel)]="client_residence" name="izabran_valuta" class="form-control">
+                        <option *ngFor="let place of places" [value]="place.id">{{place.name}}</option>
+                    </select>
                 </div>
             </div>
 
