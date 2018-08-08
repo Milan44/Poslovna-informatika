@@ -24,12 +24,12 @@ INSERT INTO `bank`.`bank` (`id`, `address`, `bank`, `bankCode`, `email`, `fax`, 
 INSERT INTO `bank`.`bank` (`id`, `address`, `bank`, `bankCode`, `email`, `fax`, `name`, `phone`, `pib`, `racun`, `swift`, `web`) VALUES ('4', 'Trifkovicev Trg 7', b'1', 'SGB', 'societe@societe', '323-372-323', 'Societe Generale Bank', '0612537788', '44', '556984532654194639', '66666666', 'www.societe.com');
 
 
-INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('1', 'Milovana Jelica 15', 'adressStatement1', 'naovis@gmai.com', b'1', '25223', '1004995830255', 'Naovis', '069782145', '11', 'pravno lice', '1');
-INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('2', 'Marka Markovica 15', 'adressStatement2', 'nis@nis.com', b'1', '44423', '7888996542', 'NIS', '7894562', '22', 'pravno lice', '2');
-INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `typeOfClient`, `residence_id`) VALUES ('3', 'Janka Cmelika 12', 'adresaStamenta3', 'pera@pera', b'1', '023711456', '1004995830266', 'Pera Peric', '060123456', 'fizicko lice', '3');
-INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('5', 'Brace Ribnikar 13', 'adressStatement5', 'simpo@simpo', b'1', '34567', '1265787654345', 'Simpo', '0607856633', '44', 'pravno lice', '1');
-INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('6', 'Dr Sime Milosevica 34', 'adressStatement6', 'ftn@ftn', b'1', '59845', '8745985632547', 'Fakultet tehnickih nauka', '0632156633', '55', 'pravno lice', '1');
-INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('7', 'Bulevar Oslobodjenja 76', 'adressStatement7', 'mercator@mercator', b'1', '94847', '7543363724515', 'Mercator', '0657854427', '66', 'pravno lice', '1');
+	INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('2', 'Milovana Jelica 15', 'adressStatement1', 'naovis@gmai.com', b'1', '25223', '1004995830255', 'Naovis', '069782145', '11', 'pravno lice', '1');
+	INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('3', 'Marka Markovica 15', 'adressStatement2', 'nis@nis.com', b'1', '44423', '7888996542', 'NIS', '7894562', '22', 'pravno lice', '2');
+	INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `typeOfClient`, `residence_id`) VALUES ('4', 'Janka Cmelika 12', 'adresaStamenta3', 'pera@pera', b'1', '023711456', '1004995830266', 'Pera Peric', '060123456', 'fizicko lice', '3');
+	INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('5', 'Brace Ribnikar 13', 'adressStatement5', 'simpo@simpo', b'1', '34567', '1265787654345', 'Simpo', '0607856633', '44', 'pravno lice', '1');
+	INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('6', 'Dr Sime Milosevica 34', 'adressStatement6', 'ftn@ftn', b'1', '59845', '8745985632547', 'Fakultet tehnickih nauka', '0632156633', '55', 'pravno lice', '1');
+	INSERT INTO `bank`.`client` (`client_id`, `address`, `addressForStatements`, `email`, `emailStatements`, `fax`, `jmbg`, `name`, `phone`, `pib`, `typeOfClient`, `residence_id`) VALUES ('7', 'Bulevar Oslobodjenja 76', 'adressStatement7', 'mercator@mercator', b'1', '94847', '7543363724515', 'Mercator', '0657854427', '66', 'pravno lice', '1');
 
 
 INSERT INTO `bank`.`bankaccount` (`id`, `accountNumber`, `dateOfOpening`, `money`, `valid`, `bank_id`, `client_client_id`, `currency_currency_id`) VALUES ('2', '552787843787856669', '2018-08-05', '5500', b'1', '2', '2', '2');
@@ -91,5 +91,18 @@ INSERT INTO `bank`.`paymenttype` (`id`, `code`, `nameOfPaymentType`) VALUES ('2'
 --VALUES ('1', '4', 'Naovis', '2018-07-10', '2018-07-10', '234-1234-234','Cubric i minimum pet sinova,Inc', b'0', NULL, '97', 'Isplata oko aplikacije preduzeca', 
 --NULL, NULL, NULL, '8000', NULL, NULL, '2', NULL, '1')
 
+--AAAAAAAAAAA JOVICAAAAAAAAAAAAAAAAAAA
+UPDATE `bank`.`bankaccount` SET `accountNumber`='552123456789555555', `dateOfOpening`='2008-04-13 00:00:00', `money`='150000', `client_client_id`='4' WHERE `id`='6';
+UPDATE `bank`.`bankaccount` SET `accountNumber`='555123456789555555', `dateOfOpening`='2013-04-13 00:00:00', `money`='5000', `client_client_id`='2' WHERE `id`='5';
+UPDATE `bank`.`bankaccount` SET `accountNumber`='555123456789555554', `dateOfOpening`='2012-12-12 00:00:00', `money`='0', `bank_id`='2', `client_client_id`='1', `currency_currency_id`='2' WHERE `id`='4';
+UPDATE `bank`.`bankaccount` SET `accountNumber`='555123456789555553', `dateOfOpening`='2010-10-10 00:00:00', `money`='3000', `bank_id`='1', `client_client_id`='3', `currency_currency_id`='3' WHERE `id`='3';
+UPDATE `bank`.`bankaccount` SET `accountNumber`='555123456789555552', `dateOfOpening`='2008-07-12 00:00:00', `money`='0', `client_client_id`='1', `currency_currency_id`='2' WHERE `id`='2';
+UPDATE `bank`.`bankaccount` SET `accountNumber`='554123456789555555', `dateOfOpening`='2006-07-12 00:00:00', `money`='1000', `bank_id`='1', `client_client_id`='1', `currency_currency_id`='1' WHERE `id`='1';
 
+
+
+UPDATE `bank`.`client` SET `client_id`='1' WHERE `client_id`='2';
+UPDATE `bank`.`client` SET `client_id`='2' WHERE `client_id`='3';
+UPDATE `bank`.`client` SET `client_id`='3' WHERE `client_id`='4';
+UPDATE `bank`.`client` SET `client_id`='4', `address`='Bulevar Kralaj Petra 18', `addressForStatements`='adressStatement3', `email`='uniCredit@gmail.com', `fax`='25923', `jmbg`='1004458730255', `name`='UniCredit', `phone`='069778145', `pib`='33' WHERE `client_id`='5';
 

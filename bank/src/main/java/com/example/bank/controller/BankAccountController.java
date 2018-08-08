@@ -93,8 +93,14 @@ public class BankAccountController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<BankAccount>  getBankAccounts() {
 		
+		List<BankAccount> accounts = bankAccountService.getAll();
+		Date currentDate = new Date();
 		
-		return bankAccountService.getAll();
+		for(BankAccount acc: accounts){
+			acc.setMoney(dailyAccountBalanceService.findAccountStateAt(acc, currentDate).getNewState());
+			bankAccountService.save(acc);
+		}
+		return accounts;		
 		
 	}
 	

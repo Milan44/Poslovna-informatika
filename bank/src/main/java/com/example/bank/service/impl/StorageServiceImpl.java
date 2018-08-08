@@ -28,13 +28,17 @@ public class StorageServiceImpl implements StorageService{
 	private final Path rootLocation = Paths.get("upload-dir");
 	
 	public Path store(MultipartFile file){
-		try{
-			Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-			return this.rootLocation.resolve(file.getOriginalFilename());
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
+		Path path = Paths.get(rootLocation + "/" + file.getOriginalFilename());
+		if(!Files.exists(path)){
+			try{
+				Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+				return this.rootLocation.resolve(file.getOriginalFilename());
+			}catch(Exception e){
+				e.printStackTrace();
+				return null;
+			}
 		}
+		return null;
 	}
 	
 	public AnalyticsOfStatements loadAnalyticOfStatements(Path path) {

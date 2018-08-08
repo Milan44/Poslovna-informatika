@@ -58,7 +58,7 @@
                                     <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                                   </td>
                                   <td style = "text-align:center;vertical-align:middle"> 
-                                    <button id="suspendAccount"  (click) = "suspend(account, suspendAccountModal)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
+                                    <button id="suspendAccount" [disabled]="account.money<=0" (click) = "suspend(account, suspendAccountModal)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
                                   </td>
                                                    
                           </tr>
