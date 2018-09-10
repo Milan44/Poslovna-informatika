@@ -7,7 +7,6 @@ import {Http, Response, Headers } from "@angular/http";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';

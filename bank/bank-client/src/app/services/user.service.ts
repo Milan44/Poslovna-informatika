@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 
 import {HttpErrorResponse} from '@angular/common/http';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';
@@ -16,11 +15,11 @@ export class UserService {
 
   constructor(private http: Http) { }
 
-  loginUser(user : any) {
+  loginUser(user: any) {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/users/login', 
-      JSON.stringify(user), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(user), { headers : headers }).map((data: Response) => data.json());
   }
 }

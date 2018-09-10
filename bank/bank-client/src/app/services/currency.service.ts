@@ -7,7 +7,6 @@ import {Http, Response, Headers } from "@angular/http";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';
@@ -34,25 +33,25 @@ export class CurrencyService {
   
   }
 
-  registerCurrency(currencyDTO : any) {
+  registerCurrency(currencyDTO: any) {
 
     console.log(currencyDTO.id);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/public/currencies/registerCurrency', 
-      JSON.stringify(currencyDTO), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(currencyDTO), { headers : headers }).map((data: Response) => data.json());
   }
 
-  updateCurrency(currencyDTO : any) {
+  updateCurrency(currencyDTO: any) {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.put('http://localhost:8080/public/currencies/updateCurrency', 
-      JSON.stringify(currencyDTO), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(currencyDTO), { headers : headers }).map((data: Response) => data.json());
 
   }
 
-  deleteCurrency(currencyID : any) {  
+  deleteCurrency(currencyID: any) {  
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 

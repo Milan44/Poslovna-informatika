@@ -7,7 +7,6 @@ import {Http, Response, Headers } from "@angular/http";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';
@@ -44,21 +43,21 @@ export class BankAccountService {
   
   // .map(data:Response => data.json()
 
-  registerBankAccount(bankAccountDTO : any) {
+  registerBankAccount(bankAccountDTO: any) {
     console.log(bankAccountDTO);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/public/bankAccounts/registerBankAccount', 
-      JSON.stringify(bankAccountDTO), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(bankAccountDTO), { headers : headers }).map((data: Response) => data.json());
 
   }
 
-  searchBankAccount(bankAccountDTO : any) {
+  searchBankAccount(bankAccountDTO: any) {
     console.log("SALJE NA PRETRAGU::" + bankAccountDTO);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/public/bankAccounts/searchBankAccount', 
-      JSON.stringify(bankAccountDTO), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(bankAccountDTO), { headers : headers }).map((data: Response) => data.json());
   }
 
   exportBankAccountXml(startDate:any, endDate:any, bankAccount: any) {

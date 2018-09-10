@@ -36,24 +36,24 @@ import { RtgsService } from '../../services/rtgs.service';
 export class HomeComponent implements OnInit {
 
 
-  private bankAccounts : any[] = [];
-  private clients : any[] = [];
-  private banks : any[] = [];
-  private places : any[] = [];
-  private clearings : any[] = [];
-  private currencies : any[] = [];
-  private countries : any[] = [];
+  private bankAccounts: any[] = [];
+  private clients: any[] = [];
+  private banks: any[] = [];
+  private places: any[] = [];
+  private clearings: any[] = [];
+  private currencies: any[] = [];
+  private countries: any[] = [];
   private clientBankAccounts: any[];
   private accToSuspend: any;
-  private rtgsList : any[] = [];
+  private rtgsList: any[] = [];
 
-  private accountNumber : any;
-  private money : any;
-  private dateOfOpening : any;
+  private accountNumber: any;
+  private money: any;
+  private dateOfOpening: any;
   private dateOfOpeningSearch: any;
-  private selectedClient : any;
-  private selectedBank : any;
-  private selectedCurrency : any;
+  private selectedClient: any;
+  private selectedBank: any;
+  private selectedCurrency: any;
 
   private suspendDialogRef: MatDialogRef<SuspendAccountComponent>;
 
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
   private currency_domicilna: any;
   private currency_countryID: any;
 
-  private clickedClearing : any;
+  private clickedClearing: any;
   private isFizicko;
 
   private startDate: any;
@@ -93,12 +93,12 @@ export class HomeComponent implements OnInit {
   private actionId: number;
   private modalRef: NgbModalRef;
   
+  private validation = true;
 
-
-  constructor(private router : Router , private modalService: NgbModal, private bankAccountService : BankAccountService, private clientService : ClientService,
-              private bankService : BankService, private currencyService: CurrencyService, private countryService:CountryService, private suspendDialog: MatDialog, private placeService : PlaceService,
-              private analyticsOfStatementsService :AnalyticsOfStatementsService, private analyticService:AnalyticsService, private suspendAccountService: SuspendAccountService,
-              private clearingService : ClearingService, private rtgsService : RtgsService) { }
+  constructor(private router: Router, private modalService: NgbModal, private bankAccountService: BankAccountService, private clientService: ClientService,
+    private bankService: BankService, private currencyService: CurrencyService, private countryService: CountryService, private suspendDialog: MatDialog, private placeService: PlaceService,
+    private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService, private suspendAccountService: SuspendAccountService,
+    private clearingService: ClearingService, private rtgsService: RtgsService) { }
  
   
 
@@ -146,8 +146,8 @@ export class HomeComponent implements OnInit {
   }
 
   confirmSuspend(){
-    let selector = document.getElementById("accountSelect") as HTMLSelectElement;
-    let accountTransfer = selector.options[selector.selectedIndex].text;
+    const selector = document.getElementById("accountSelect") as HTMLSelectElement;
+    const accountTransfer = selector.options[selector.selectedIndex].text;
 
     console.log(accountTransfer);
 
@@ -229,20 +229,22 @@ export class HomeComponent implements OnInit {
   addBankAccount() {
 
     let date = "" + this.dateOfOpening.year + "-";
-    if (this.dateOfOpening.month < 10)
+    if (this.dateOfOpening.month < 10){
       date += "0" + this.dateOfOpening.month + "-";
-    else
+    }
+    else{
       date += this.dateOfOpening.month + "-";
-
-    if (this.dateOfOpening.day < 10)
+    }
+    if (this.dateOfOpening.day < 10){
       date += "0" + this.dateOfOpening.day;
-    else
+    }
+    else{
       date += this.dateOfOpening.day;
-
+    }
     console.log(date);
     console.log("ID klijenta za racun koji se dodaje:");
     console.log(this.selectedClient);
- 
+
     this.bankAccountService.registerBankAccount({ accountNumber: this.accountNumber + "", money: this.money, valid: true, dateOfOpening: date, clientID: this.selectedClient, bankID: this.selectedBank, currencyID: this.selectedCurrency }).subscribe(data => {
 
       if (data) {
@@ -339,6 +341,17 @@ export class HomeComponent implements OnInit {
     else {
       this.isFizicko = false;
     }
+  }
+
+  inputBankAccountNumber() {
+    
+    if(this.accountNumber.length < 15) {
+      this.validation = true;
+    }
+    else {
+      this.validation = false;
+    }
+
   }
 
   openUpdateClientModal(UpdateClientModal, client) {
@@ -479,7 +492,7 @@ export class HomeComponent implements OnInit {
   // NOVO
 
   getAnalytics() {
-    let putanja = document.getElementById("putanjaInput") as HTMLInputElement;
+    const putanja = document.getElementById("putanjaInput") as HTMLInputElement;
     console.log(putanja.value);
     this.analyticService.loadAnalytics(putanja.value).subscribe(data => {
       console.log(data);
@@ -512,27 +525,35 @@ export class HomeComponent implements OnInit {
 
   exportXML() {
     let startDateModified = "" + this.startDate.year + "-";
-    if (this.startDate.month < 10)
+    if (this.startDate.month < 10){
       startDateModified += "0" + this.startDate.month + "-";
-    else
+    }
+    else{
       startDateModified += this.startDate.month + "-";
+    }
 
-    if (this.startDate.day < 10)
+    if (this.startDate.day < 10) {
       startDateModified += "0" + this.startDate.day;
-    else
+    }
+    else{
       startDateModified += this.startDate.day;
+    }
 
 
     let endDateModified = "" + this.endDate.year + "-";
-    if (this.endDate.month < 10)
+    if (this.endDate.month < 10) {
       endDateModified += "0" + this.endDate.month + "-";
-    else
+    }
+    else{
       endDateModified += this.endDate.month + "-";
+    }
 
-    if (this.endDate.day < 10)
+    if (this.endDate.day < 10){
       endDateModified += "0" + this.endDate.day;
-    else
+    }
+    else{
       endDateModified += this.endDate.day;
+    }
 
     this.bankAccountService.exportBankAccountXml(
       startDateModified, endDateModified, this.selectedBankAccount).subscribe(data => {

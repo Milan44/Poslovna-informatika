@@ -7,7 +7,6 @@ import {Http, Response, Headers } from "@angular/http";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';
@@ -33,11 +32,11 @@ export class ClearingService {
   
   }
 
-  exportClearing(clearing : any) {
+  exportClearing(clearing: any) {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/clearings/export', 
-      clearing, { headers : headers }).map((data : Response) => data.json());
+      clearing, { headers : headers }).map((data: Response) => data.json());
   }
 }
