@@ -7,6 +7,9 @@ import com.example.bank.model.BankAccount;
 
 public interface BankAccountService {
 	
+	
+	
+	
 	List<BankAccount> getAll();
 	
 
@@ -33,4 +36,7 @@ public interface BankAccountService {
 
 	List<BankAccount> searchBankAccounts(String accountNumber, double money, Long clientID, Long bankId, Long currencyID);
 
+	
+	String getCurrentIdBank();
+	void setCurrentIdBank(String idBank);
 }

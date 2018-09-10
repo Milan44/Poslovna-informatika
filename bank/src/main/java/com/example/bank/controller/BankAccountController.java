@@ -118,7 +118,7 @@ public class BankAccountController {
 		try {
 			
 			BankAccount account = new BankAccount();
-			account.setAccountNumber(accountDTO.getAccountNumber());
+			account.setAccountNumber(bankAccountService.getCurrentIdBank() + accountDTO.getAccountNumber());
 			account.setDateOfOpening(new SimpleDateFormat("yyyy-MM-dd").parse(accountDTO.getDateOfOpening()));
 			account.setMoney(accountDTO.getMoney());
 			account.setValid(accountDTO.getValid());

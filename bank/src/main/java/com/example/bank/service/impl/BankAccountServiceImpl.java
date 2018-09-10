@@ -18,6 +18,9 @@ public class BankAccountServiceImpl implements BankAccountService{
 	@Autowired
 	private BankAccountRepository bankAccountRepository;
 	
+	private String currentIdBank = "555";
+	
+	
 	@Override
 	public List<BankAccount> getAll() {
 //		List<BankAccount> accountList = bankAccountRepository.findAll();
@@ -109,6 +112,19 @@ public class BankAccountServiceImpl implements BankAccountService{
 	public List<BankAccount> searchBankAccounts(String accountNumber, double money, Long clientID, Long bankId,
 			Long currencyID) {		
 		return bankAccountRepository.searchBankAccountr(clientID, bankId, accountNumber, money, currencyID);
+	}
+
+	@Override
+	public String getCurrentIdBank() {
+		// TODO Auto-generated method stub
+		return currentIdBank;
+	}
+
+	@Override
+	public void setCurrentIdBank(String idBank) {
+		// TODO Auto-generated method stub
+		this.currentIdBank = idBank;
+		
 	}
 
 
