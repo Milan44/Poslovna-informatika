@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accountStatement>
+    <fromDate>2018-04-04T00:00:00+02:00</fromDate>
+    <toDate>2018-09-11T00:00:00+02:00</toDate>
+    <accountNumber>555123456789555554</accountNumber>
+    <countOfTrafficToBenefit>0</countOfTrafficToBenefit>
+    <countOfTrafficToBurden>0</countOfTrafficToBurden>
+</accountStatement>

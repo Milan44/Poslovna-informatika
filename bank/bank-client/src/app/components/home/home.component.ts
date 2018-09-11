@@ -559,14 +559,14 @@ export class HomeComponent implements OnInit {
       startDateModified, endDateModified, this.selectedBankAccount).subscribe(data => {
 
         if (data) {
-          alert("You have successfully added a currecny!");
-          this.getCurrencies();
+          alert("You have successfully exported a daily dir(XML)!");
+          // this.getCurrencies();
 
-          this.currency_id = null;
-          this.currency_official_code = null;
-          this.currency_name = null;
-          this.currency_domicilna = false;
-          this.currency_countryID = null;
+          // this.currency_id = null;
+          // this.currency_official_code = null;
+          // this.currency_name = null;
+          // this.currency_domicilna = false;
+          // this.currency_countryID = null;
 
         }
         else {
