@@ -34,12 +34,12 @@ export class BankAccountService {
   
   }
 
-  exportAccount(bank){
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+  // exportAccount(bank){
+  //   const headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
 
-    return this.http.get("http://localhost:8080/public/bankAccounts/pdf/" + bank.id, {headers:headers});
-  }
+  //   return this.http.get("http://localhost:8080/public/bankAccounts/pdf/" + bank.id, {headers:headers});
+  // }
   
   // .map(data:Response => data.json()
 
@@ -67,6 +67,15 @@ export class BankAccountService {
     startDate +"/"+ endDate, 
       JSON.stringify(bankAccount), { headers : headers });
       // .map((data : Response) => data.json()
+
+  }
+
+  exportAccountsToPDF(bankAccounts: any) {
+    console.log(bankAccounts);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/public/bankAccounts/exportAccountsToPDF', 
+      JSON.stringify(bankAccounts), { headers : headers }).map((data: Response) => data.json());
 
   }
 

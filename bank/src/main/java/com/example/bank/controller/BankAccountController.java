@@ -2,7 +2,10 @@ package com.example.bank.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.OutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,7 +42,13 @@ import com.example.bank.service.DailyAccountBalanceService;
 import com.example.bank.service.PaymentTypeService;
 import com.example.bank.service.PlaceService;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 //import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -237,45 +246,85 @@ public class BankAccountController {
 
 	// NOVO
 	
-	@GetMapping("/pdf/{id}")
-	public void exportAccountsToPdf(@PathVariable Long id) throws Exception {
-		ArrayList<AccountForBank> list = new ArrayList<>();
-
-		ArrayList<BankAccount> accounts = bankAccountService.findByBank(id);
-		Bank bank = bankService.findOne(id);
-		Date date = new Date();
-		for (BankAccount account : accounts) {
-			String clientName = "";
-			if (account.getClient().getTypeOfClient().equals("fizicko lice")) {
-				clientName = account.getClient().getName();
-			} else {
-				//clientName = ((BankAccount) account.getClient()).getNaziv_klijenta();
-				clientName = account.getClient().getName();
-			}
-			DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(account, new Date());
-			Float state = (float) 0.0;
-			if (dailyAccountBalance.getTrafficToBenefit() == 0 && dailyAccountBalance.getTrafficToTheBurden() == 0)
-				state = dailyAccountBalance.getPreviousState();
-			else
-				state = dailyAccountBalance.getNewState();
-			AccountForBank afb = new AccountForBank(clientName, account.getAccountNumber(), state.toString(),
-					account.getCurrency().getOfficial_code());
-			list.add(afb);
+//	@GetMapping("/pdf/{id}")
+//	public void exportAccountsToPdf(@PathVariable Long id) throws Exception {
+//		ArrayList<AccountForBank> list = new ArrayList<>();
+//
+//		ArrayList<BankAccount> accounts = bankAccountService.findByBank(id);
+//		Bank bank = bankService.findOne(id);
+//		Date date = new Date();
+//		for (BankAccount account : accounts) {
+//			String clientName = "";
+//			if (account.getClient().getTypeOfClient().equals("fizicko lice")) {
+//				clientName = account.getClient().getName();
+//			} else {
+//				//clientName = ((BankAccount) account.getClient()).getNaziv_klijenta();
+//				clientName = account.getClient().getName();
+//			}
+//			DailyAccountBalance dailyAccountBalance = dailyAccountBalanceService.findByAccountNumberAndDate(account, new Date());
+//			Float state = (float) 0.0;
+//			if (dailyAccountBalance.getTrafficToBenefit() == 0 && dailyAccountBalance.getTrafficToTheBurden() == 0)
+//				state = dailyAccountBalance.getPreviousState();
+//			else
+//				state = dailyAccountBalance.getNewState();
+//			AccountForBank afb = new AccountForBank(clientName, account.getAccountNumber(), state.toString(),
+//					account.getCurrency().getOfficial_code());
+//			list.add(afb);
+//		}
+//
+//		JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(list);
+//
+//
+//		Map<String, Object> parameters = new HashMap<String, Object>();
+//		parameters.put("ItemDataSource", itemsJRBean);
+//		parameters.put("BankName", bank.getName());
+//		parameters.put("Date", date);
+//		
+//	//	JasperPrint jasperPrint = JasperFillManager.fillReport("excerptBank.jasper", parameters, new JREmptyDataSource());
+//	    File file = new File("../bank/accounts.pdf");
+//	    OutputStream outputStream = new FileOutputStream(file);
+//	   // JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); 
+//	
+//	}
+	
+	@RequestMapping(
+			value = "/exportAccountsToPDF",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public boolean exportAccountsToPDF(@RequestBody ArrayList<BankAccountDTO> accountsDTO) {
+			
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		
+		for (BankAccountDTO ba :  accountsDTO) {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("accountNumber", ba.getAccountNumber());
+			map.put("money", ba.getMoney() + "");
+			list.add(map);
+			
 		}
 
-		JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(list);
-
-
-		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("ItemDataSource", itemsJRBean);
-		parameters.put("BankName", bank.getName());
-		parameters.put("Date", date);
 		
-	//	JasperPrint jasperPrint = JasperFillManager.fillReport("excerptBank.jasper", parameters, new JREmptyDataSource());
-	    File file = new File("../bank/accounts.pdf");
-	    OutputStream outputStream = new FileOutputStream(file);
-	   // JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); 
-	
+		JRDataSource dataSource = new JRBeanCollectionDataSource(list);
+		String sourceName = "src/main/java/com/example/bank/jasperReports/bankAccountsReport.jrxml";
+		
+		try {
+			
+			JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "generatedReports/" + accountsDTO.get(0).getAccountNumber().substring(0, 3) + ".pdf");
+		
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+		
+		
+		
+		
 	}
 
 }

@@ -1,10 +1,6 @@
 package com.example.bank.DTO;
 
 
-import com.example.bank.model.Bank;
-import com.example.bank.model.Client;
-import com.example.bank.model.Currency;
-
 public class BankAccountDTO {
 	
 	private String accountNumber;
