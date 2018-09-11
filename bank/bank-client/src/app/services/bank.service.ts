@@ -7,7 +7,6 @@ import {Http, Response, Headers } from "@angular/http";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';
@@ -37,7 +36,7 @@ export class BankService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/public/banks/searchBanks', 
-      JSON.stringify(bankParams), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(bankParams), { headers : headers }).map((data: Response) => data.json());
   }
 
 }

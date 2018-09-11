@@ -12,7 +12,7 @@ export class DetailUploadComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let splitedString = this.fileUpload.split("/");
+    const splitedString = this.fileUpload.split("/");
     this.fileUploadName = splitedString[splitedString.length - 1];
     console.log(this.fileUploadName);
   }

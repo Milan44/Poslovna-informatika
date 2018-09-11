@@ -7,7 +7,6 @@ import {Http, Response, Headers } from "@angular/http";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import 'rxjs/Rx'
 
 
 import 'rxjs/add/operator/map';
@@ -35,31 +34,31 @@ export class ClientService {
   
   }
 
-  registerClient(clientDTO : any) {
+  registerClient(clientDTO: any) {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/public/clients/registerClient', 
-      JSON.stringify(clientDTO), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(clientDTO), { headers : headers }).map((data: Response) => data.json());
   }
 
-  searchClient(clientDTO : any){
+  searchClient(clientDTO: any){
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/public/clients/searchClient', 
-      JSON.stringify(clientDTO), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(clientDTO), { headers : headers }).map((data: Response) => data.json());
   }
 
-  updateClient(client : any) {
+  updateClient(client: any) {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.put('http://localhost:8080/public/clients/updateClient', 
-      JSON.stringify(client), { headers : headers }).map((data : Response) => data.json());
+      JSON.stringify(client), { headers : headers }).map((data: Response) => data.json());
 
   }
 
-  deleteClient(clientID : any) {  
+  deleteClient(clientID: any) {  
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 

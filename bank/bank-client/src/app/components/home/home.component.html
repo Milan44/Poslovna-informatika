@@ -556,7 +556,7 @@
             
               <div class="form-group">
                   <label for="broj_racuna">Account number: </label>
-                  <input id="broj_racuna" name="broj_racuna" [(ngModel)]="accountNumber" class="form-control" type="number" data-validation="required" #broj_Racuna >
+                  <input id="broj_racuna" name="broj_racuna" [(ngModel)]="accountNumber" (keypress) = "inputBankAccountNumber()" class="form-control" type="text" maxlength="15" data-validation="required" #broj_Racuna >
                   <span id="error_naziv_drzave" class="text-danger"></span>
               </div>
       
@@ -610,7 +610,7 @@
       
               <div class="form-group">
       
-                  <button id="submitBankAccount" *ngIf="actionId==0" (click) = "addBankAccount()" type="button" class="btn btn-primary  center" > Submit </button>
+                  <button id="submitBankAccount" *ngIf="actionId==0" [disabled]="validation" (click) = "addBankAccount()" type="button" class="btn btn-primary  center" > Submit </button>
                   <button *ngIf="actionId==1" (click) = "searchBankAccount()" type="button" class="btn btn-primary  center" > Search </button>
       
               </div>
