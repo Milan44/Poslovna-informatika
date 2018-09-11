@@ -484,11 +484,11 @@ export class HomeComponent implements OnInit {
 
 
   // NOVO
-  exportAccount(bank) {
-    this.bankAccountService.exportAccount(bank).subscribe(data => {
-      console.log(data);
-    });
-  }
+  // exportAccount(bank) {
+  //   this.bankAccountService.exportAccount(bank).subscribe(data => {
+  //     console.log(data);
+  //   });
+  // }
   // NOVO
 
   getAnalytics() {
@@ -678,6 +678,33 @@ export class HomeComponent implements OnInit {
       
     }, (reason) => {
       
+    });
+
+  }
+
+  exportPDF() {
+
+    var accountsToExport =  [];
+    for(var i = 0; i < this.bankAccounts.length; i++) {
+      
+      if (this.bankAccounts[i].accountNumber.substring(0, 3) == "555") {
+
+        accountsToExport.push(this.bankAccounts[i]);
+        console.log(this.bankAccounts[i]);
+
+      }
+   }
+
+
+   this.bankAccountService.exportAccountsToPDF(accountsToExport).subscribe(data => {
+
+      if (data) {
+       alert(".pdf successfully exported")
+      }
+      else {
+        alert("Error.");
+      }
+
     });
 
   }

@@ -53,13 +53,17 @@
                                   <td style="text-align:center;vertical-align:middle">
                                     <!-- <button id="exportXML"  (click) = "exportXML(account)" type="button" class="btn btn-success btn-sm center" >Export .xml</button> -->
                                     <button id="exportXML" (click)="openExportXmlModal(exportXmlModal,account)" type="button" class="btn btn-success btn-sm center">Export .xml</button>
-                                   </td>
-                                  <td style = "text-align:center;vertical-align:middle"> 
-                                    <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
-                                  </td>
-                                  <td style = "text-align:center;vertical-align:middle"> 
-                                    <button id="suspendAccount" [disabled]="account.money<=0" (click) = "suspend(account, suspendAccountModal)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
-                                  </td>
+                                    
+                                </td>
+                                <td style="text-align:center;vertical-align:middle">
+
+                                    <button id="exportPDFClient" (click) = "exportPDFClient()" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
+                                </td>
+
+                                <td style = "text-align:center;vertical-align:middle"> 
+                                    <button id="suspendAccount" [disabled]="account.money<0" (click) = "suspend(account, suspendAccountModal)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
+                                </td>
+                              
                                                    
                           </tr>
         
@@ -69,7 +73,8 @@
                   <button id="addBankAccount"  (click) = "openAddBankAccountModal(addBankAccountModal)" type="button" class="btn btn-primary  center" >Register account</button>
                   <button (click) = "openSearchBankAccountModal(addBankAccountModal)" type="button" class="btn btn-primary center">Search</button>
                   <button (click) = "resetSearchBankAccount()" type="button" class="btn btn-primary center">Reset</button>
-              </ng-template>
+                  <button id="exportPDF" (click) = "exportPDF()" type="button" class="btn btn-primary center">Export .pdf</button>
+                </ng-template>
             </ngb-tab>
       
       

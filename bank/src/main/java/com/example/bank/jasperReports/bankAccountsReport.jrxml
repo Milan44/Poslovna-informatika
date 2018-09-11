@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bankAccountsReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ac422a54-bc84-4afe-b233-c5ddca27d250">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="accountNumber" class="java.lang.String"/>
+	<field name="money" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="-3" y="0" width="560" height="40" uuid="049290a9-c692-48b1-9176-47478f809b57"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bank accounts]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="280" height="30" uuid="70e41910-3c66-4a31-802b-44b1577e60f7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c80499a-a255-4b17-bb0e-a6cb46fe3eb3"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Account number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="10" width="280" height="30" uuid="b6ecc9ac-5c91-4474-8f7d-1adcdd6fd306">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93121925-d0d2-4369-bd8e-a1658e361324"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Money]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="40" width="605" height="3" uuid="da9c959b-7867-4670-bbcc-309d474dcfea"/>
+			</line>
+			<line>
+				<reportElement x="-30" y="0" width="605" height="3" uuid="79b075a1-bc93-4f84-82cd-11d83d4bb8a5"/>
+			</line>
+			<line>
+				<reportElement x="281" y="3" width="1" height="37" uuid="9747d82e-8c21-49f1-9e71-24ecb98952da"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="10" width="280" height="30" uuid="d63dd5e1-a872-4de1-bb70-a1ae05c4d26c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c80499a-a255-4b17-bb0e-a6cb46fe3eb3"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accountNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="11" width="280" height="30" uuid="e77e6588-a609-436d-a201-21db58cf1df0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93121925-d0d2-4369-bd8e-a1658e361324"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{money}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="280" y="-1" width="1" height="42" uuid="6870d722-b00e-4cca-8285-9bdd7b12b387"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="44" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
