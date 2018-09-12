@@ -7,11 +7,13 @@
 	</queryString>
 	<field name="accountNumber" class="java.lang.String"/>
 	<field name="money" class="java.lang.String"/>
+	<field name="dateOfOpening" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="41" splitType="Stretch">
+		<band height="66" splitType="Stretch">
 			<staticText>
 				<reportElement x="-3" y="0" width="560" height="40" uuid="049290a9-c692-48b1-9176-47478f809b57"/>
 				<textElement textAlignment="Center">
@@ -19,15 +21,33 @@
 				</textElement>
 				<text><![CDATA[Bank accounts]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="440" y="40" width="48" height="22" uuid="544fac12-5137-4d5d-ad71-b523906fa262">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="32c68984-59db-4a13-b373-c1fa6424b93c"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="491" y="40" width="64" height="22" uuid="d16beb11-70e3-4661-827e-d4f970016c9e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="32c68984-59db-4a13-b373-c1fa6424b93c"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="44" splitType="Stretch">
+		<band height="47" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="280" height="30" uuid="70e41910-3c66-4a31-802b-44b1577e60f7">
+				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="180" height="37" uuid="70e41910-3c66-4a31-802b-44b1577e60f7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c80499a-a255-4b17-bb0e-a6cb46fe3eb3"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -36,7 +56,7 @@
 				<text><![CDATA[Account number]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="280" y="10" width="280" height="30" uuid="b6ecc9ac-5c91-4474-8f7d-1adcdd6fd306">
+				<reportElement x="180" y="10" width="200" height="37" uuid="b6ecc9ac-5c91-4474-8f7d-1adcdd6fd306">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93121925-d0d2-4369-bd8e-a1658e361324"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -45,20 +65,29 @@
 				<text><![CDATA[Money]]></text>
 			</staticText>
 			<line>
-				<reportElement x="-20" y="40" width="605" height="3" uuid="da9c959b-7867-4670-bbcc-309d474dcfea"/>
+				<reportElement x="-30" y="0" width="605" height="1" uuid="79b075a1-bc93-4f84-82cd-11d83d4bb8a5"/>
 			</line>
 			<line>
-				<reportElement x="-30" y="0" width="605" height="3" uuid="79b075a1-bc93-4f84-82cd-11d83d4bb8a5"/>
+				<reportElement x="180" y="0" width="1" height="41" uuid="9747d82e-8c21-49f1-9e71-24ecb98952da"/>
 			</line>
+			<staticText>
+				<reportElement x="380" y="10" width="176" height="37" uuid="4cc920bc-6612-42ed-8991-3c976b9df3f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="65b7989b-599d-4e1f-bf20-b3998c132e0c"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Date of opening]]></text>
+			</staticText>
 			<line>
-				<reportElement x="281" y="3" width="1" height="37" uuid="9747d82e-8c21-49f1-9e71-24ecb98952da"/>
+				<reportElement x="380" y="0" width="1" height="41" uuid="2f22586f-0752-43ab-bfe8-10f167e5d469"/>
 			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="41" splitType="Stretch">
+		<band height="49" splitType="Stretch">
 			<textField evaluationTime="Report">
-				<reportElement x="0" y="10" width="280" height="30" uuid="d63dd5e1-a872-4de1-bb70-a1ae05c4d26c">
+				<reportElement x="0" y="10" width="180" height="30" uuid="d63dd5e1-a872-4de1-bb70-a1ae05c4d26c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c80499a-a255-4b17-bb0e-a6cb46fe3eb3"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -67,7 +96,7 @@
 				<textFieldExpression><![CDATA[$F{accountNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="280" y="11" width="280" height="30" uuid="e77e6588-a609-436d-a201-21db58cf1df0">
+				<reportElement x="180" y="10" width="200" height="30" uuid="e77e6588-a609-436d-a201-21db58cf1df0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93121925-d0d2-4369-bd8e-a1658e361324"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -76,7 +105,22 @@
 				<textFieldExpression><![CDATA[$F{money}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="280" y="-1" width="1" height="42" uuid="6870d722-b00e-4cca-8285-9bdd7b12b387"/>
+				<reportElement x="180" y="-6" width="1" height="53" uuid="6870d722-b00e-4cca-8285-9bdd7b12b387"/>
+			</line>
+			<textField>
+				<reportElement x="380" y="10" width="175" height="30" uuid="cc7e3ec1-c166-46f6-8f5a-8fe09f313b8e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="65b7989b-599d-4e1f-bf20-b3998c132e0c"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateOfOpening}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="380" y="-6" width="1" height="53" uuid="dcbda604-ba66-4b12-b73e-3efabf79f51a"/>
+			</line>
+			<line>
+				<reportElement x="-22" y="0" width="601" height="1" uuid="da9c959b-7867-4670-bbcc-309d474dcfea"/>
 			</line>
 		</band>
 	</detail>

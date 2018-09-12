@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date; 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -296,12 +298,16 @@ public class BankAccountController {
 			
 		List<Map<String, Object>> list = new ArrayList<>();
 		
-		
+		ZoneId z = ZoneId.of( "Europe/Paris" );
+		LocalDate today = LocalDate.now(z);
+		String date = today.toString();
 		for (BankAccountDTO ba :  accountsDTO) {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("accountNumber", ba.getAccountNumber());
 			map.put("money", ba.getMoney() + "");
+			map.put("dateOfOpening", ba.getDateOfOpening().split("T")[0]);
+			map.put("date", date);
 			list.add(map);
 			
 		}

@@ -690,7 +690,7 @@ export class HomeComponent implements OnInit {
       if (this.bankAccounts[i].accountNumber.substring(0, 3) == "555") {
 
         accountsToExport.push(this.bankAccounts[i]);
-        console.log(this.bankAccounts[i]);
+        console.log("bankAcc" + this.bankAccounts[i]);
 
       }
    }
