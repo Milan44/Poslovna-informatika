@@ -251,20 +251,23 @@ public class DailyAccountBalanceController {
 		float totalBurden = 0;
 		
 		for (DailyAccountBalance dailyAccountBalance :  accountStatement.getDailyBalances()) {
-			if(dailyAccountBalance.getTrafficDate() != null) {
-				Map<String, Object> map2 = new HashMap<String, Object>();
-				map2.put("trafficDate", dailyAccountBalance.getTrafficDate());
-				map2.put("trafficToBenefit", dailyAccountBalance.getTrafficToBenefit());
-				map2.put("trafficToTheBurden", dailyAccountBalance.getTrafficToTheBurden());
-				list.add(map2);		
-				
-				totalBenefit += dailyAccountBalance.getTrafficToBenefit();
-				totalBurden += dailyAccountBalance.getTrafficToTheBurden();
-			}
 			
+			System.out.println("trafficDate: " + dailyAccountBalance.getTrafficDate());
+			System.out.println("trafficBenefit: " + dailyAccountBalance.getTrafficToBenefit());
+			System.out.println("trafficToTheBurden: " + dailyAccountBalance.getTrafficToTheBurden());
+			System.out.println(" --------------------- ");
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("trafficDate", dailyAccountBalance.getTrafficDate());
+			map2.put("trafficToBenefit", dailyAccountBalance.getTrafficToBenefit());
+			map2.put("trafficToTheBurden", dailyAccountBalance.getTrafficToTheBurden());
+			list.add(map2);		
+			
+			totalBenefit += dailyAccountBalance.getTrafficToBenefit();
+			totalBurden += dailyAccountBalance.getTrafficToTheBurden();
+				
 		}
 		
-		Map<String, Object> map3 = new HashMap<String, Object>();	
+		Map<String, Object> map3 = new HashMap<String, Object>();
 		map3.put("totalTrafficToBenefit", totalBenefit);
 		map3.put("totalTrafficToTheBurden", totalBurden);
 		list.add(map3);
