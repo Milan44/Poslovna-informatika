@@ -240,12 +240,12 @@ public class DailyAccountBalanceController {
 		
 		
 		List<Map<String, Object>> list = new ArrayList<>();
-		
-		Map<String, Object> map = new HashMap<String, Object>();	
-		map.put("accountNumber", accountStatement.getAccountNumber());
-		map.put("fromDate", accountStatement.getFromDate());
-		map.put("toDate", accountStatement.getToDate());	
-		list.add(map);
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();	
+//		map.put("accountNumber", accountStatement.getAccountNumber());
+//		map.put("fromDate", accountStatement.getFromDate());
+//		map.put("toDate", accountStatement.getToDate());	
+//		list.add(map);
 		
 		float totalBenefit = 0;
 		float totalBurden = 0;
@@ -257,20 +257,30 @@ public class DailyAccountBalanceController {
 			System.out.println("trafficToTheBurden: " + dailyAccountBalance.getTrafficToTheBurden());
 			System.out.println(" --------------------- ");
 			Map<String, Object> map2 = new HashMap<String, Object>();
+			
+			map2.put("accountNumber", accountStatement.getAccountNumber());
+			map2.put("fromDate", accountStatement.getFromDate());
+			map2.put("toDate", accountStatement.getToDate());
+			
 			map2.put("trafficDate", dailyAccountBalance.getTrafficDate());
 			map2.put("trafficToBenefit", dailyAccountBalance.getTrafficToBenefit());
 			map2.put("trafficToTheBurden", dailyAccountBalance.getTrafficToTheBurden());
-			list.add(map2);		
+			
 			
 			totalBenefit += dailyAccountBalance.getTrafficToBenefit();
 			totalBurden += dailyAccountBalance.getTrafficToTheBurden();
+			
+			map2.put("totalTrafficToBenefit", totalBenefit);
+			map2.put("totalTrafficToTheBurden", totalBurden);
+			
+			list.add(map2);		
 				
 		}
 		
-		Map<String, Object> map3 = new HashMap<String, Object>();
-		map3.put("totalTrafficToBenefit", totalBenefit);
-		map3.put("totalTrafficToTheBurden", totalBurden);
-		list.add(map3);
+//		Map<String, Object> map3 = new HashMap<String, Object>();
+//		map3.put("totalTrafficToBenefit", totalBenefit);
+//		map3.put("totalTrafficToTheBurden", totalBurden);
+//		list.add(map3);
 		
 		
 		JRDataSource dataSource = new JRBeanCollectionDataSource(list);
