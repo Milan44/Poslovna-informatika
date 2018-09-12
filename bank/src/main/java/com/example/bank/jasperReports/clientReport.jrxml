@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8b8f21ce-a5bf-456c-ba65-a3ee5f942f41">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="accountNumber" class="java.lang.String"/>
+	<field name="fromDate" class="java.util.Date"/>
+	<field name="toDate" class="java.util.Date"/>
+	<field name="trafficDate" class="java.util.Date"/>
+	<field name="trafficToBenefit" class="java.lang.Float"/>
+	<field name="trafficToTheBurden" class="java.lang.Float"/>
+	<field name="totalTrafficToBenefit" class="java.lang.Float"/>
+	<field name="totalTrafficToTheBurden" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="20" width="201" height="41" uuid="5fc64e40-25c4-43fc-a212-bf15b21c25ae"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Client Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="117" splitType="Stretch">
+			<textField>
+				<reportElement x="127" y="10" width="153" height="30" uuid="6f2418a5-2895-4a91-a945-6ee6bf29a6d9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef7f1817-1c5c-4874-a956-bf817efb4a42"/>
+				</reportElement>
+				<textElement markup="styled">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accountNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="10" width="100" height="30" uuid="67d5adca-7795-4f64-b4fa-e3577f752367">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef7f1817-1c5c-4874-a956-bf817efb4a42"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account number:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="60" width="100" height="30" uuid="1f5518fc-ef39-4bfa-95a0-c7f080286cd6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7a2478e4-4e5d-4d47-861a-6f723a303637"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="60" width="100" height="30" uuid="0ee0cb17-4f9f-4d7f-ae9b-64db1f20be5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7a2478e4-4e5d-4d47-861a-6f723a303637"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fromDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="62" width="100" height="30" uuid="9fe5e9ea-1ee2-4019-8550-683e0ee3d0df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b44f4751-4fbd-447d-bf03-47ab8a64dc24"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="62" width="100" height="30" uuid="c1e2bd3c-ab09-46b4-b01c-15f53be50290">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b44f4751-4fbd-447d-bf03-47ab8a64dc24"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{toDate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="116" width="550" height="1" uuid="5217c2ad-86e6-4129-95b3-3378cd3001ac"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="10" width="100" height="30" uuid="ad41e74a-37ad-4ce3-a489-b7f39eafbc87">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d3a0f3ee-3579-43bc-8129-0ca3e22f4e05"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Traffic date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="10" width="100" height="30" uuid="56a44dec-75f8-47ca-9fc8-ec35a1efe212">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="67ab9c93-7958-48cf-a76e-24bba6100168"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Traffic To Benefit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="10" width="110" height="30" uuid="fae896b6-434c-48c3-98fb-822e2d499535">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3848d0a6-9ab3-4b1c-8d9c-84e419951e1d"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Traffic To Burden]]></text>
+			</staticText>
+			<line>
+				<reportElement x="550" y="-2" width="1" height="44" uuid="0113cc9d-6263-4584-ac53-9c8a623b0dc6"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-1" width="1" height="43" uuid="06398284-9368-4f4a-bdbe-edf2cfbfd04d"/>
+			</line>
+			<line>
+				<reportElement x="180" y="-1" width="1" height="44" uuid="da621378-90da-463a-9f03-099fb92d3dfb"/>
+			</line>
+			<line>
+				<reportElement x="380" y="-2" width="1" height="44" uuid="9e9d3978-eecd-46bc-a01c-33f0aa03070e"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="13" width="100" height="30" uuid="bbb411e7-f4ab-4abe-b685-ef644f60d520">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d3a0f3ee-3579-43bc-8129-0ca3e22f4e05"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{trafficDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="10" width="100" height="30" uuid="23708ce4-af39-46b7-8802-b0e710a03235">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="67ab9c93-7958-48cf-a76e-24bba6100168"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{trafficToBenefit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="10" width="110" height="30" uuid="da80d8f8-71bc-4922-ba51-eed145bfc077">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3848d0a6-9ab3-4b1c-8d9c-84e419951e1d"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{trafficToTheBurden}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="550" height="1" uuid="3ac9e6ca-0d46-4841-b523-d57388fcca15"/>
+			</line>
+			<line>
+				<reportElement x="550" y="1" width="1" height="43" uuid="61748084-e6c8-434e-afd0-972cd1cfba52"/>
+			</line>
+			<line>
+				<reportElement x="380" y="-1" width="1" height="45" uuid="5cba6148-1fc4-48fe-98fe-b63a00fddbf5"/>
+			</line>
+			<line>
+				<reportElement x="180" y="1" width="1" height="42" uuid="86bc54cd-b221-439a-995f-628ee8b11d95"/>
+			</line>
+			<line>
+				<reportElement x="1" y="1" width="1" height="45" uuid="4a0f1bd8-4f36-45ee-9e32-a58df34368b5"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="12" width="100" height="30" uuid="67a1ded5-cca8-4357-ac2b-cb38211cc5da">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="233d6d1e-ce09-4d14-8b79-d3decf1961b5"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total benefit:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="12" width="100" height="30" uuid="4194e2a7-cd9f-40cc-9404-5a9a622797be">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="233d6d1e-ce09-4d14-8b79-d3decf1961b5"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalTrafficToBenefit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="10" width="100" height="30" uuid="5135b064-d8bb-4e23-9af8-10aa338f7d4a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8ecaa941-f9ab-4530-a55b-e9c7ce18b8f6"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total burden:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="10" width="100" height="30" uuid="65cdbc90-e436-414b-8adc-95c4e06e6ed1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8ecaa941-f9ab-4530-a55b-e9c7ce18b8f6"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalTrafficToTheBurden}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="550" height="1" uuid="39fe87a4-0023-485e-a2c8-b05e120c1a70"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

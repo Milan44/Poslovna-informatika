@@ -95,6 +95,9 @@ export class HomeComponent implements OnInit {
   
   private validation = true;
 
+  private startDatePdf: any;
+  private endDatePdf: any;
+
   constructor(private router: Router, private modalService: NgbModal, private bankAccountService: BankAccountService, private clientService: ClientService,
     private bankService: BankService, private currencyService: CurrencyService, private countryService: CountryService, private suspendDialog: MatDialog, private placeService: PlaceService,
     private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService, private suspendAccountService: SuspendAccountService,
@@ -559,14 +562,7 @@ export class HomeComponent implements OnInit {
       startDateModified, endDateModified, this.selectedBankAccount).subscribe(data => {
 
         if (data) {
-          alert("You have successfully added a currecny!");
-          this.getCurrencies();
-
-          this.currency_id = null;
-          this.currency_official_code = null;
-          this.currency_name = null;
-          this.currency_domicilna = false;
-          this.currency_countryID = null;
+          alert("You have successfully exported a daily dir(XML)!");
 
         }
         else {
@@ -575,6 +571,67 @@ export class HomeComponent implements OnInit {
 
       });
     }
+
+
+  openPDFClientModal(exportPDFModal, account) {
+
+    this.selectedBankAccount = account;
+    this.modalService.open(exportPDFModal).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+
+  }
+
+  exportPDFClient() {
+    let startDateModified = "" + this.startDatePdf.year + "-";
+    if (this.startDatePdf.month < 10){
+      startDateModified += "0" + this.startDatePdf.month + "-";
+    }
+    else{
+      startDateModified += this.startDatePdf.month + "-";
+    }
+
+    if (this.startDatePdf.day < 10) {
+      startDateModified += "0" + this.startDatePdf.day;
+    }
+    else{
+      startDateModified += this.startDatePdf.day;
+    }
+
+
+    let endDateModified = "" + this.endDatePdf.year + "-";
+    if (this.endDatePdf.month < 10) {
+      endDateModified += "0" + this.endDatePdf.month + "-";
+    }
+    else{
+      endDateModified += this.endDatePdf.month + "-";
+    }
+
+    if (this.endDatePdf.day < 10){
+      endDateModified += "0" + this.endDatePdf.day;
+    }
+    else{
+      endDateModified += this.endDatePdf.day;
+    }
+
+    this.bankAccountService.exportClientReportPDF(
+      startDateModified, endDateModified, this.selectedBankAccount).subscribe(data => {
+
+        if (data) {
+          alert("You have successfully exported a clinet report (PDF)!");
+
+        }
+        else {
+          alert("An error has occurred.");
+        }
+
+      });
+
+    }
+
+
   openSearchBankAccountModal(modal){
     this.action = "Search"
     this.actionId = 1;
@@ -684,10 +741,10 @@ export class HomeComponent implements OnInit {
 
   exportPDF() {
 
-    var accountsToExport =  [];
-    for(var i = 0; i < this.bankAccounts.length; i++) {
+    const accountsToExport =  [];
+    for(let i = 0; i < this.bankAccounts.length; i++) {
       
-      if (this.bankAccounts[i].accountNumber.substring(0, 3) == "555") {
+      if (this.bankAccounts[i].accountNumber.substring(0, 3) === "555") {
 
         accountsToExport.push(this.bankAccounts[i]);
         console.log("bankAcc" + this.bankAccounts[i]);

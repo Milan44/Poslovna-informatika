@@ -70,6 +70,15 @@ export class BankAccountService {
 
   }
 
+  exportClientReportPDF(startDate:any, endDate:any, bankAccount: any) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/dailyAccountBalance/exportClientReportPDF/'+
+    startDate +"/"+ endDate, 
+      JSON.stringify(bankAccount), { headers : headers }).map((data: Response) => data.json());
+
+  }
+
   exportAccountsToPDF(bankAccounts: any) {
     console.log(bankAccounts);
     const headers = new Headers();
