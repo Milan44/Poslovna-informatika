@@ -7,8 +7,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBContext;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import com.example.bank.DTO.BankAccountDTO;
 import com.example.bank.model.AccountStatement;
 import com.example.bank.model.AnalyticsOfStatements;
 import com.example.bank.model.BankAccount;
@@ -43,6 +46,15 @@ import com.example.bank.service.DailyAccountBalanceService;
 import com.example.bank.service.StorageService;
 import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.text.SimpleDateFormat;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -166,6 +178,118 @@ public class DailyAccountBalanceController {
 		jaxbMarshaller.marshal(accountStatement, file);
 		jaxbMarshaller.marshal(accountStatement, System.out);
 	}
+	
+	
+	@PostMapping("/exportClientReportPDF/{startDate}/{endDate}")
+	public boolean exportClientReportPDF(@PathVariable("startDate")String startDateString,@PathVariable("endDate")String endDateString,@RequestBody BankAccount legalEntityAccount) throws JAXBException{
+		
+		String startDateChanged = startDateString; //+ ",00:00:00 AM";
+		String endDateChanged = endDateString; // + ",00:00:00 AM";
+
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+		Date startDate;
+		Date endDate;
+		try {
+			startDate = formatter.parse(startDateChanged);
+			endDate = formatter.parse(endDateChanged);
+			return exportPDF(startDate,endDate,legalEntityAccount);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	
+	private boolean exportPDF(Date startDate,Date endDate, BankAccount legalEntityAccount) {
+		
+		ArrayList<DailyAccountBalance> dailyAccountBalances = (ArrayList<DailyAccountBalance>) dailyAccountBalanceService.findBalances(legalEntityAccount, startDate, endDate);
+		AccountStatement accountStatement = new AccountStatement(startDate,endDate,legalEntityAccount.getAccountNumber());
+		//		Balances balances = new Balances();
+		if(dailyAccountBalances.size()>0) {
+				DailyAccountBalance firstBalance=dailyAccountBalances.get(0);
+				DailyAccountBalance lastBalance=dailyAccountBalances.get(0);
+
+			
+			for(DailyAccountBalance d : dailyAccountBalances){
+			
+				if(d.getTrafficDate().before(firstBalance.getTrafficDate())) {
+					firstBalance=d;
+				}
+				
+				if(d.getTrafficDate().after(lastBalance.getTrafficDate())) {
+					lastBalance=d;
+				}
+				accountStatement.getDailyBalances().add(d);
+				accountStatement.getStatements().addAll(0, d.getAnalyticsOfStatements());
+				for(AnalyticsOfStatements analyticsOfStatement : d.getAnalyticsOfStatements()){
+					if(analyticsOfStatement.getDebtorAccount().equals(legalEntityAccount.getAccountNumber())) {
+						accountStatement.setCountOfTrafficToBurden(accountStatement.getCountOfTrafficToBurden()+1);
+					}
+					else {
+						accountStatement.setCountOfTrafficToBenefit(accountStatement.getCountOfTrafficToBenefit()+1);
+					}
+				}
+				
+			}
+			
+			accountStatement.setStartAccountState(firstBalance.getPreviousState());
+			accountStatement.setStateAtTheEndOfPeriod(lastBalance.getNewState());
+
+		}
+		
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();	
+		map.put("accountNumber", accountStatement.getAccountNumber());
+		map.put("fromDate", accountStatement.getFromDate());
+		map.put("toDate", accountStatement.getToDate());	
+		list.add(map);
+		
+		float totalBenefit = 0;
+		float totalBurden = 0;
+		
+		for (DailyAccountBalance dailyAccountBalance :  accountStatement.getDailyBalances()) {
+			if(dailyAccountBalance.getTrafficDate() != null) {
+				Map<String, Object> map2 = new HashMap<String, Object>();
+				map2.put("trafficDate", dailyAccountBalance.getTrafficDate());
+				map2.put("trafficToBenefit", dailyAccountBalance.getTrafficToBenefit());
+				map2.put("trafficToTheBurden", dailyAccountBalance.getTrafficToTheBurden());
+				list.add(map2);		
+				
+				totalBenefit += dailyAccountBalance.getTrafficToBenefit();
+				totalBurden += dailyAccountBalance.getTrafficToTheBurden();
+			}
+			
+		}
+		
+		Map<String, Object> map3 = new HashMap<String, Object>();	
+		map3.put("totalTrafficToBenefit", totalBenefit);
+		map3.put("totalTrafficToTheBurden", totalBurden);
+		list.add(map3);
+		
+		
+		JRDataSource dataSource = new JRBeanCollectionDataSource(list);
+		String sourceName = "src/main/java/com/example/bank/jasperReports/clientReport.jrxml";
+		
+		try {
+			
+			JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "generatedClientReports/" + accountStatement.getAccountNumber().substring(0, 3) + ".pdf");
+			return true;
+		
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+	}
+	
+	
 	
 	@GetMapping("/getallfiles")
 	public ResponseEntity<List<String>> getListFiles(Model model) {

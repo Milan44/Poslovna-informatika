@@ -43,21 +43,18 @@
                                   <!-- <td style = "text-align:center;vertical-align:middle" scope="row">{{i + 1}}</td> -->
                                   <td style = "text-align:center;vertical-align:middle; visibility: hidden;" >{{account.id}}</td>
                                   <td style = "text-align:center;vertical-align:middle" >{{account.accountNumber}}</td>
-                                  <td style = "text-align:center;vertical-align:middle">{{account.dateOfOpening}}</td>
+                                  <td style = "text-align:center;vertical-align:middle">{{account.dateOfOpening.split("T")[0]}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.valid}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.money}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.client.name}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.bank.name}}</td>
                                   <td style = "text-align:center;vertical-align:middle">{{account.currency.official_code}}</td>
                                  
-                                  <td style="text-align:center;vertical-align:middle">
-                                    <!-- <button id="exportXML"  (click) = "exportXML(account)" type="button" class="btn btn-success btn-sm center" >Export .xml</button> -->
-                                    <button id="exportXML" (click)="openExportXmlModal(exportXmlModal,account)" type="button" class="btn btn-success btn-sm center">Export .xml</button>
-                                    
+                                <td style="text-align:center;vertical-align:middle">
+                                    <button id="exportXML" (click)="openExportXmlModal(exportXmlModal,account)" type="button" class="btn btn-success btn-sm center">Export .xml</button>    
                                 </td>
                                 <td style="text-align:center;vertical-align:middle">
-
-                                    <button id="exportPDFClient" (click) = "exportPDFClient()" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
+                                    <button id="openPDFClientModal" (click) = "openPDFClientModal(exportPDFModal,account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                                 </td>
 
                                 <td style = "text-align:center;vertical-align:middle"> 
@@ -229,9 +226,9 @@
                             <!-- <td style = "text-align:center;vertical-align:middle"> 
                               <button id="exportPDF" (click) = "exportPDF(account)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
                             </td>                                                            -->
-                            <td>
+                            <!-- <td>
                                 <button id="exportPDF" (click)="exportAccount(bank)" type="button" class="btn btn-success btn-sm center">Export .pdf</button>
-                            </td>
+                            </td> -->
                             <!-- <td style = "text-align:center;vertical-align:middle"> 
                               <button id="suspendAccount"  (click) = "suspend(account)" type="button" class="btn btn-danger btn-sm center" >Suspend</button>
                             </td> -->
@@ -810,7 +807,6 @@
 
 
     <ng-template #exportXmlModal let-c="close" let-d="dismiss">
-
         <div class="modal-header">
             <h4 class="modal-title">Export bank account</h4>
         </div>
@@ -845,6 +841,49 @@
             <div class="form-group">
 
                 <button id="exportAddClient" (click)="exportXML()" type="button" class="btn btn-primary  center"> Export XML </button>
+
+            </div>
+        </div>
+
+    </ng-template>
+
+
+    <ng-template #exportPDFModal let-c="close" let-d="dismiss">
+
+        <div class="modal-header">
+            <h4 class="modal-title">Export client report</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="broj_racuna">Start date: </label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="datePicker" [(ngModel)]="startDatePdf" ngbDatepicker #sd="ngbDatepicker"
+                        required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="sd.toggle()" type="button">
+                            <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="toDate">End date:</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="datePicker" [(ngModel)]="endDatePdf" ngbDatepicker #ed="ngbDatepicker"
+                        required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="ed.toggle()" type="button">
+                            <img src="../../../assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <button id="exportPDFClient" (click)="exportPDFClient()" type="button" class="btn btn-primary  center"> Export PDF </button>
 
             </div>
 
