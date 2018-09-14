@@ -4,15 +4,15 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 
 
-import {BankAccountService} from '../../services/bank-account.service'
-import {ClientService} from '../../services/client.service'
-import {BankService} from '../../services/bank.service'
-import {CurrencyService} from '../../services/currency.service'
+import { BankAccountService } from '../../services/bank-account.service'
+import { ClientService } from '../../services/client.service'
+import { BankService } from '../../services/bank.service'
+import { CurrencyService } from '../../services/currency.service'
 import { ClearingService } from '../../services/clearing.service'
 
 
@@ -22,7 +22,7 @@ import { CountryService } from '../../services/country.service'
 import { AnalyticsService } from '../../services/analytics.service';
 
 import { SuspendAccountComponent } from '../../components/suspend-account/suspend-account.component';
-import { SuspendAccountService} from '../../services/suspend-account.service';
+import { SuspendAccountService } from '../../services/suspend-account.service';
 import { AnalyticsOfStatementsService } from '../../services/analytics-of-statements.service'
 
 import { RtgsService } from '../../services/rtgs.service';
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
   private action: string;
   private actionId: number;
   private modalRef: NgbModalRef;
-  
+
   private validation = true;
 
   private startDatePdf: any;
@@ -102,8 +102,8 @@ export class HomeComponent implements OnInit {
     private bankService: BankService, private currencyService: CurrencyService, private countryService: CountryService, private suspendDialog: MatDialog, private placeService: PlaceService,
     private analyticsOfStatementsService: AnalyticsOfStatementsService, private analyticService: AnalyticsService, private suspendAccountService: SuspendAccountService,
     private clearingService: ClearingService, private rtgsService: RtgsService) { }
- 
-  
+
+
 
 
   ngOnInit() {
@@ -126,8 +126,8 @@ export class HomeComponent implements OnInit {
     this.endDate = this.dateOfOpening;
   }
 
-  getClientBankAcconunts(){
-   
+  getClientBankAcconunts() {
+
   }
 
   suspend(account, suspendModal) {
@@ -143,18 +143,18 @@ export class HomeComponent implements OnInit {
     this.accToSuspend = account.id;
 
     this.suspendAccountService.getClientAccounts(account.client.id, account.id).subscribe(data => {
-      this.clientBankAccounts = data;    
+      this.clientBankAccounts = data.filter(account => account.valid);
       this.modalRef = this.modalService.open(suspendModal);
     });
   }
 
-  confirmSuspend(){
+  confirmSuspend() {
     const selector = document.getElementById("accountSelect") as HTMLSelectElement;
     const accountTransfer = selector.options[selector.selectedIndex].text;
 
     console.log(accountTransfer);
 
-    this.suspendAccountService.suspendAccount(this.accToSuspend, accountTransfer).subscribe( data => {
+    this.suspendAccountService.suspendAccount(this.accToSuspend, accountTransfer).subscribe(data => {
       console.log(data);
       this.modalRef.close();
     });
@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit {
   }
 
   getClearings() {
-    this.clearingService.getClearings().subscribe(data=> {   
+    this.clearingService.getClearings().subscribe(data => {
       this.clearings = data;
       console.log(this.clearings);
     });
@@ -219,7 +219,7 @@ export class HomeComponent implements OnInit {
 
   openAddBankAccountModal(addBankAccountModal) {
 
-    this.action="Add";
+    this.action = "Add";
     this.actionId = 0;
     this.modalService.open(addBankAccountModal).result.then((result) => {
 
@@ -232,16 +232,16 @@ export class HomeComponent implements OnInit {
   addBankAccount() {
 
     let date = "" + this.dateOfOpening.year + "-";
-    if (this.dateOfOpening.month < 10){
+    if (this.dateOfOpening.month < 10) {
       date += "0" + this.dateOfOpening.month + "-";
     }
-    else{
+    else {
       date += this.dateOfOpening.month + "-";
     }
-    if (this.dateOfOpening.day < 10){
+    if (this.dateOfOpening.day < 10) {
       date += "0" + this.dateOfOpening.day;
     }
-    else{
+    else {
       date += this.dateOfOpening.day;
     }
     console.log(date);
@@ -298,7 +298,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  addClient() {    
+  addClient() {
 
     this.clientService.registerClient(
       {
@@ -347,8 +347,8 @@ export class HomeComponent implements OnInit {
   }
 
   inputBankAccountNumber() {
-    
-    if(this.accountNumber.length < 15) {
+
+    if (this.accountNumber.length < 15) {
       this.validation = true;
     }
     else {
@@ -420,7 +420,7 @@ export class HomeComponent implements OnInit {
   openAddCurrencyModal(addCurrencyModal) {
 
     this.currency_domicilna = false;
-    
+
     this.modalService.open(addCurrencyModal).result.then((result) => {
 
     }, (reason) => {
@@ -507,8 +507,8 @@ export class HomeComponent implements OnInit {
 
     this.clearings[i].exportovan = true;
     this.clearingService.exportClearing(JSON.stringify(this.clearings[i])).subscribe(data => {
-      
-      
+
+
 
     });
 
@@ -528,17 +528,17 @@ export class HomeComponent implements OnInit {
 
   exportXML() {
     let startDateModified = "" + this.startDate.year + "-";
-    if (this.startDate.month < 10){
+    if (this.startDate.month < 10) {
       startDateModified += "0" + this.startDate.month + "-";
     }
-    else{
+    else {
       startDateModified += this.startDate.month + "-";
     }
 
     if (this.startDate.day < 10) {
       startDateModified += "0" + this.startDate.day;
     }
-    else{
+    else {
       startDateModified += this.startDate.day;
     }
 
@@ -547,14 +547,14 @@ export class HomeComponent implements OnInit {
     if (this.endDate.month < 10) {
       endDateModified += "0" + this.endDate.month + "-";
     }
-    else{
+    else {
       endDateModified += this.endDate.month + "-";
     }
 
-    if (this.endDate.day < 10){
+    if (this.endDate.day < 10) {
       endDateModified += "0" + this.endDate.day;
     }
-    else{
+    else {
       endDateModified += this.endDate.day;
     }
 
@@ -570,7 +570,7 @@ export class HomeComponent implements OnInit {
         }
 
       });
-    }
+  }
 
 
   openPDFClientModal(exportPDFModal, account) {
@@ -586,17 +586,17 @@ export class HomeComponent implements OnInit {
 
   exportPDFClient() {
     let startDateModified = "" + this.startDatePdf.year + "-";
-    if (this.startDatePdf.month < 10){
+    if (this.startDatePdf.month < 10) {
       startDateModified += "0" + this.startDatePdf.month + "-";
     }
-    else{
+    else {
       startDateModified += this.startDatePdf.month + "-";
     }
 
     if (this.startDatePdf.day < 10) {
       startDateModified += "0" + this.startDatePdf.day;
     }
-    else{
+    else {
       startDateModified += this.startDatePdf.day;
     }
 
@@ -605,14 +605,14 @@ export class HomeComponent implements OnInit {
     if (this.endDatePdf.month < 10) {
       endDateModified += "0" + this.endDatePdf.month + "-";
     }
-    else{
+    else {
       endDateModified += this.endDatePdf.month + "-";
     }
 
-    if (this.endDatePdf.day < 10){
+    if (this.endDatePdf.day < 10) {
       endDateModified += "0" + this.endDatePdf.day;
     }
-    else{
+    else {
       endDateModified += this.endDatePdf.day;
     }
 
@@ -629,77 +629,81 @@ export class HomeComponent implements OnInit {
 
       });
 
-    }
+  }
 
 
-  openSearchBankAccountModal(modal){
+  openSearchBankAccountModal(modal) {
     this.action = "Search"
     this.actionId = 1;
     this.modalRef = this.modalService.open(modal);
   }
 
-  searchBankAccount(){
+  searchBankAccount() {
     this.modalRef.close();
 
-    this.bankAccountService.searchBankAccount({accountNumber:this.accountNumber, money: this.money,
-    clientID:this.selectedClient, bankID:this.selectedBank, currencyID:this.selectedCurrency}).subscribe(data => this.bankAccounts = data);
+    this.bankAccountService.searchBankAccount({
+      accountNumber: this.accountNumber, money: this.money,
+      clientID: this.selectedClient, bankID: this.selectedBank, currencyID: this.selectedCurrency
+    }).subscribe(data => this.bankAccounts = data);
 
     this.accountNumber = null;
-    this.money = null;   
+    this.money = null;
     this.selectedClient = null;
     this.selectedBank = null;
     this.selectedCurrency = null;
 
   }
-  resetSearchBankAccount(){
-    this.getBankAccounts(); 
+  resetSearchBankAccount() {
+    this.getBankAccounts();
   }
 
-  openSarchClientsModal(modal){
+  openSarchClientsModal(modal) {
     this.action = "Search"
     this.actionId = 1;
     this.modalRef = this.modalService.open(modal);
   }
 
-  searchClient(){
+  searchClient() {
     this.modalRef.close();
 
     this.clientService.searchClient(
-      {name:this.client_name, address:this.client_address, phone:this.client_phone, fax:this.client_fax, email:this.client_email,
-        addressForStatements:this.client_addressForStatements, emailStatements:this.client_emailStatements, jmbg:this.client_jmbg,
-        typeOfClient:this.client_typeOfClient, residenceID:this.client_residence, pib:this.client_pib}).subscribe(data=>{
-          this.clients = data;
-        });
+      {
+        name: this.client_name, address: this.client_address, phone: this.client_phone, fax: this.client_fax, email: this.client_email,
+        addressForStatements: this.client_addressForStatements, emailStatements: this.client_emailStatements, jmbg: this.client_jmbg,
+        typeOfClient: this.client_typeOfClient, residenceID: this.client_residence, pib: this.client_pib
+      }).subscribe(data => {
+        this.clients = data;
+      });
 
-        this.client_id = null;
-        this.client_name = null;
-        this.client_address = null;
-        this.client_phone = null;
-        this.client_fax = null;
-        this.client_email = null;
-        this.client_addressForStatements = null;
-        this.client_emailStatements = false;
-        this.client_jmbg = null;
-        this.client_typeOfClient = null;
-        this.client_residence = null;
-        this.client_pib = null;
+    this.client_id = null;
+    this.client_name = null;
+    this.client_address = null;
+    this.client_phone = null;
+    this.client_fax = null;
+    this.client_email = null;
+    this.client_addressForStatements = null;
+    this.client_emailStatements = false;
+    this.client_jmbg = null;
+    this.client_typeOfClient = null;
+    this.client_residence = null;
+    this.client_pib = null;
   }
 
-  resetSarchClientsModal(){
+  resetSarchClientsModal() {
     this.getClients();
   }
 
-  openSearchBankModal(modal){
+  openSearchBankModal(modal) {
     this.action = "Search";
     this.actionId = 1;
     this.modalRef = this.modalService.open(modal);
   }
 
-  searchBank(){
+  searchBank() {
 
     this.modalRef.close();
 
-    this.bankService.searchBanks({bankCode: this.bank_code, pib:this.bank_pib, name: this.bank_name, address: this.bank_address}).subscribe(data => {
+    this.bankService.searchBanks({ bankCode: this.bank_code, pib: this.bank_pib, name: this.bank_name, address: this.bank_address }).subscribe(data => {
       this.banks = data;
     });
 
@@ -709,7 +713,7 @@ export class HomeComponent implements OnInit {
     this.bank_name = null;
   }
 
-  resetSearchBank(){
+  resetSearchBank() {
     this.getBanks();
   }
 
@@ -730,33 +734,33 @@ export class HomeComponent implements OnInit {
 
   openClearingItems(clearingItemsModal, i) {
 
-    this.clickedClearing = this.clearings[i] 
+    this.clickedClearing = this.clearings[i]
     this.modalService.open(clearingItemsModal, { size: 'lg' }).result.then((result) => {
-      
+
     }, (reason) => {
-      
+
     });
 
   }
 
   exportPDF() {
 
-    const accountsToExport =  [];
-    for(let i = 0; i < this.bankAccounts.length; i++) {
-      
+    const accountsToExport = [];
+    for (let i = 0; i < this.bankAccounts.length; i++) {
+
       if (this.bankAccounts[i].accountNumber.substring(0, 3) === "555") {
 
         accountsToExport.push(this.bankAccounts[i]);
         console.log("bankAcc" + this.bankAccounts[i]);
 
       }
-   }
+    }
 
 
-   this.bankAccountService.exportAccountsToPDF(accountsToExport).subscribe(data => {
+    this.bankAccountService.exportAccountsToPDF(accountsToExport).subscribe(data => {
 
       if (data) {
-       alert(".pdf successfully exported")
+        alert(".pdf successfully exported")
       }
       else {
         alert("Error.");
@@ -766,5 +770,5 @@ export class HomeComponent implements OnInit {
 
   }
 
-  
+
 }

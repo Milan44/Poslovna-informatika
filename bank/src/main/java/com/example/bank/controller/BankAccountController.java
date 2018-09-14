@@ -188,6 +188,8 @@ public class BankAccountController {
 		
 		
 		BankAccount origin = bankAccountService.findById(id);
+		origin.setValid(false);
+		bankAccountService.save(origin);
 		
 		long time = System.currentTimeMillis();
 		java.sql.Date currentDate = new java.sql.Date(time);
